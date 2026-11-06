@@ -5,7 +5,7 @@ import {
   ChevronDown,
   MessageSquare
 } from 'lucide-react';
-import { BRAND_CONFIG } from '../config/brandConfig';
+import { openWhatsAppWithTracking } from '../services/api';
 import { SEOHead } from '../components/common/SEOHead';
 
 interface FAQItem {
@@ -242,15 +242,18 @@ export const FAQs: React.FC = () => {
             >
               Contact Desk
             </Link>
-            <a
-              href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(BRAND_CONFIG.contact.whatsappPrefilledMessage)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all text-center flex items-center justify-center gap-1.5"
+            <button
+              type="button"
+              onClick={() => openWhatsAppWithTracking({
+                loanCategory: 'General FAQ Enquiry',
+                sourceContext: 'FAQs Page CTA',
+                city: 'Hyderabad'
+              })}
+              className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer"
             >
               <MessageSquare className="w-3.5 h-3.5" />
               <span>WhatsApp Us</span>
-            </a>
+            </button>
           </div>
         </div>
 

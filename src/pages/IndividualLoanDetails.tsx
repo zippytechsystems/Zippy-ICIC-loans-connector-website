@@ -18,6 +18,7 @@ import { LoanEnquiryForm } from '../components/forms/LoanEnquiryForm';
 import { EmiCalculator } from '../components/calculator/EmiCalculator';
 import { SEOHead } from '../components/common/SEOHead';
 import { BRAND_CONFIG } from '../config/brandConfig';
+import { openWhatsAppWithTracking } from '../services/api';
 
 interface IndividualLoanDetailsProps {
   directSlug?: string;
@@ -46,10 +47,13 @@ export const IndividualLoanDetails: React.FC<IndividualLoanDetailsProps> = ({ di
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const whatsappMessage = encodeURIComponent(
-    `Hello Zippy ICICI Loan Connector, I would like to know about ${loan.title} options in Hyderabad.`
-  );
-  const whatsappUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${whatsappMessage}`;
+  const handleWhatsAppEnquiry = (context: string) => {
+    openWhatsAppWithTracking({
+      loanCategory: loan.title,
+      sourceContext: `Loan Details: ${loan.title} (${context})`,
+      city: 'Hyderabad'
+    });
+  };
 
   return (
     <>
@@ -120,15 +124,14 @@ export const IndividualLoanDetails: React.FC<IndividualLoanDetailsProps> = ({ di
                 <ArrowRight className="w-4 h-4" />
               </a>
 
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
+              <button
+                type="button"
+                onClick={() => handleWhatsAppEnquiry('Hero CTA')}
+                className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
                 <span>WhatsApp Enquiry</span>
-              </a>
+              </button>
 
               <a
                 href="#eligibility-criteria"
@@ -309,15 +312,14 @@ export const IndividualLoanDetails: React.FC<IndividualLoanDetailsProps> = ({ di
                 <p className="text-emerald-800">
                   Prefer instant messaging? Connect with our Hyderabad loan coordinator:
                 </p>
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-2 mt-2"
+                <button
+                  type="button"
+                  onClick={() => handleWhatsAppEnquiry('Sidebar Box')}
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-2 mt-2 cursor-pointer"
                 >
                   <MessageSquare className="w-4 h-4" />
                   <span>Chat on WhatsApp</span>
-                </a>
+                </button>
               </div>
 
               {/* Direct Phone Link */}

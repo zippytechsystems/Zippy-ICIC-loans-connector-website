@@ -15,6 +15,7 @@ import { ContactUs } from './pages/ContactUs';
 import { FAQs } from './pages/FAQs';
 import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsConditions } from './pages/TermsConditions';
+import { AdminLeads } from './pages/AdminLeads';
 
 // Scroll to top helper
 const ScrollToTop: React.FC = () => {
@@ -91,6 +92,10 @@ export const App: React.FC = () => {
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsConditions />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
+
+            {/* Admin Lead Management Portal */}
+            <Route path="/admin-leads" element={<AdminLeads />} />
+            <Route path="/leads" element={<AdminLeads />} />
             
             {/* 404 Fallback */}
             <Route path="*" element={<NotFound />} />

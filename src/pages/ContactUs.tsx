@@ -11,6 +11,7 @@ import {
   ShieldCheck
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../config/brandConfig';
+import { openWhatsAppWithTracking } from '../services/api';
 import { SEOHead } from '../components/common/SEOHead';
 
 export const ContactUs: React.FC = () => {
@@ -52,9 +53,6 @@ export const ContactUs: React.FC = () => {
       setSubmitted(true);
     }, 1000);
   };
-
-  const encodedWhatsApp = encodeURIComponent(BRAND_CONFIG.contact.whatsappPrefilledMessage);
-  const whatsappUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodedWhatsApp}`;
 
   return (
     <>
@@ -148,14 +146,17 @@ export const ContactUs: React.FC = () => {
                     <strong className="text-slate-900 block font-semibold text-xs uppercase tracking-wider">
                       WhatsApp Messaging
                     </strong>
-                    <a
-                      href={whatsappUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-emerald-700 hover:underline font-bold text-sm block"
+                    <button
+                      type="button"
+                      onClick={() => openWhatsAppWithTracking({
+                        loanCategory: 'General Loan Enquiry',
+                        sourceContext: 'Contact Us Page (WhatsApp Card)',
+                        city: 'Hyderabad'
+                      })}
+                      className="text-emerald-700 hover:underline font-bold text-sm block text-left cursor-pointer"
                     >
                       +91 {BRAND_CONFIG.contact.whatsappNumber.slice(2)}
-                    </a>
+                    </button>
                     <span className="text-xs text-slate-400 block mt-0.5">
                       Fast responses for eligibility queries
                     </span>
