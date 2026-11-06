@@ -80,10 +80,16 @@ export const App: React.FC = () => {
 
             {/* Core utility and enquiry pages */}
             <Route path="/eligibility" element={<CheckEligibility />} />
+            <Route path="/check-eligibility" element={<CheckEligibility />} />
             <Route path="/apply" element={<ApplyForLoan />} />
+            <Route path="/apply-now" element={<ApplyForLoan />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/contact-us" element={<ContactUs />} />
+            <Route path="/about-us" element={<AboutUs />} />
             <Route path="/faqs" element={<FAQs />} />
+            <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms" element={<TermsConditions />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
             
             {/* 404 Fallback */}
