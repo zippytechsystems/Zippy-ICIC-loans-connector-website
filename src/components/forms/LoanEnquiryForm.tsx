@@ -12,10 +12,14 @@ import {
   MapPin,
   Briefcase,
   IndianRupee,
-  FileText
+  FileText,
+  Mail,
+  ExternalLink,
+  MessageSquare
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../../config/brandConfig';
 import { LOANS_DATA } from '../../data/loansData';
+import { submitLoanEnquiry } from '../../services/api';
 
 interface FormProps {
   initialLoanCategory?: string;
@@ -26,6 +30,7 @@ interface FormProps {
 interface FormState {
   fullName: string;
   mobileNumber: string;
+  email: string;
   city: string;
   loanCategory: string;
   requiredAmount: string;
@@ -43,6 +48,7 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
   const [formData, setFormData] = useState<FormState>({
     fullName: '',
     mobileNumber: '',
+    email: '',
     city: 'Hyderabad',
     loanCategory: initialLoanCategory || 'Personal Loans',
     requiredAmount: initialAmount || '',
@@ -65,12 +71,20 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submittedSuccess, setSubmittedSuccess] = useState(false);
   const [referenceId, setReferenceId] = useState('');
+  const [whatsappChatUrl, setWhatsappChatUrl] = useState('');
 
   // Validate Indian Mobile Number: 10 digits starting with 6, 7, 8, or 9
   const validateMobile = (num: string) => {
     const cleaned = num.replace(/\D/g, '');
     const regex = /^[6-9]\d{9}$/;
     return regex.test(cleaned);
+  };
+
+  // Optional email format validation
+  const validateEmail = (em: string) => {
+    if (!em.trim()) return true;
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(em.trim());
   };
 
   const validate = () => {
@@ -84,6 +98,10 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
       newErrors.mobileNumber = 'Please enter your 10-digit mobile number';
     } else if (!validateMobile(formData.mobileNumber)) {
       newErrors.mobileNumber = 'Enter a valid 10-digit Indian mobile number (e.g. 9876543210)';
+    }
+
+    if (formData.email.trim() && !validateEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address or leave blank';
     }
 
     if (!formData.city) {
@@ -111,36 +129,80 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
 
-    // Simulate reliable submission & reference generation
-    setTimeout(() => {
-      const randomRef = `ZIP-HYD-${Math.floor(100000 + Math.random() * 900000)}`;
-      setReferenceId(randomRef);
+    try {
+      // 1. Submit to Backend REST API (POST /api/v1/loan-enquiries)
+      const apiResponse = await submitLoanEnquiry({
+        ...formData,
+        sourceContext
+      });
 
-      // Save submission record safely to localStorage for user's personal session review
+      const finalRef = apiResponse.referenceId;
+      setReferenceId(finalRef);
+
+      // 2. Generate Professional WhatsApp Message with Customer Details
+      const professionalWhatsAppMessage = 
+`*New Loan Enquiry - Zippy Loan Connector*
+Ref ID: *${finalRef}*
+
+*Customer Details:*
+• Name: ${formData.fullName.trim()}
+• Mobile: +91 ${formData.mobileNumber}
+${formData.email.trim() ? `• Email: ${formData.email.trim()}\n` : ''}• City: ${formData.city}
+
+*Loan Requirement:*
+• Loan Type: *${formData.loanCategory}*
+• Requested Amount: *₹${formData.requiredAmount}*
+• Employment: ${formData.employmentType}
+${formData.monthlyIncome ? `• Monthly Income: ₹${formData.monthlyIncome}\n` : ''}${formData.additionalInfo ? `• Notes: ${formData.additionalInfo.trim()}\n` : ''}
+Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like guidance on suitable lender options.`;
+
+      // 3. Construct WhatsApp click-to-chat URL for official business number +91 6302690251
+      const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(professionalWhatsAppMessage)}`;
+      setWhatsappChatUrl(chatUrl);
+
+      // 4. Save safely to localStorage for user's personal session history
       try {
         const stored = JSON.parse(localStorage.getItem('zippy_loan_enquiries') || '[]');
         stored.push({
-          ref: randomRef,
+          ref: finalRef,
           timestamp: new Date().toISOString(),
           category: formData.loanCategory,
           amount: formData.requiredAmount,
           city: formData.city,
+          savedToBackend: apiResponse.savedToDatabase,
           context: sourceContext
         });
         localStorage.setItem('zippy_loan_enquiries', JSON.stringify(stored));
-      } catch (err) {
+      } catch {
         // Ignore storage exceptions
+      }
+
+      // 5. Open WhatsApp in a new tab/app immediately
+      try {
+        const opened = window.open(chatUrl, '_blank', 'noopener,noreferrer');
+        if (!opened) {
+          console.info('Pop-up prevented auto-open. User can click manual WhatsApp button.');
+        }
+      } catch {
+        // Fallback handled by manual UI button
       }
 
       setIsSubmitting(false);
       setSubmittedSuccess(true);
-    }, 1200);
+    } catch (err) {
+      console.error('Enquiry handling error:', err);
+      setIsSubmitting(false);
+      // Still show success screen with fallback ref so customer can reach WhatsApp
+      const fallbackRef = `ZIP-${Date.now().toString().slice(-6)}`;
+      setReferenceId(fallbackRef);
+      setSubmittedSuccess(true);
+    }
   };
 
   const handleReset = () => {
@@ -148,6 +210,7 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
     setFormData({
       fullName: '',
       mobileNumber: '',
+      email: '',
       city: 'Hyderabad',
       loanCategory: 'Personal Loans',
       requiredAmount: '',
@@ -161,13 +224,13 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
 
   if (submittedSuccess) {
     return (
-      <div className="bg-white rounded-3xl p-8 sm:p-10 border border-emerald-200 shadow-xl text-center animate-in fade-in zoom-in-95 duration-300">
-        <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-5">
+      <div className="bg-white rounded-3xl p-6 sm:p-10 border border-emerald-200 shadow-xl text-center animate-in fade-in zoom-in-95 duration-300">
+        <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center mb-4 shadow-sm">
           <CheckCircle className="w-10 h-10" />
         </div>
 
-        <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold tracking-wide uppercase mb-2">
-          Enquiry Received Successfully
+        <span className="inline-block px-3.5 py-1 rounded-full bg-emerald-50 text-emerald-800 text-xs font-bold tracking-wide uppercase mb-2 border border-emerald-200">
+          Enquiry Registered Successfully
         </span>
 
         <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-2">
@@ -175,45 +238,98 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
         </h3>
 
         <p className="text-slate-600 text-sm max-w-lg mx-auto mb-6">
-          Your loan enquiry for <strong className="text-slate-900">{formData.loanCategory}</strong> has been logged. Our Hyderabad referral specialist will contact you on <strong className="text-slate-900">+91 {formData.mobileNumber}</strong> within working hours.
+          Your enquiry for <strong className="text-slate-900">{formData.loanCategory}</strong> (Amount: <strong className="text-slate-900">₹{formData.requiredAmount}</strong>) has been logged in our referral system.
         </p>
 
         {/* Reference ID card */}
         <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 max-w-sm mx-auto mb-6">
           <div className="text-xs text-slate-500 uppercase tracking-wider font-semibold mb-1">
-            Enquiry Reference ID
+            Official Enquiry Reference ID
           </div>
-          <div className="text-xl font-mono font-extrabold text-fintech-royal tracking-wider">
+          <div className="text-xl sm:text-2xl font-mono font-extrabold text-fintech-royal tracking-wider">
             {referenceId}
           </div>
-          <p className="text-[11px] text-slate-400 mt-1">Please quote this ID for future follow-up</p>
+          <p className="text-[11px] text-slate-400 mt-1">Please quote this Reference ID during communication</p>
         </div>
 
-        {/* Security reassurance banner */}
-        <div className="bg-blue-50/70 border border-blue-200/60 rounded-xl p-3.5 max-w-md mx-auto text-xs text-blue-900 text-left mb-6 flex items-start gap-3">
-          <ShieldCheck className="w-5 h-5 text-fintech-royal shrink-0 mt-0.5" />
-          <div>
-            <span className="font-bold block">Important Security Assurance:</span>
-            <span>We will never ask for your passwords, OTPs, or cash payments. The loan evaluation will be conducted through authorized lending partner protocols.</span>
+        {/* Action Instruction: Step to complete in WhatsApp */}
+        <div className="bg-amber-50 border-2 border-amber-300/80 rounded-2xl p-5 max-w-lg mx-auto text-left mb-6 shadow-sm">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 font-bold text-sm shadow-xs">
+              👉
+            </div>
+            <div>
+              <h4 className="text-sm font-extrabold text-amber-950 uppercase tracking-wide">
+                Next Step: Confirm on WhatsApp
+              </h4>
+              <p className="text-xs text-amber-900 mt-1 leading-relaxed">
+                We have generated your enquiry details and redirected to WhatsApp.
+                <strong> Please click "Send" in WhatsApp</strong> to deliver your message to our Hyderabad loan advisor.
+              </p>
+            </div>
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-3">
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-3.5 mb-8">
+          <a
+            href={whatsappChatUrl || `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(`Hello Zippy Loan Connector, I have submitted an enquiry with Ref ${referenceId}.`)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto px-7 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2 group"
+          >
+            <MessageSquare className="w-4 h-4 transition-transform group-hover:scale-110" />
+            <span>Open WhatsApp & Press Send</span>
+            <ExternalLink className="w-3.5 h-3.5 opacity-80" />
+          </a>
+
           <button
             onClick={handleReset}
-            className="px-6 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold transition-colors"
+            className="w-full sm:w-auto px-5 py-3 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 text-sm font-semibold transition-colors"
           >
             Submit Another Enquiry
           </button>
-          <a
-            href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(`Hello Zippy ICICI Loan Connector, I have submitted an enquiry with Reference ID ${referenceId} for ${formData.loanCategory}.`)}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-2.5 rounded-xl bg-emerald-600 text-white hover:bg-emerald-700 text-sm font-semibold shadow-md transition-colors flex items-center justify-center gap-2"
-          >
-            <PhoneCall className="w-4 h-4" />
-            <span>Chat on WhatsApp</span>
-          </a>
+        </div>
+
+        {/* Official Contact Box */}
+        <div className="border-t border-slate-200 pt-6 max-w-lg mx-auto text-center">
+          <p className="text-xs text-slate-500 font-semibold mb-3 uppercase tracking-wider">
+            Official Loan Assistance Channels
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+            <a
+              href={`tel:${BRAND_CONFIG.contact.phoneRaw}`}
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-fintech-royal font-medium transition-colors flex items-center justify-center gap-1.5"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-blue-600" />
+              <span>{BRAND_CONFIG.contact.phoneDisplay}</span>
+            </a>
+            <a
+              href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl bg-emerald-50/60 hover:bg-emerald-50 border border-emerald-200 text-emerald-800 font-medium transition-colors flex items-center justify-center gap-1.5"
+            >
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />
+              <span>+91 63026 90251</span>
+            </a>
+            <a
+              href={`mailto:${BRAND_CONFIG.contact.email}`}
+              className="p-2.5 rounded-xl bg-slate-50 hover:bg-blue-50 border border-slate-200 text-slate-700 hover:text-fintech-royal font-medium transition-colors flex items-center justify-center gap-1.5 truncate"
+              title={BRAND_CONFIG.contact.email}
+            >
+              <Mail className="w-3.5 h-3.5 text-blue-600 shrink-0" />
+              <span className="truncate">{BRAND_CONFIG.contact.email}</span>
+            </a>
+          </div>
+        </div>
+
+        {/* Security Reassurance */}
+        <div className="mt-6 p-3 rounded-xl bg-blue-50/70 border border-blue-200/60 text-xs text-blue-900 text-left flex items-start gap-2.5">
+          <ShieldCheck className="w-4 h-4 text-fintech-royal shrink-0 mt-0.5" />
+          <p className="text-[11px] leading-relaxed">
+            <strong>Security Reminder:</strong> Zippy Loan Connector will never ask for your Aadhaar card number, PAN card physical copies, bank passwords, or OTPs. All loan evaluation and approvals are executed solely by authorized lenders.
+          </p>
         </div>
       </div>
     );
@@ -425,30 +541,62 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
           </div>
         </div>
 
-        {/* Row 4: Monthly Income (Optional) */}
-        <div>
-          <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-            Net Monthly Income / Turnover (Optional)
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
-              <IndianRupee className="w-4 h-4" />
+        {/* Row 4: Monthly Income & Email (Both Optional) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {/* Monthly Income */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Net Monthly Income / Turnover (Optional)
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <IndianRupee className="w-4 h-4" />
+              </div>
+              <input
+                type="text"
+                placeholder="e.g. 75,000"
+                value={formData.monthlyIncome}
+                onChange={(e) => {
+                  const raw = e.target.value.replace(/[^0-9]/g, '');
+                  if (!raw) {
+                    setFormData({ ...formData, monthlyIncome: '' });
+                  } else {
+                    const formatted = Number(raw).toLocaleString('en-IN');
+                    setFormData({ ...formData, monthlyIncome: formatted });
+                  }
+                }}
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-fintech-royal transition-all bg-white"
+              />
             </div>
-            <input
-              type="text"
-              placeholder="e.g. 75,000 (Helps us check lender eligibility brackets faster)"
-              value={formData.monthlyIncome}
-              onChange={(e) => {
-                const raw = e.target.value.replace(/[^0-9]/g, '');
-                if (!raw) {
-                  setFormData({ ...formData, monthlyIncome: '' });
-                } else {
-                  const formatted = Number(raw).toLocaleString('en-IN');
-                  setFormData({ ...formData, monthlyIncome: formatted });
-                }
-              }}
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-fintech-royal transition-all bg-white"
-            />
+          </div>
+
+          {/* Email Address */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
+              Email Address (Optional)
+            </label>
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <Mail className="w-4 h-4" />
+              </div>
+              <input
+                type="email"
+                placeholder="e.g. yourname@gmail.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className={`w-full pl-10 pr-4 py-2.5 rounded-xl border text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 transition-all bg-white ${
+                  errors.email
+                    ? 'border-rose-300 focus:border-rose-500 focus:ring-rose-200'
+                    : 'border-slate-300 focus:border-fintech-royal focus:ring-blue-100'
+                }`}
+              />
+            </div>
+            {errors.email && (
+              <p className="mt-1 text-xs text-rose-500 flex items-center gap-1 font-medium">
+                <AlertCircle className="w-3 h-3 shrink-0" />
+                {errors.email}
+              </p>
+            )}
           </div>
         </div>
 

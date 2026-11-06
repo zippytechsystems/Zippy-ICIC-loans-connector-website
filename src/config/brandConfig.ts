@@ -62,12 +62,12 @@ export const BRAND_CONFIG: BrandConfig = {
     "Other Telangana Locations"
   ],
   contact: {
-    // Configurable placeholders
-    phoneDisplay: "+91 90000 00000 / (040) 6828-XXXX",
-    phoneRaw: "+919000000000",
-    whatsappNumber: "919000000000", // Clearly marked configurable placeholder
+    // Official Contact Information
+    phoneDisplay: "+91 63026 90251",
+    phoneRaw: "+916302690251",
+    whatsappNumber: "916302690251",
     whatsappPrefilledMessage: "Hello Zippy ICICI Loan Connector, I would like to know about suitable loan options.",
-    email: "contact@zippyloans.in",
+    email: "zippyloanconnector2@gmail.com",
     officeLocation: "Hyderabad, Telangana, India",
     businessHours: "Monday – Saturday: 9:30 AM – 6:30 PM IST (Sunday Closed)"
   },
