@@ -215,6 +215,10 @@ export const Footer: React.FC = () => {
           </p>
           <div className="flex items-center gap-4">
             <span className="text-slate-400">Target Region: Hyderabad, Telangana, India</span>
+            <span className="text-slate-700">•</span>
+            <Link to="/leads" className="text-slate-500 hover:text-slate-300 text-[11px] transition-colors">
+              Leads Portal
+            </Link>
           </div>
         </div>
 
