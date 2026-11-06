@@ -52,20 +52,23 @@ export const BRAND_CONFIG: BrandConfig = {
   targetRegion: "Hyderabad, Secunderabad & Telangana",
   primaryCity: "Hyderabad",
   serviceAreas: [
-    "Hyderabad",
-    "Secunderabad",
-    "Cyberabad / HITEC City",
+    "Nacharam & HMT Nagar (Primary Hub)",
+    "Habsiguda & Tarnaka",
+    "Uppal & Boduppal",
+    "Narapally & Ghatkesar",
+    "Secunderabad & Malkajgiri",
+    "LB Nagar, Nagole & Kothapet",
+    "Dilsukhnagar & Malakpet",
+    "Cyberabad / HITEC City & Madhapur",
     "Gachibowli & Financial District",
-    "Kukatpally & Miyapur",
+    "Kukatpally, KPHB & Miyapur",
     "Banjara Hills & Jubilee Hills",
     "Begumpet & Somajiguda",
-    "Dilsukhnagar & LB Nagar",
-    "Uppal & Habsiguda",
     "Warangal & Hanamkonda",
     "Karimnagar",
     "Nizamabad",
     "Khammam",
-    "Other Telangana Locations"
+    "All Greater Hyderabad & Telangana Districts"
   ],
   contact: {
     // Official Contact Information

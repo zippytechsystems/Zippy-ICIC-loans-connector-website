@@ -11,6 +11,7 @@ import { LOANS_DATA } from '../data/loansData';
 import { LoanCard } from '../components/loans/LoanCard';
 import { HowItWorksSection } from '../components/home/HowItWorksSection';
 import { WhyChooseUsSection } from '../components/home/WhyChooseUsSection';
+import { LocalSeoHub } from '../components/home/LocalSeoHub';
 import { EmiCalculator } from '../components/calculator/EmiCalculator';
 import { LoanEnquiryForm } from '../components/forms/LoanEnquiryForm';
 import { SEOHead } from '../components/common/SEOHead';
@@ -252,6 +253,9 @@ export const Home: React.FC = () => {
 
       {/* Why Choose Us Section */}
       <WhyChooseUsSection />
+
+      {/* Hyper-Local SEO & All Loan Categories Assistance Hub */}
+      <LocalSeoHub />
 
       {/* Direct Online Enquiry Form Section */}
       <section id="enquiry-form" className="py-20 bg-slate-50 relative">
