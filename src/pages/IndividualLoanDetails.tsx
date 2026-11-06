@@ -7,7 +7,10 @@ import {
   ShieldAlert,
   ArrowRight,
   ChevronDown,
-  UserCheck
+  UserCheck,
+  MessageSquare,
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 import { LOANS_DATA } from '../data/loansData';
 import { LoanIcon } from '../components/common/LoanIcon';
@@ -16,10 +19,23 @@ import { EmiCalculator } from '../components/calculator/EmiCalculator';
 import { SEOHead } from '../components/common/SEOHead';
 import { BRAND_CONFIG } from '../config/brandConfig';
 
-export const IndividualLoanDetails: React.FC = () => {
-  const { loanSlug } = useParams<{ loanSlug: string }>();
+interface IndividualLoanDetailsProps {
+  directSlug?: string;
+}
 
-  const loan = LOANS_DATA.find((l) => l.slug === loanSlug);
+export const IndividualLoanDetails: React.FC<IndividualLoanDetailsProps> = ({ directSlug }) => {
+  const params = useParams<{ loanSlug: string }>();
+  const activeSlug = directSlug || params.loanSlug;
+
+  // Support both singular and plural slugs (e.g. personal-loan or personal-loans)
+  const normalizedSlug = activeSlug?.toLowerCase().trim();
+  const loan = LOANS_DATA.find((l) => {
+    if (l.slug === normalizedSlug || l.id === normalizedSlug) return true;
+    const singular = l.slug.replace(/-loans$/, '-loan');
+    const targetSingular = normalizedSlug?.replace(/-loans$/, '-loan');
+    return singular === targetSingular;
+  });
+
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   if (!loan) {
@@ -30,35 +46,40 @@ export const IndividualLoanDetails: React.FC = () => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
+  const whatsappMessage = encodeURIComponent(
+    `Hello Zippy ICICI Loan Connector, I would like to know about ${loan.title} options in Hyderabad.`
+  );
+  const whatsappUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${whatsappMessage}`;
+
   return (
     <>
       <SEOHead
-        title={`${loan.title} in Hyderabad | Rates, Eligibility & Documents`}
+        title={`${loan.title} Guidance in Hyderabad | Eligibility & Checklist`}
         description={loan.shortDescription}
-        keywords={`${loan.title} Hyderabad, ${loan.title} interest rates Telangana, ${loan.title} eligibility, ${loan.title} documents required`}
+        keywords={`${loan.title} Hyderabad, ${loan.title} eligibility, ${loan.title} documents required, ${loan.title} assistance Telangana`}
       />
 
       {/* Breadcrumb Navigation Bar */}
       <div className="bg-slate-100 border-b border-slate-200 py-2.5 text-xs text-slate-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-1.5 flex-wrap">
-          <Link to="/" className="hover:text-fintech-royal">Home</Link>
+          <Link to="/" className="hover:text-secondary">Home</Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-          <Link to="/services" className="hover:text-fintech-royal">Loan Services</Link>
+          <Link to="/services" className="hover:text-secondary">Loan Services</Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
           <span className="text-slate-900 font-semibold">{loan.title}</span>
         </div>
       </div>
 
       {/* Hero Banner */}
-      <section className="bg-gradient-to-b from-slate-900 via-fintech-navy to-slate-900 text-white py-14 lg:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18),transparent_50%)] pointer-events-none"></div>
+      <section className="bg-gradient-to-b from-primary via-[#0D213F] to-primary text-white py-14 lg:py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.22),transparent_50%)] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl space-y-4">
             
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-900/60 border border-blue-400/30 text-blue-300 text-xs font-semibold">
               <LoanIcon name={loan.iconName} className="w-3.5 h-3.5" />
-              <span>Verified Lending Category</span>
+              <span>Verified Lending Product</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
@@ -81,7 +102,7 @@ export const IndividualLoanDetails: React.FC = () => {
               </div>
               <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80">
                 <span className="text-[11px] text-slate-400 block">Max Limit</span>
-                <span className="text-sm sm:text-base font-bold text-orange-400 font-mono">{loan.maxAmount}</span>
+                <span className="text-sm sm:text-base font-bold text-accent font-mono">{loan.maxAmount}</span>
               </div>
               <div className="p-3 rounded-xl bg-slate-800/80 border border-slate-700/80">
                 <span className="text-[11px] text-slate-400 block">Turnaround</span>
@@ -89,14 +110,26 @@ export const IndividualLoanDetails: React.FC = () => {
               </div>
             </div>
 
-            <div className="pt-2 flex flex-wrap gap-3">
+            {/* CTAs: Apply Now + WhatsApp Enquiry */}
+            <div className="pt-3 flex flex-wrap items-center gap-3">
               <a
                 href="#enquiry-form"
-                className="px-6 py-3 rounded-xl bg-fintech-royal hover:bg-blue-600 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
+                className="px-6 py-3 rounded-xl bg-secondary hover:bg-blue-600 text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
               >
                 <span>Apply for {loan.title}</span>
                 <ArrowRight className="w-4 h-4" />
               </a>
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-md transition-all flex items-center gap-2"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>WhatsApp Enquiry</span>
+              </a>
+
               <a
                 href="#eligibility-criteria"
                 className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 font-semibold text-sm transition-all"
@@ -119,16 +152,17 @@ export const IndividualLoanDetails: React.FC = () => {
             {/* Overview Section */}
             <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-                Product Overview & Purpose
+                Loan Overview & Purpose
               </h2>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 {loan.fullDescription}
               </p>
 
-              {/* Key Highlights */}
+              {/* Key Features & Potential Benefits */}
               <div className="pt-4">
-                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-3">
-                  Key Benefits & Highlights
+                <h3 className="text-sm font-bold uppercase tracking-wider text-slate-800 mb-3 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-accent" />
+                  <span>Key Features & Potential Benefits</span>
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-slate-700">
                   {loan.keyHighlights.map((highlight, idx) => (
@@ -137,23 +171,29 @@ export const IndividualLoanDetails: React.FC = () => {
                       <span>{highlight}</span>
                     </div>
                   ))}
+                  {loan.features.map((feature, idx) => (
+                    <div key={`feat-${idx}`} className="flex items-start gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-100">
+                      <CheckCircle2 className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </section>
 
-            {/* Eligibility Criteria */}
+            {/* General Eligibility Information */}
             <section id="eligibility-criteria" className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-6 scroll-mt-24">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-fintech-royal">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary">
                 <UserCheck className="w-4 h-4" />
-                <span>Eligibility Parameters</span>
+                <span>General Eligibility Information</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-                Who Can Apply?
+                Who Can Qualify for Referral?
               </h2>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-slate-400 block font-semibold text-xs">Eligible Age Range</span>
+                  <span className="text-slate-400 block font-semibold text-xs">Eligible Age Bracket</span>
                   <span className="font-bold text-slate-800">{loan.eligibility.ageRange}</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-1">
@@ -161,32 +201,32 @@ export const IndividualLoanDetails: React.FC = () => {
                   <span className="font-bold text-slate-800">{loan.eligibility.employmentType}</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-slate-400 block font-semibold text-xs">Minimum Net Monthly Income</span>
+                  <span className="text-slate-400 block font-semibold text-xs">Indicative Income Guideline</span>
                   <span className="font-bold text-slate-800">{loan.eligibility.minIncome}</span>
                 </div>
                 <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200/60 space-y-1">
-                  <span className="text-slate-400 block font-semibold text-xs">Credit Score Recommendation</span>
+                  <span className="text-slate-400 block font-semibold text-xs">Credit Score Guidance</span>
                   <span className="font-bold text-emerald-600">{loan.eligibility.minCreditScore}</span>
                 </div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 text-xs text-blue-900 flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-fintech-royal shrink-0 mt-0.5" />
-                <span><strong>Residential Requirement:</strong> {loan.eligibility.residence}</span>
+                <ShieldCheck className="w-4 h-4 text-secondary shrink-0 mt-0.5" />
+                <span><strong>Residential Scope:</strong> {loan.eligibility.residence}</span>
               </div>
             </section>
 
-            {/* Required Documentation */}
+            {/* Common Document Checklist */}
             <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-6">
-              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-fintech-royal">
+              <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-secondary">
                 <FileText className="w-4 h-4" />
-                <span>Verification Checklist</span>
+                <span>Verification Dossier</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-                Required Documents Checklist
+                Common Document Checklist
               </h2>
               <p className="text-xs text-slate-500">
-                Having clear photocopies ready helps prevent delays during lender appraisal:
+                Lenders typically require verified copies of these documents during credit underwriting:
               </p>
 
               <div className="space-y-4">
@@ -208,27 +248,7 @@ export const IndividualLoanDetails: React.FC = () => {
               </div>
             </section>
 
-            {/* Application Stages */}
-            <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-6">
-              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
-                Application Journey for {loan.title}
-              </h2>
-
-              <div className="space-y-4">
-                {loan.steps.map((st, idx) => (
-                  <div key={idx} className="flex items-start gap-4">
-                    <div className="w-8 h-8 rounded-full bg-fintech-navy text-white text-xs font-bold flex items-center justify-center shrink-0">
-                      {idx + 1}
-                    </div>
-                    <div className="pt-1 text-sm text-slate-700 leading-relaxed">
-                      {st}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Loan Specific FAQs */}
+            {/* Frequently Asked Questions */}
             {loan.faqs && loan.faqs.length > 0 && (
               <section className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-xs space-y-4">
                 <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
@@ -246,7 +266,7 @@ export const IndividualLoanDetails: React.FC = () => {
                         className="w-full p-4 text-left font-bold text-sm text-slate-800 flex justify-between items-center gap-3 hover:bg-slate-50"
                       >
                         <span>{faq.question}</span>
-                        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${openFaq === idx ? 'rotate-180 text-fintech-royal' : ''}`} />
+                        <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${openFaq === idx ? 'rotate-180 text-secondary' : ''}`} />
                       </button>
                       {openFaq === idx && (
                         <div className="p-4 pt-0 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100 bg-slate-50/50">
@@ -264,11 +284,11 @@ export const IndividualLoanDetails: React.FC = () => {
               <EmiCalculator defaultLoanType={loan.title} />
             </section>
 
-            {/* Loan Disclaimers */}
+            {/* Disclaimers & Lender Discretion */}
             <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200/70 text-xs text-amber-900 flex items-start gap-3">
               <ShieldAlert className="w-5 h-5 text-amber-700 shrink-0 mt-0.5" />
               <div className="leading-relaxed">
-                <strong>Specific Lender Disclosure:</strong> {loan.lenderDisclaimer}
+                <strong>Important Lender Discretion Notice:</strong> {loan.lenderDisclaimer} No guaranteed loan approval or fixed interest rates are promised or implied.
               </div>
             </div>
 
@@ -283,12 +303,29 @@ export const IndividualLoanDetails: React.FC = () => {
                 sourceContext={`Individual Product Page: ${loan.title}`}
               />
 
-              <div className="p-5 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600 space-y-3">
+              {/* Direct WhatsApp Callout Box */}
+              <div className="p-5 rounded-2xl bg-[#F0FDF4] border border-[#BBF7D0] text-xs text-emerald-950 space-y-2">
+                <span className="font-bold block text-sm text-emerald-900">Fast WhatsApp Assistance</span>
+                <p className="text-emerald-800">
+                  Prefer instant messaging? Connect with our Hyderabad loan coordinator:
+                </p>
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-3 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-xs shadow-xs transition-all flex items-center justify-center gap-2 mt-2"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Chat on WhatsApp</span>
+                </a>
+              </div>
+
+              {/* Direct Phone Link */}
+              <div className="p-5 rounded-2xl bg-white border border-slate-200 text-xs text-slate-600 space-y-2">
                 <span className="font-bold text-slate-900 block text-sm">Need Direct Phone Assistance?</span>
-                <p>Call our Hyderabad loan coordinator during working hours:</p>
                 <a
                   href={`tel:${BRAND_CONFIG.contact.phoneRaw}`}
-                  className="font-bold text-fintech-royal hover:underline block text-sm"
+                  className="font-bold text-secondary hover:underline block text-sm"
                 >
                   {BRAND_CONFIG.contact.phoneDisplay}
                 </a>

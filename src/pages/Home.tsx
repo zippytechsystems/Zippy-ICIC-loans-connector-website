@@ -25,10 +25,10 @@ export const Home: React.FC = () => {
       />
 
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-slate-900 via-fintech-navy to-[#06101E] text-white pt-12 pb-24 lg:pt-16 lg:pb-32 overflow-hidden">
-        {/* Background glow and geometric mesh */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(37,99,235,0.18),transparent_50%)] pointer-events-none"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(249,115,22,0.12),transparent_40%)] pointer-events-none"></div>
+      <section className="relative bg-gradient-to-b from-primary via-[#0D213F] to-[#0A1B33] text-white pt-12 pb-24 lg:pt-16 lg:pb-32 overflow-hidden">
+        {/* Background glow and subtle accents */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.22),transparent_50%)] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.12),transparent_40%)] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
               
               {/* Region & Badge tag */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
                 <span>Dedicated Loan Referral Desk for {BRAND_CONFIG.targetRegion}</span>
               </div>
 
@@ -74,26 +74,26 @@ export const Home: React.FC = () => {
 
               {/* Required Exact Buttons */}
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <Link
-                  to="/eligibility"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-fintech-royal via-blue-600 to-fintech-royal hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base"
-                >
-                  <span>Check Eligibility</span>
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-
                 <a
                   href="#loan-categories"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base"
                 >
                   <span>Explore Loan Options</span>
+                  <ArrowRight className="w-5 h-5" />
                 </a>
+
+                <Link
+                  to="/eligibility"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm"
+                >
+                  <span>Check Eligibility</span>
+                </Link>
               </div>
 
               {/* Local Area Trust indicators */}
               <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-orange-400" />
+                  <MapPin className="w-3.5 h-3.5 text-accent" />
                   <span>Hyderabad • Secunderabad • Cyberabad</span>
                 </span>
                 <span className="flex items-center gap-1.5">
@@ -103,11 +103,11 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Premium Fintech Consultation Card / Visual Element */}
+            {/* Right Column: Premium Financial Consultation Hero Card */}
             <div className="lg:col-span-5">
               <div className="relative mx-auto max-w-md lg:max-w-none">
                 {/* Decorative border glow */}
-                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-blue-600 to-orange-500 opacity-20 blur-xl"></div>
+                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-secondary to-accent opacity-20 blur-xl"></div>
 
                 <div className="relative rounded-3xl bg-slate-900/90 border border-slate-700/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
                   {/* Header */}
@@ -117,7 +117,7 @@ export const Home: React.FC = () => {
                         Z
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-white">Loan Advisory Concierge</h4>
+                        <h4 className="text-sm font-bold text-white">Financial Consultation Desk</h4>
                         <p className="text-[11px] text-slate-400">Authorized Lending Referral Services</p>
                       </div>
                     </div>
@@ -135,7 +135,7 @@ export const Home: React.FC = () => {
                     </div>
                     <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
                       <span className="text-[11px] text-slate-400 block mb-0.5">Max Tenure</span>
-                      <span className="text-lg font-bold text-orange-400 font-mono">Up to 30 Yrs</span>
+                      <span className="text-lg font-bold text-accent font-mono">Up to 30 Yrs</span>
                       <span className="text-[10px] text-slate-500 block">Home / LAP Loans</span>
                     </div>
                   </div>
@@ -160,7 +160,7 @@ export const Home: React.FC = () => {
                   <div className="mt-6 pt-5 border-t border-slate-800">
                     <Link
                       to="/apply"
-                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 hover:from-orange-600 hover:to-amber-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                     >
                       <span>Start Confidential Enquiry</span>
                       <ArrowRight className="w-4 h-4" />
@@ -184,7 +184,7 @@ export const Home: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-fintech-royal px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 inline-block mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-secondary px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 inline-block mb-3">
               Comprehensive Financing Solutions
             </span>
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -215,6 +215,34 @@ export const Home: React.FC = () => {
       {/* How It Works Section */}
       <HowItWorksSection />
 
+      {/* Section: Check Your Preliminary Loan Eligibility CTA */}
+      <section className="py-16 bg-gradient-to-r from-primary to-[#0D213F] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-slate-900/60 border border-slate-700/60 p-8 sm:p-10 rounded-3xl backdrop-blur-md">
+            <div className="space-y-3 max-w-2xl text-center md:text-left">
+              <span className="text-xs font-bold uppercase tracking-wider text-accent px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 inline-block">
+                Instant 4-Step Diagnostic
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white">
+                Check Your Preliminary Loan Eligibility
+              </h2>
+              <p className="text-sm text-slate-300">
+                Estimate your borrowing readiness, calculate permissible EMIs, and understand necessary documentation for borrowers in Hyderabad and Telangana.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <Link
+                to="/eligibility"
+                className="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary to-blue-700 hover:from-blue-700 hover:to-secondary shadow-lg shadow-blue-500/30 transition-all flex items-center gap-2 text-sm"
+              >
+                <span>Check Eligibility</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Interactive EMI Calculator Section */}
       <section className="py-20 bg-white border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -229,7 +257,7 @@ export const Home: React.FC = () => {
       <section id="enquiry-form" className="py-20 bg-slate-50 relative">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
-            <span className="text-xs font-bold uppercase tracking-wider text-fintech-royal px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 inline-block mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-secondary px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200/60 inline-block mb-2">
               Confidential & Fast
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900">
@@ -241,6 +269,42 @@ export const Home: React.FC = () => {
           </div>
 
           <LoanEnquiryForm initialLoanCategory="Personal Loans" sourceContext="Home Page Bottom Form" />
+        </div>
+      </section>
+
+      {/* Final Call to Action Section */}
+      <section className="py-20 bg-primary text-white text-center relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(23,105,170,0.3),transparent_70%)] pointer-events-none"></div>
+
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-accent px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 inline-block">
+            Start Your Application Journey
+          </span>
+
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Looking for the Right Loan? Let's Get Started.
+          </h2>
+
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Whether you need a personal credit line in HITEC City, a home loan for a flat in Kukatpally, or commercial business funds in Telangana—our loan advisors are ready to guide you.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/apply"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent shadow-lg shadow-amber-500/25 transition-all flex items-center justify-center gap-2 text-base"
+            >
+              <span>Apply for Loan Now</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+
+            <Link
+              to="/contact"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-center gap-2 text-base"
+            >
+              <span>Contact Assistance Desk</span>
+            </Link>
+          </div>
         </div>
       </section>
     </>

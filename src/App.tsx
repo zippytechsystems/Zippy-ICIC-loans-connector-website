@@ -36,14 +36,14 @@ const NotFound: React.FC = () => {
   return (
     <div className="min-h-[70vh] flex items-center justify-center bg-slate-50 px-4 py-20 text-center">
       <div className="max-w-md bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-4">
-        <span className="text-4xl font-extrabold text-fintech-royal font-mono">404</span>
+        <span className="text-4xl font-extrabold text-secondary font-mono">404</span>
         <h1 className="text-2xl font-bold text-slate-900">Page Not Found</h1>
         <p className="text-sm text-slate-600">
           The requested loan page or resource could not be found. Please check the URL or return to our home page.
         </p>
         <Link
           to="/"
-          className="inline-block px-6 py-2.5 rounded-xl bg-fintech-royal text-white text-sm font-bold shadow-md hover:bg-blue-700 transition-all"
+          className="inline-block px-6 py-2.5 rounded-xl bg-secondary text-white text-sm font-bold shadow-md hover:bg-blue-700 transition-all"
         >
           Return to Home
         </Link>
@@ -56,7 +56,7 @@ export const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-blue-600 selection:text-white">
+      <div className="min-h-screen flex flex-col bg-white text-darkSlate font-sans selection:bg-secondary selection:text-white">
         {/* Navigation */}
         <Navbar />
 
@@ -66,13 +66,27 @@ export const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/services" element={<LoanServices />} />
+            
+            {/* Dynamic slug route for all 12 loans */}
             <Route path="/services/:loanSlug" element={<IndividualLoanDetails />} />
+            
+            {/* Direct named routes for specific requested loan pages */}
+            <Route path="/personal-loan" element={<IndividualLoanDetails directSlug="personal-loans" />} />
+            <Route path="/home-loan" element={<IndividualLoanDetails directSlug="home-loans" />} />
+            <Route path="/business-loan" element={<IndividualLoanDetails directSlug="business-loans" />} />
+            <Route path="/loan-against-property" element={<IndividualLoanDetails directSlug="loan-against-property" />} />
+            <Route path="/vehicle-loan" element={<IndividualLoanDetails directSlug="vehicle-loans" />} />
+            <Route path="/construction-loan" element={<IndividualLoanDetails directSlug="construction-loans" />} />
+
+            {/* Core utility and enquiry pages */}
             <Route path="/eligibility" element={<CheckEligibility />} />
             <Route path="/apply" element={<ApplyForLoan />} />
             <Route path="/contact" element={<ContactUs />} />
             <Route path="/faqs" element={<FAQs />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
+            
+            {/* 404 Fallback */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
