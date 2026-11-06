@@ -19,7 +19,7 @@ import {
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../../config/brandConfig';
 import { LOANS_DATA } from '../../data/loansData';
-import { submitLoanEnquiry } from '../../services/api';
+import { submitLoanEnquiry, generateClientFallbackRef } from '../../services/api';
 
 interface FormProps {
   initialLoanCategory?: string;
@@ -129,26 +129,20 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
 
-    try {
-      // 1. Submit to Backend REST API (POST /api/v1/loan-enquiries)
-      const apiResponse = await submitLoanEnquiry({
-        ...formData,
-        sourceContext
-      });
+    // 1. Generate Official Reference ID immediately (ZIP-YYYYMMDD-XXXX)
+    const officialRef = generateClientFallbackRef();
+    setReferenceId(officialRef);
 
-      const finalRef = apiResponse.referenceId;
-      setReferenceId(finalRef);
-
-      // 2. Generate Professional WhatsApp Message with Customer Details
-      const professionalWhatsAppMessage = 
+    // 2. Generate Professional WhatsApp Message containing customer's submitted details
+    const professionalWhatsAppMessage = 
 `*New Loan Enquiry - Zippy Loan Connector*
-Ref ID: *${finalRef}*
+Ref ID: *${officialRef}*
 
 *Customer Details:*
 • Name: ${formData.fullName.trim()}
@@ -162,47 +156,49 @@ ${formData.email.trim() ? `• Email: ${formData.email.trim()}\n` : ''}• City:
 ${formData.monthlyIncome ? `• Monthly Income: ₹${formData.monthlyIncome}\n` : ''}${formData.additionalInfo ? `• Notes: ${formData.additionalInfo.trim()}\n` : ''}
 Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like guidance on suitable lender options.`;
 
-      // 3. Construct WhatsApp click-to-chat URL for official business number +91 6302690251
-      const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(professionalWhatsAppMessage)}`;
-      setWhatsappChatUrl(chatUrl);
+    // 3. Construct official WhatsApp click-to-chat URL (+91 6302690251)
+    const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(professionalWhatsAppMessage)}`;
+    setWhatsappChatUrl(chatUrl);
 
-      // 4. Save safely to localStorage for user's personal session history
-      try {
-        const stored = JSON.parse(localStorage.getItem('zippy_loan_enquiries') || '[]');
-        stored.push({
-          ref: finalRef,
-          timestamp: new Date().toISOString(),
-          category: formData.loanCategory,
-          amount: formData.requiredAmount,
-          city: formData.city,
-          savedToBackend: apiResponse.savedToDatabase,
-          context: sourceContext
-        });
-        localStorage.setItem('zippy_loan_enquiries', JSON.stringify(stored));
-      } catch {
-        // Ignore storage exceptions
-      }
-
-      // 5. Open WhatsApp in a new tab/app immediately
-      try {
-        const opened = window.open(chatUrl, '_blank', 'noopener,noreferrer');
-        if (!opened) {
-          console.info('Pop-up prevented auto-open. User can click manual WhatsApp button.');
-        }
-      } catch {
-        // Fallback handled by manual UI button
-      }
-
-      setIsSubmitting(false);
-      setSubmittedSuccess(true);
-    } catch (err) {
-      console.error('Enquiry handling error:', err);
-      setIsSubmitting(false);
-      // Still show success screen with fallback ref so customer can reach WhatsApp
-      const fallbackRef = `ZIP-${Date.now().toString().slice(-6)}`;
-      setReferenceId(fallbackRef);
-      setSubmittedSuccess(true);
+    // 4. Open WhatsApp immediately on submit
+    try {
+      window.open(chatUrl, '_blank', 'noopener,noreferrer');
+    } catch (popupErr) {
+      console.info('Auto popup restricted. Fallback CTA active on screen.', popupErr);
     }
+
+    // 5. Asynchronously persist enquiry into Hostinger MySQL Database
+    submitLoanEnquiry({
+      ...formData,
+      clientReferenceId: officialRef,
+      sourceContext
+    })
+      .then((apiResponse) => {
+        console.log('[ENQUIRY_PERSISTED_DATABASE]', apiResponse);
+        // Save to localStorage for customer's session reference
+        try {
+          const stored = JSON.parse(localStorage.getItem('zippy_loan_enquiries') || '[]');
+          stored.push({
+            ref: officialRef,
+            timestamp: new Date().toISOString(),
+            category: formData.loanCategory,
+            amount: formData.requiredAmount,
+            city: formData.city,
+            savedToDatabase: apiResponse.savedToDatabase,
+            context: sourceContext
+          });
+          localStorage.setItem('zippy_loan_enquiries', JSON.stringify(stored));
+        } catch {
+          // ignore
+        }
+      })
+      .catch((err) => {
+        console.warn('[DATABASE_ASYNC_NOTICE]', err);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+        setSubmittedSuccess(true);
+      });
   };
 
   const handleReset = () => {
