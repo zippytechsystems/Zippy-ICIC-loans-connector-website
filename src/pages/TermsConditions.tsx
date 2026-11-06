@@ -49,7 +49,7 @@ export const TermsConditions: React.FC = () => {
             1. Acceptance of Terms
           </h2>
           <p>
-            By accessing or browsing this website (<a href="https://zippyloans.in" className="text-fintech-royal">zippyloans.in</a>), using our eligibility estimation calculators, or submitting an online enquiry, you acknowledge that you have read, understood, and agreed to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, you should refrain from using this website.
+            By accessing or browsing this website (<a href="https://zippyicicloanconnector.in" className="text-fintech-royal">zippyicicloanconnector.in</a>), using our eligibility estimation calculators, or submitting an online enquiry, you acknowledge that you have read, understood, and agreed to be bound by these Terms and Conditions and our Privacy Policy. If you do not agree with any part of these terms, you should refrain from using this website.
           </p>
         </section>
 

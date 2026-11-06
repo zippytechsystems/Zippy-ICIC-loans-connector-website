@@ -8,6 +8,9 @@
 export interface BrandConfig {
   brandName: string;
   shortName: string;
+  googleSearchName: string;
+  domain: string;
+  siteUrl: string;
   legalEntityName: string;
   tagline: string;
   targetRegion: string;
@@ -41,6 +44,9 @@ export interface BrandConfig {
 export const BRAND_CONFIG: BrandConfig = {
   brandName: "Zippy ICICI Loan Connector",
   shortName: "Zippy Loan Connector",
+  googleSearchName: "Zippy Icic loan connector",
+  domain: "zippyicicloanconnector.in",
+  siteUrl: "https://zippyicicloanconnector.in",
   legalEntityName: "Zippy Financial Referral & Assistance Services",
   tagline: "Your Loan. Your Choice. Our Guidance.",
   targetRegion: "Hyderabad, Secunderabad & Telangana",

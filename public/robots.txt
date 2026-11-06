@@ -1,4 +1,7 @@
+# Robots.txt for Zippy Icic loan connector
 User-agent: *
 Allow: /
+Disallow: /api/
 
-Sitemap: https://zippyloans.in/sitemap.xml
+# Sitemap location
+Sitemap: https://zippyicicloanconnector.in/sitemap.xml
