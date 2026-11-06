@@ -1,7 +1,35 @@
-# Apache rewrite rules for React Router SPA on Hostinger
+# ==============================================================================
+# Zippy ICICI Loan Connector - Enterprise Production Security & Routing Configuration
+# Built for Hostinger Apache Web Server with HTTPS, HSTS, and Anti-Exploit Defenses
+# ==============================================================================
+
+# 1. DISABLE DIRECTORY BROWSING (Prevents hackers from viewing folder files)
+Options -Indexes -MultiViews
+
+# 2. DEFAULT CHARSET
+AddDefaultCharset UTF-8
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # 3. ENFORCE HTTPS / SSL (Redirects all HTTP traffic to HTTPS)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 4. BLOCK MALICIOUS USER AGENTS & EXPLOIT TOOLS (sqlmap, nikto, wpscan, etc.)
+  RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|wpscan|havij|acunetix|masscan|zgrab|nmap|dirbuster) [NC]
+  RewriteRule .* - [F,L]
+
+  # 5. BLOCK COMMON INJECTION ATTEMPTS IN QUERY STRINGS
+  RewriteCond %{QUERY_STRING} (eval\(|<script|%3Cscript|SELECT.*FROM|UNION.*SELECT|INSERT.*INTO|DELETE.*FROM|DROP.*TABLE|benchmark\(|sleep\() [NC]
+  RewriteRule .* - [F,L]
+
+  # 6. BLOCK ATTEMPTS TO ACCESS HIDDEN DIRECTORIES (.git, .env, etc.)
+  RewriteRule "(^|/)\.(?!well-known)" - [F,L]
+
+  # 7. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
@@ -9,12 +37,47 @@
   RewriteRule . /index.html [L]
 </IfModule>
 
-# Caching & Compression headers
+# 8. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
+<FilesMatch "(?i)\.(env|sql|log|bak|config|ts|tsx|map|sh|ps1|yml|yaml|md|lock)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# 9. HTTP SECURITY HEADERS (Defends against XSS, Clickjacking, Sniffing & MITM)
+<IfModule mod_headers.c>
+  # Enforce HSTS (HTTP Strict Transport Security) - 1 Year with subdomains
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Defend against Clickjacking (prevents external websites from framing this site)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Browser XSS Filter Protection
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Privacy: Send full referrer to same origin, but only domain to external sites
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restrict unauthorized browser feature APIs (camera, mic, payment, geolocation)
+  Header always set Permissions-Policy "camera=(), microphone=(), payment=(), usb=()"
+</IfModule>
+
+# 10. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
 <IfModule mod_expires.c>
   ExpiresActive On
+  ExpiresDefault "access plus 1 day"
   ExpiresByType image/svg+xml "access plus 1 month"
   ExpiresByType image/png "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
