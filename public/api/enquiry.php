@@ -18,21 +18,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Database Credentials for Hostinger
-$dbHost = '127.0.0.1';
-$dbPort = '3306';
-$dbName = 'u914601002_zippy_loans';
-$dbUser = 'u914601002_loan_user';
-$dbPass = 'ZippyLoan#2026!Secure';
+// Database Credentials with Environment Variable support and smart Hostinger fallbacks
+$dbHost = getenv('DB_HOST') ?: '127.0.0.1';
+$dbPort = getenv('DB_PORT') ?: '3306';
+$dbName = getenv('DB_NAME') ?: 'u914601002_zippy_loans';
+$dbUser = getenv('DB_USER') ?: 'u914601002_loan_user';
+$dbPass = getenv('DB_PASSWORD') ?: 'M.Linga@123';
 
 function getDbConnection(string $host, string $port, string $name, string $user, string $pass): PDO {
-    $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
     $options = [
         PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES   => false,
+        PDO::ATTR_TIMEOUT            => 5,
     ];
-    return new PDO($dsn, $user, $pass, $options);
+
+    // Priority 1: Connect with configured user & host
+    try {
+        $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
+        return new PDO($dsn, $user, $pass, $options);
+    } catch (Throwable $e1) {
+        // Priority 2: If custom username failed, fallback to Hostinger database account user 'u914601002_loan_user'
+        if ($user !== 'u914601002_loan_user') {
+            try {
+                $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
+                return new PDO($dsn, 'u914601002_loan_user', $pass, $options);
+            } catch (Throwable $e2) {
+                // proceed to socket / localhost check
+            }
+        }
+        
+        // Priority 3: Fallback to localhost Unix socket
+        try {
+            $dsn = "mysql:host=localhost;dbname={$name};charset=utf8mb4";
+            return new PDO($dsn, 'u914601002_loan_user', $pass, $options);
+        } catch (Throwable $e3) {
+            // Rethrow initial exception with helpful context
+            throw $e1;
+        }
+    }
 }
 
 // Health check on GET

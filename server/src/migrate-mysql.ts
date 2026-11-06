@@ -7,7 +7,7 @@ async function migrateMySQL() {
     host: process.env.MYSQL_HOST || 'srv1555.hstgr.io',
     port: parseInt(process.env.MYSQL_PORT || '3306', 10),
     user: process.env.MYSQL_USER || 'u914601002_loan_user',
-    password: process.env.MYSQL_PASSWORD || 'ZippyLoan#2026!Secure',
+    password: process.env.MYSQL_PASSWORD || 'M.Linga@123',
     database: process.env.MYSQL_DATABASE || 'u914601002_zippy_loans'
   });
 
