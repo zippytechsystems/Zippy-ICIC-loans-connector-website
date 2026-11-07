@@ -230,12 +230,12 @@ export const HeroImageSlider: React.FC = () => {
       onTouchEnd={handleTouchEnd}
       aria-label="Featured Loan Categories Hero Slider"
     >
-      {/* Main Slider Viewport: Grand Height for Maximum First-Impression */}
-      <div className="relative w-full min-h-[590px] xs:min-h-[580px] sm:min-h-[620px] md:min-h-[640px] lg:min-h-[680px] overflow-hidden flex items-center">
+      {/* Main Slider Viewport: Responsive Height (Natural flow on mobile, Grand height on desktop) */}
+      <div className="relative w-full min-h-0 md:min-h-[640px] lg:min-h-[680px] overflow-hidden flex items-center">
         
-        {/* Horizontal Sliding Track (Automatic side sliding with GPU acceleration) */}
+        {/* Desktop / Tablet Full-Bleed Background Sliding Track (Hidden on mobile phones to prevent oversized zoomed heads) */}
         <div
-          className="absolute inset-0 flex h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+          className="hidden md:flex absolute inset-0 h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {SLIDES.map((slide, index) => (
@@ -257,7 +257,7 @@ export const HeroImageSlider: React.FC = () => {
                     console.warn(`[Vite:HeroSlider] Bundled image load issue for ${slide.id}, falling back to public image.`);
                   }
                 }}
-                className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-1000 ease-out brightness-105"
+                className="w-full h-full object-cover object-[70%_center] md:object-[65%_center] lg:object-center transform scale-100 transition-transform duration-1000 ease-out brightness-105"
               />
 
               {/* Balanced cinematic scrim overlays: clear image visibility on right, optimal text contrast on left */}
@@ -268,11 +268,18 @@ export const HeroImageSlider: React.FC = () => {
           ))}
         </div>
 
+        {/* Mobile Ambient Glow Accents (Subtle high-end backdrop for mobile) */}
+        <div className="md:hidden absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-blue-600/15 blur-3xl" />
+          <div className="absolute bottom-12 -left-20 w-64 h-64 rounded-full bg-accent/10 blur-3xl" />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/95 to-slate-950" />
+        </div>
+
         {/* Foreground Content: Anchored in Max-Width Container */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 py-10 sm:py-14 md:py-16 pb-16 sm:pb-14">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 py-5 sm:py-10 md:py-16 pb-12 sm:pb-14">
           
           {/* Top Quick Category Navigation Tabs (User can click any tab to switch directly) */}
-          <div className="mb-4 sm:mb-8 flex flex-wrap items-center justify-between gap-3">
+          <div className="mb-3 sm:mb-6 md:mb-8 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-xl max-w-full overflow-x-auto scrollbar-none touch-pan-x">
               {SLIDES.map((slide, idx) => {
                 const Icon = slide.tagIcon;
@@ -302,11 +309,81 @@ export const HeroImageSlider: React.FC = () => {
             </div>
           </div>
 
+          {/* MOBILE SLIDE IMAGE BANNER:
+              Displays the complete 16:9 photo so the full image is covered & visible
+              without cropping or zooming into giant faces on smartphones. */}
+          <div className="block md:hidden my-3 sm:my-4">
+            <div className="relative w-full aspect-[16/9] xs:aspect-[16/9.5] rounded-2xl overflow-hidden border border-slate-700/80 shadow-2xl bg-slate-900 group">
+              {/* Sliding Track for Mobile Banner */}
+              <div
+                className="flex h-full w-full transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+              >
+                {SLIDES.map((slide, index) => (
+                  <div key={slide.id} className="relative w-full h-full shrink-0">
+                    <img
+                      src={slide.image}
+                      alt={slide.alt}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (!target.dataset.triedFallback) {
+                          target.dataset.triedFallback = 'true';
+                          target.src = `/images/hero/${slide.id}.jpg`;
+                        }
+                      }}
+                      className="w-full h-full object-cover object-center"
+                    />
+                    {/* Subtle bottom gradient vignette */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/20 pointer-events-none" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Floating Category Badge over the Image (Top Left) */}
+              <div className="absolute top-2.5 left-2.5 z-10">
+                <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] xs:text-xs font-extrabold uppercase tracking-wider ${currentSlide.tagColor} border backdrop-blur-md shadow-md`}>
+                  <TagIcon className="w-3 h-3" />
+                  <span>{currentSlide.tag}</span>
+                </span>
+              </div>
+
+              {/* Slide Counter on Image (Bottom Right) */}
+              <div className="absolute bottom-2.5 right-2.5 z-10 px-2 py-0.5 rounded-full bg-slate-900/80 backdrop-blur-md border border-slate-700/70 text-[10px] font-bold text-slate-300">
+                <span>{currentIndex + 1} / {SLIDES.length}</span>
+              </div>
+
+              {/* Subtle Touch Arrow Chevrons on Mobile Banner */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  prevSlide();
+                }}
+                type="button"
+                aria-label="Previous Slide"
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-slate-950/70 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 active:scale-90"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  nextSlide();
+                }}
+                type="button"
+                aria-label="Next Slide"
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-slate-950/70 text-white flex items-center justify-center backdrop-blur-sm border border-white/20 active:scale-90"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
           {/* Active Slide Text & Call to Actions */}
-          <div className="max-w-3xl space-y-4 sm:space-y-5">
+          <div className="max-w-3xl space-y-3.5 sm:space-y-5">
             
-            {/* Category Tag Badge */}
-            <div className="inline-flex items-center gap-2 flex-wrap">
+            {/* Category Tag Badge (Desktop only, since mobile displays it neatly on the image banner) */}
+            <div className="hidden md:inline-flex items-center gap-2 flex-wrap">
               <span className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-extrabold uppercase tracking-wider ${currentSlide.tagColor} border backdrop-blur-md shadow-sm`}>
                 <TagIcon className="w-3.5 h-3.5" />
                 <span>{currentSlide.tag}</span>
@@ -318,7 +395,7 @@ export const HeroImageSlider: React.FC = () => {
             </div>
 
             {/* Big Headline for Unforgettable First Impression */}
-            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12] drop-shadow-lg">
+            <h1 className="text-xl xs:text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.2] sm:leading-[1.12] drop-shadow-lg">
               {currentSlide.headline}
             </h1>
 
@@ -385,12 +462,12 @@ export const HeroImageSlider: React.FC = () => {
 
         </div>
 
-        {/* Carousel Navigation Arrow Controls (Visible on tablets and desktop, swipe enabled on mobile) */}
+        {/* Carousel Navigation Arrow Controls (Visible on desktop/tablets) */}
         <button
           onClick={prevSlide}
           type="button"
           aria-label="Previous Slide"
-          className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
+          className="hidden md:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
@@ -399,7 +476,7 @@ export const HeroImageSlider: React.FC = () => {
           onClick={nextSlide}
           type="button"
           aria-label="Next Slide"
-          className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
+          className="hidden md:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
