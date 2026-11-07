@@ -3,41 +3,64 @@
 # Built for Hostinger Apache Web Server with HTTPS, HSTS, and Anti-Exploit Defenses
 # ==============================================================================
 
-# 1. DISABLE DIRECTORY BROWSING (Prevents hackers from viewing folder files)
+# 1. DIRECTORY INDEX PRIORITY
+# Ensures index.html is served first even if default.php exists on Hostinger
+DirectoryIndex index.html index.php
+
+# 2. DISABLE DIRECTORY BROWSING (Prevents file listing)
 Options -Indexes -MultiViews
 
-# 2. DEFAULT CHARSET
+# 3. DEFAULT CHARSET & MIME TYPES
 AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType image/svg+xml .svg
+  AddType image/x-icon .ico
+  AddType application/json .json
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 3. ENFORCE HTTPS / SSL (Redirects all HTTP traffic to HTTPS)
+  # 4. ENFORCE HTTPS / SSL (Redirects all HTTP traffic to HTTPS)
   RewriteCond %{HTTPS} off
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  # 4. BLOCK MALICIOUS USER AGENTS & EXPLOIT TOOLS (sqlmap, nikto, wpscan, etc.)
+  # 5. BLOCK MALICIOUS USER AGENTS & EXPLOIT TOOLS (sqlmap, nikto, wpscan, etc.)
   RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|wpscan|havij|acunetix|masscan|zgrab|nmap|dirbuster) [NC]
   RewriteRule .* - [F,L]
 
-  # 5. BLOCK COMMON INJECTION ATTEMPTS IN QUERY STRINGS
+  # 6. BLOCK COMMON INJECTION ATTEMPTS IN QUERY STRINGS
   RewriteCond %{QUERY_STRING} (eval\(|<script|%3Cscript|SELECT.*FROM|UNION.*SELECT|INSERT.*INTO|DELETE.*FROM|DROP.*TABLE|benchmark\(|sleep\() [NC]
   RewriteRule .* - [F,L]
 
-  # 6. BLOCK ATTEMPTS TO ACCESS HIDDEN DIRECTORIES (.git, .env, etc.)
+  # 7. BLOCK ATTEMPTS TO ACCESS HIDDEN DIRECTORIES (.git, .env, etc.)
   RewriteRule "(^|/)\.(?!well-known)" - [F,L]
 
-  # 7. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE
+  # 8. SUBPATH ASSET FALLBACK (Crucial for Vite base: './' with React Router)
+  # Resolves requests like /services/assets/* or /about/assets/* directly to /assets/*
+  RewriteRule ^(.*/)?(assets/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(images/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(api/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(favicon\.(svg|ico))$ favicon.$2 [L,QSA]
+  RewriteRule ^(.*/)?(robots\.txt)$ robots.txt [L,QSA]
+  RewriteRule ^(.*/)?(sitemap\.xml)$ sitemap.xml [L,QSA]
+
+  # 9. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /index.html [L]
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule . index.html [L]
 </IfModule>
 
-# 8. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
+# 10. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
 <FilesMatch "(?i)\.(env|sql|log|bak|config|ts|tsx|map|sh|ps1|yml|yaml|md|lock)$">
   <IfModule mod_authz_core.c>
     Require all denied
@@ -48,7 +71,7 @@ AddDefaultCharset UTF-8
   </IfModule>
 </FilesMatch>
 
-# 9. HTTP SECURITY HEADERS (Defends against XSS, Clickjacking, Sniffing & MITM)
+# 11. HTTP SECURITY HEADERS (Defends against XSS, Clickjacking, Sniffing & MITM)
 <IfModule mod_headers.c>
   # Enforce HSTS (HTTP Strict Transport Security) - 1 Year with subdomains
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -65,16 +88,22 @@ AddDefaultCharset UTF-8
   # Privacy: Send full referrer to same origin, but only domain to external sites
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
 
-  # Restrict unauthorized browser feature APIs (camera, mic, payment, geolocation)
+  # Restrict unauthorized browser feature APIs
   Header always set Permissions-Policy "camera=(), microphone=(), payment=(), usb=()"
 </IfModule>
 
-# 10. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
+# 12. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
 <IfModule mod_headers.c>
+  # Never cache index.html to guarantee instantaneous updates on new uploads
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
     Header set Pragma "no-cache"
     Header set Expires "0"
+  </FilesMatch>
+  
+  # Cache fingerprinted assets (contain hash) permanently
+  <FilesMatch "\.(js|mjs|css|jpg|jpeg|png|gif|svg|webp|woff|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
 </IfModule>
 

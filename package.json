@@ -8,6 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "package": "powershell -ExecutionPolicy Bypass -File scripts/package-hostinger.ps1",
     "server:dev": "npm --prefix server run dev",
     "server:build": "npm --prefix server run build",
     "server:test": "npm --prefix server test"

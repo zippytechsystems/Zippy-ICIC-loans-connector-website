@@ -1,7 +1,7 @@
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$zipPath = Join-Path (Get-Location) "zippy-loans-hostinger-deploy.zip"
+$zipPath = Join-Path (Get-Location) "hostinger-upload.zip"
 if (Test-Path $zipPath) {
     Remove-Item $zipPath -Force
 }

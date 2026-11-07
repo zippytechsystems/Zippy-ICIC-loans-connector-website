@@ -1,9 +1,58 @@
-# Apache rewrite rules for Zippy ICICI Loan Connector on Hostinger
+# ==============================================================================
+# Zippy ICICI Loan Connector - Enterprise Production Security & Routing Configuration
+# Built for Hostinger Apache Web Server with HTTPS, HSTS, and Anti-Exploit Defenses
+# ==============================================================================
+
+# 1. DIRECTORY INDEX PRIORITY
+# Ensures index.html is served first even if default.php exists on Hostinger
+DirectoryIndex index.html index.php
+
+# 2. DISABLE DIRECTORY BROWSING (Prevents file listing)
+Options -Indexes -MultiViews
+
+# 3. DEFAULT CHARSET & MIME TYPES
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType text/css .css
+  AddType image/svg+xml .svg
+  AddType image/x-icon .ico
+  AddType application/json .json
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. If dist/ directory exists (Hostinger Git auto-deployment), route everything to dist/
+  # 4. ENFORCE HTTPS / SSL (Redirects all HTTP traffic to HTTPS)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # 5. BLOCK MALICIOUS USER AGENTS & EXPLOIT TOOLS (sqlmap, nikto, wpscan, etc.)
+  RewriteCond %{HTTP_USER_AGENT} (sqlmap|nikto|wpscan|havij|acunetix|masscan|zgrab|nmap|dirbuster) [NC]
+  RewriteRule .* - [F,L]
+
+  # 6. BLOCK COMMON INJECTION ATTEMPTS IN QUERY STRINGS
+  RewriteCond %{QUERY_STRING} (eval\(|<script|%3Cscript|SELECT.*FROM|UNION.*SELECT|INSERT.*INTO|DELETE.*FROM|DROP.*TABLE|benchmark\(|sleep\() [NC]
+  RewriteRule .* - [F,L]
+
+  # 7. BLOCK ATTEMPTS TO ACCESS HIDDEN DIRECTORIES (.git, .env, etc.)
+  RewriteRule "(^|/)\.(?!well-known)" - [F,L]
+
+  # 8. SUBPATH ASSET FALLBACK (Crucial for Vite base: './' with React Router)
+  # Resolves requests like /services/assets/* or /about/assets/* directly to /assets/*
+  RewriteRule ^(.*/)?(assets/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(images/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(api/.*)$ $2 [L,QSA]
+  RewriteRule ^(.*/)?(favicon\.(svg|ico))$ favicon.$2 [L,QSA]
+  RewriteRule ^(.*/)?(robots\.txt)$ robots.txt [L,QSA]
+  RewriteRule ^(.*/)?(sitemap\.xml)$ sitemap.xml [L,QSA]
+
+  # 9. If dist/ directory exists (for git root deployments), route into dist/
   RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
   RewriteRule ^$ dist/index.html [L]
 
@@ -15,36 +64,70 @@
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . dist/index.html [L]
 
-  # 2. Standard SPA rewrite when compiled files are deployed at document root
+  # 10. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE (for public_html extracted dist contents)
   RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_FILENAME} !-l
-  RewriteRule . /index.html [L]
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule . index.html [L]
 </IfModule>
 
-# Security: Block sensitive files if repo is served directly
-<FilesMatch "(\.(ts|tsx|json|config\..*|lock)|package\.json|tsconfig.*)">
+# 11. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
+<FilesMatch "(?i)\.(env|sql|log|bak|config|ts|tsx|map|sh|ps1|yml|yaml|md|lock)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
 </FilesMatch>
 
-# Caching & Compression headers: Never cache HTML to ensure live updates reflect instantly
+# 12. HTTP SECURITY HEADERS (Defends against XSS, Clickjacking, Sniffing & MITM)
 <IfModule mod_headers.c>
+  # Enforce HSTS (HTTP Strict Transport Security) - 1 Year with subdomains
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+  # Prevent MIME-type sniffing
+  Header always set X-Content-Type-Options "nosniff"
+
+  # Defend against Clickjacking (prevents external websites from framing this site)
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # Browser XSS Filter Protection
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Privacy: Send full referrer to same origin, but only domain to external sites
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Restrict unauthorized browser feature APIs
+  Header always set Permissions-Policy "camera=(), microphone=(), payment=(), usb=()"
+</IfModule>
+
+# 13. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
+<IfModule mod_headers.c>
+  # Never cache index.html to guarantee instantaneous updates on new uploads
   <FilesMatch "\.(html|htm)$">
     Header set Cache-Control "no-cache, no-store, must-revalidate, max-age=0"
     Header set Pragma "no-cache"
     Header set Expires "0"
   </FilesMatch>
+  
+  # Cache fingerprinted assets (contain hash) permanently
+  <FilesMatch "\.(js|mjs|css|jpg|jpeg|png|gif|svg|webp|woff|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
 </IfModule>
 
 <IfModule mod_expires.c>
   ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
   ExpiresByType text/html "access plus 0 seconds"
   ExpiresByType image/svg+xml "access plus 1 month"
   ExpiresByType image/png "access plus 1 month"
   ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 year"
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
