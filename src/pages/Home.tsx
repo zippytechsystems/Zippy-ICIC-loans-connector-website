@@ -26,88 +26,82 @@ export const Home: React.FC = () => {
         keywords="Loan Assistance Hyderabad, Personal Loans Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Loan Against Property Hyderabad, Loan Enquiry Hyderabad, Loan Assistance Telangana"
       />
 
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-primary via-[#0D213F] to-[#0A1B33] text-white pt-12 pb-24 lg:pt-16 lg:pb-32 overflow-hidden">
+      {/* 1. TOP HERO IMAGE SLIDER: ABSOLUTE FIRST THING USER SEES FOR MAXIMUM IMPRESSION */}
+      <HeroImageSlider />
+
+      {/* 2. ADVISORY & VALUE PROPOSITION HERO SECTION */}
+      <section className="relative bg-gradient-to-b from-primary via-[#0D213F] to-[#0A1B33] text-white py-14 lg:py-18 overflow-hidden border-b border-slate-800">
         {/* Background glow and subtle accents */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.22),transparent_50%)] pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.12),transparent_40%)] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
             
-            {/* Left Column: Headlines & Call to Actions */}
-            <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
-              
-              {/* Region & Badge tag */}
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                <span>Dedicated Loan Referral Desk for {BRAND_CONFIG.targetRegion}</span>
+            {/* Region & Badge tag */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
+              <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+              <span>Dedicated Loan Referral Desk for {BRAND_CONFIG.targetRegion}</span>
+            </div>
+
+            {/* Required Exact Headline */}
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.18]">
+              Find the Right Loan for Your Financial Needs
+            </h2>
+
+            {/* Required Exact Description */}
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto font-normal">
+              Explore suitable loan options with personalized guidance and assistance throughout your loan application journey.
+            </p>
+
+            {/* Highlight bullet points */}
+            <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs text-slate-200 text-left max-w-3xl mx-auto">
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Personalized review</span>
               </div>
-
-              {/* Required Exact Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-5.5xl font-extrabold tracking-tight text-white leading-[1.15]">
-                Find the Right Loan for Your Financial Needs
-              </h1>
-
-              {/* Required Exact Description */}
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
-                Explore suitable loan options with personalized guidance and assistance throughout your loan application journey.
-              </p>
-
-              {/* Highlight bullet points */}
-              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200 text-left max-w-lg mx-auto lg:mx-0">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Personalized loan feasibility review</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Transparent interest & EMI simulations</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Authorized lender channel connection</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>Zero upfront customer consulting fees</span>
-                </div>
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Transparent simulations</span>
               </div>
-
-              {/* Required Exact Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                <a
-                  href="#loan-categories"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base active:scale-95"
-                >
-                  <span>Explore Loan Options</span>
-                  <ArrowRight className="w-5 h-5" />
-                </a>
-
-                <Link
-                  to="/eligibility"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm active:scale-95"
-                >
-                  <span>Check Eligibility</span>
-                </Link>
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Authorized lender channel</span>
               </div>
-
-              {/* Local Area Trust indicators */}
-              <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-accent" />
-                  <span>Hyderabad • Secunderabad • Cyberabad</span>
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Fast 24-hr consultation callback</span>
-                </span>
+              <div className="flex items-center gap-2 p-2.5 rounded-xl bg-slate-900/60 border border-slate-800">
+                <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Zero upfront fee</span>
               </div>
             </div>
 
-            {/* Right Column: Hero Image Carousel Slider */}
-            <div className="lg:col-span-6 w-full">
-              <HeroImageSlider />
+            {/* Required Exact Buttons */}
+            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <a
+                href="#loan-categories"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base active:scale-95"
+              >
+                <span>Explore All 12 Loan Options</span>
+                <ArrowRight className="w-5 h-5" />
+              </a>
+
+              <Link
+                to="/eligibility"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm active:scale-95"
+              >
+                <span>Check Eligibility</span>
+              </Link>
+            </div>
+
+            {/* Local Area Trust indicators */}
+            <div className="pt-4 border-t border-slate-800/80 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400">
+              <span className="flex items-center gap-1.5">
+                <MapPin className="w-3.5 h-3.5 text-accent" />
+                <span>Hyderabad • Secunderabad • Cyberabad</span>
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-3.5 h-3.5 text-blue-400" />
+                <span>Fast 24-hr consultation callback</span>
+              </span>
             </div>
 
           </div>
