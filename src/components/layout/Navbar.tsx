@@ -87,19 +87,19 @@ export const Navbar: React.FC = () => {
       {/* Main Navigation Bar */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo & Title */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-primary via-blue-900 to-secondary p-0.5 shadow-md flex items-center justify-center text-white font-bold transition-transform group-hover:scale-105">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 group min-w-0">
+          <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-primary via-blue-900 to-secondary p-0.5 shadow-md flex items-center justify-center text-white font-bold transition-transform group-hover:scale-105 shrink-0">
             <div className="w-full h-full bg-primary rounded-[10px] flex items-center justify-center relative overflow-hidden">
-              <span className="text-xl font-extrabold tracking-tight text-white">Z</span>
+              <span className="text-lg sm:text-xl font-extrabold tracking-tight text-white">Z</span>
               <span className="w-2 h-2 rounded-full bg-accent absolute bottom-1.5 right-1.5"></span>
             </div>
           </div>
 
-          <div className="flex flex-col">
-            <span className="text-lg sm:text-xl font-extrabold text-primary tracking-tight leading-tight group-hover:text-secondary transition-colors">
+          <div className="flex flex-col min-w-0">
+            <span className="text-base sm:text-lg md:text-xl font-extrabold text-primary tracking-tight leading-tight group-hover:text-secondary transition-colors truncate">
               {BRAND_CONFIG.brandName}
             </span>
-            <span className="text-[11px] text-slate-500 font-medium tracking-wide">
+            <span className="text-[10px] sm:text-[11px] text-slate-500 font-medium tracking-wide truncate">
               {BRAND_CONFIG.tagline}
             </span>
           </div>
@@ -244,10 +244,10 @@ export const Navbar: React.FC = () => {
         </div>
 
         {/* Mobile Hamburger Toggle */}
-        <div className="flex lg:hidden items-center gap-2">
+        <div className="flex lg:hidden items-center gap-2 shrink-0">
           <Link
             to="/apply"
-            className="sm:hidden px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-secondary hover:bg-blue-700 active:scale-95 shadow-xs transition-all"
+            className="hidden xs:inline-flex sm:hidden px-3 py-1.5 rounded-xl text-xs font-bold text-white bg-secondary hover:bg-blue-700 active:scale-95 shadow-xs transition-all"
           >
             Apply Now
           </Link>

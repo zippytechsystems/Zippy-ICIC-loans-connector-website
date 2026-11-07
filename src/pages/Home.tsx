@@ -48,17 +48,17 @@ export const Home: React.FC = () => {
               </div>
 
               {/* Required Exact Headline */}
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.15]">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-[1.2] sm:leading-[1.15]">
                 Find the Right Loan for Your Financial Needs
               </h2>
 
               {/* Required Exact Description */}
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
                 Explore suitable loan options with personalized guidance and assistance throughout your loan application journey.
               </p>
 
               {/* Highlight bullet points */}
-              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200 text-left max-w-lg mx-auto lg:mx-0">
+              <div className="pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 text-xs text-slate-200 text-left max-w-lg mx-auto lg:mx-0">
                 <div className="flex items-center gap-2">
                   <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>Personalized loan feasibility review</span>
@@ -78,18 +78,18 @@ export const Home: React.FC = () => {
               </div>
 
               {/* Required Exact Buttons */}
-              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+              <div className="pt-4 flex flex-col xs:flex-row items-stretch xs:items-center justify-center lg:justify-start gap-3 sm:gap-4">
                 <a
                   href="#loan-categories"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-base"
+                  className="w-full xs:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base text-center"
                 >
                   <span>Explore Loan Options</span>
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
 
                 <Link
                   to="/eligibility"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm"
+                  className="w-full xs:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base backdrop-blur-sm text-center"
                 >
                   <span>Check Eligibility</span>
                 </Link>

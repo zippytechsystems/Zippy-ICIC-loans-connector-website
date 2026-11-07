@@ -231,7 +231,7 @@ export const HeroImageSlider: React.FC = () => {
       aria-label="Featured Loan Categories Hero Slider"
     >
       {/* Main Slider Viewport: Grand Height for Maximum First-Impression */}
-      <div className="relative w-full min-h-[580px] sm:min-h-[620px] md:min-h-[660px] lg:min-h-[700px] overflow-hidden flex items-center">
+      <div className="relative w-full min-h-[590px] xs:min-h-[580px] sm:min-h-[620px] md:min-h-[640px] lg:min-h-[680px] overflow-hidden flex items-center">
         
         {/* Horizontal Sliding Track (Automatic side sliding with GPU acceleration) */}
         <div
@@ -261,19 +261,19 @@ export const HeroImageSlider: React.FC = () => {
               />
 
               {/* Balanced cinematic scrim overlays: clear image visibility on right, optimal text contrast on left */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 md:via-slate-950/50 to-slate-950/15 pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/25 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/75 md:via-slate-950/50 to-slate-950/20 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/30 pointer-events-none" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.25),transparent_60%)] pointer-events-none" />
             </div>
           ))}
         </div>
 
         {/* Foreground Content: Anchored in Max-Width Container */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 sm:px-8 lg:px-8 py-10 sm:py-14 md:py-16 pb-16 sm:pb-14">
           
           {/* Top Quick Category Navigation Tabs (User can click any tab to switch directly) */}
-          <div className="mb-6 sm:mb-8 flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-xl max-w-full overflow-x-auto scrollbar-none">
+          <div className="mb-4 sm:mb-8 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-1.5 sm:gap-2 p-1 sm:p-1.5 rounded-2xl bg-slate-900/90 backdrop-blur-md border border-slate-700/80 shadow-xl max-w-full overflow-x-auto scrollbar-none touch-pan-x">
               {SLIDES.map((slide, idx) => {
                 const Icon = slide.tagIcon;
                 const isActive = idx === currentIndex;
@@ -282,13 +282,13 @@ export const HeroImageSlider: React.FC = () => {
                     key={slide.id}
                     onClick={() => goToSlide(idx)}
                     type="button"
-                    className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all duration-300 whitespace-nowrap active:scale-95 ${
+                    className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-[11px] sm:text-sm font-bold transition-all duration-300 whitespace-nowrap shrink-0 active:scale-95 ${
                       isActive
                         ? 'bg-gradient-to-r from-secondary to-blue-600 text-white shadow-lg shadow-blue-500/30'
                         : 'text-slate-300 hover:text-white hover:bg-slate-800/70'
                     }`}
                   >
-                    <Icon className="w-4 h-4 shrink-0" />
+                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
                     <span>{slide.tabLabel}</span>
                   </button>
                 );
@@ -303,41 +303,41 @@ export const HeroImageSlider: React.FC = () => {
           </div>
 
           {/* Active Slide Text & Call to Actions */}
-          <div className="max-w-3xl space-y-5">
+          <div className="max-w-3xl space-y-4 sm:space-y-5">
             
             {/* Category Tag Badge */}
-            <div className="inline-flex items-center gap-2">
-              <span className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider ${currentSlide.tagColor} border backdrop-blur-md shadow-sm`}>
-                <TagIcon className="w-4 h-4" />
+            <div className="inline-flex items-center gap-2 flex-wrap">
+              <span className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-extrabold uppercase tracking-wider ${currentSlide.tagColor} border backdrop-blur-md shadow-sm`}>
+                <TagIcon className="w-3.5 h-3.5" />
                 <span>{currentSlide.tag}</span>
               </span>
-              <span className="hidden sm:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-blue-950/70 border border-blue-500/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
+              <span className="hidden xs:inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-full bg-blue-950/70 border border-blue-500/30 text-blue-300 text-[11px] sm:text-xs font-semibold backdrop-blur-md">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Instant Referral Guidance</span>
               </span>
             </div>
 
             {/* Big Headline for Unforgettable First Impression */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12] drop-shadow-lg">
+            <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.12] drop-shadow-lg">
               {currentSlide.headline}
             </h1>
 
             {/* Subheadline Description */}
-            <p className="text-sm sm:text-base md:text-lg text-slate-200/95 leading-relaxed font-normal max-w-2xl drop-shadow">
+            <p className="text-xs xs:text-sm sm:text-base md:text-lg text-slate-200/95 leading-relaxed font-normal max-w-2xl drop-shadow">
               {currentSlide.subheadline}
             </p>
 
             {/* Key Metrics Floating Cards */}
-            <div className="grid grid-cols-3 gap-2.5 sm:gap-4 py-2 max-w-xl">
+            <div className="grid grid-cols-3 gap-2 sm:gap-4 py-1.5 sm:py-2 max-w-xl">
               {currentSlide.metrics.map((metric, mIdx) => (
                 <div
                   key={mIdx}
-                  className="px-3.5 py-2.5 rounded-2xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md shadow-md hover:border-slate-600 transition-colors"
+                  className="px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl bg-slate-900/80 border border-slate-700/70 backdrop-blur-md shadow-md hover:border-slate-600 transition-colors"
                 >
-                  <span className="text-[10px] sm:text-xs text-slate-400 block font-medium uppercase tracking-wider truncate">
+                  <span className="text-[9px] xs:text-[10px] sm:text-xs text-slate-400 block font-medium uppercase tracking-wider truncate">
                     {metric.label}
                   </span>
-                  <span className="text-sm sm:text-base md:text-lg font-extrabold text-white font-mono block mt-0.5">
+                  <span className="text-xs xs:text-sm sm:text-base md:text-lg font-extrabold text-white font-mono block mt-0.5 truncate">
                     {metric.value}
                   </span>
                 </div>
@@ -345,36 +345,36 @@ export const HeroImageSlider: React.FC = () => {
             </div>
 
             {/* Feature Checkmarks */}
-            <div className="pt-1 space-y-1.5 text-xs text-slate-200">
+            <div className="pt-0.5 sm:pt-1 space-y-1 sm:space-y-1.5 text-xs text-slate-200">
               {currentSlide.highlights.map((h, hIdx) => (
                 <div key={hIdx} className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span>{h}</span>
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400 shrink-0" />
+                  <span className="text-[11px] sm:text-xs">{h}</span>
                 </div>
               ))}
             </div>
 
             {/* Call to Action Buttons */}
-            <div className="pt-3 flex flex-wrap items-center gap-3 sm:gap-4">
+            <div className="pt-2 sm:pt-3 flex flex-col xs:flex-row items-stretch xs:items-center gap-2.5 sm:gap-4">
               <Link
                 to={currentSlide.primaryCta.url}
-                className="px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center gap-2 text-sm sm:text-base"
+                className="w-full xs:w-auto px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-xl shadow-blue-500/30 hover:shadow-2xl hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 text-sm sm:text-base text-center"
               >
                 <span>{currentSlide.primaryCta.text}</span>
-                <ArrowRight className="w-5 h-5" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
 
               {currentSlide.secondaryCta.url.startsWith('#') ? (
                 <a
                   href={currentSlide.secondaryCta.url}
-                  className="px-6 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 backdrop-blur-md hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-sm sm:text-base"
+                  className="w-full xs:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 backdrop-blur-md hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-sm sm:text-base text-center flex items-center justify-center"
                 >
                   {currentSlide.secondaryCta.text}
                 </a>
               ) : (
                 <Link
                   to={currentSlide.secondaryCta.url}
-                  className="px-6 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 backdrop-blur-md hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-sm sm:text-base"
+                  className="w-full xs:w-auto px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700/80 backdrop-blur-md hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-sm sm:text-base text-center flex items-center justify-center"
                 >
                   {currentSlide.secondaryCta.text}
                 </Link>
@@ -385,23 +385,23 @@ export const HeroImageSlider: React.FC = () => {
 
         </div>
 
-        {/* Carousel Navigation Arrow Controls */}
+        {/* Carousel Navigation Arrow Controls (Visible on tablets and desktop, swipe enabled on mobile) */}
         <button
           onClick={prevSlide}
           type="button"
           aria-label="Previous Slide"
-          className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 flex items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
+          className="hidden sm:flex absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         <button
           onClick={nextSlide}
           type="button"
           aria-label="Next Slide"
-          className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 flex items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
+          className="hidden sm:flex absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-slate-900/75 hover:bg-blue-600 text-white border border-slate-700/80 hover:border-blue-500 items-center justify-center backdrop-blur-md shadow-2xl active:scale-90 transition-all duration-200"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         {/* Bottom Autoplay Progress Bar */}
@@ -413,17 +413,17 @@ export const HeroImageSlider: React.FC = () => {
         </div>
 
         {/* Dot Indicators */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2.5">
+        <div className="absolute bottom-3.5 sm:bottom-4 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 sm:gap-2.5">
           {SLIDES.map((slide, idx) => (
             <button
               key={slide.id}
               onClick={() => goToSlide(idx)}
               type="button"
               aria-label={`Switch to slide ${idx + 1}: ${slide.tabLabel}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
+              className={`h-2 sm:h-2.5 rounded-full transition-all duration-300 ${
                 idx === currentIndex
-                  ? 'w-8 bg-accent shadow-md shadow-amber-500/50'
-                  : 'w-2.5 bg-slate-600/70 hover:bg-slate-300'
+                  ? 'w-6 sm:w-8 bg-accent shadow-md shadow-amber-500/50'
+                  : 'w-2 sm:w-2.5 bg-slate-600/70 hover:bg-slate-300'
               }`}
             />
           ))}
