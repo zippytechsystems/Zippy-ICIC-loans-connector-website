@@ -651,7 +651,7 @@ Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like g
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-fintech-royal via-blue-700 to-fintech-navy hover:from-blue-700 hover:to-blue-900 shadow-md shadow-blue-500/25 hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed text-base"
+            className="w-full py-3.5 px-6 rounded-xl font-bold text-white bg-gradient-to-r from-fintech-royal via-blue-700 to-fintech-navy hover:from-blue-700 hover:to-blue-900 shadow-md shadow-blue-500/25 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-75 disabled:cursor-not-allowed text-base"
           >
             {isSubmitting ? (
               <>

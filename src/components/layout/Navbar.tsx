@@ -236,7 +236,7 @@ export const Navbar: React.FC = () => {
         <div className="hidden sm:flex items-center gap-3">
           <Link
             to="/apply"
-            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-secondary to-blue-700 hover:from-blue-700 hover:to-primary shadow-md shadow-blue-500/20 hover:shadow-lg transition-all duration-200"
+            className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold text-white bg-gradient-to-r from-secondary to-blue-700 hover:from-blue-700 hover:to-primary shadow-md shadow-blue-500/20 hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
           >
             <span>Apply Now</span>
             <ArrowRight className="w-4 h-4" />
@@ -247,13 +247,13 @@ export const Navbar: React.FC = () => {
         <div className="flex lg:hidden items-center gap-2">
           <Link
             to="/apply"
-            className="sm:hidden px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-secondary shadow-xs"
+            className="sm:hidden px-3.5 py-1.5 rounded-xl text-xs font-bold text-white bg-secondary hover:bg-blue-700 active:scale-95 shadow-xs transition-all"
           >
             Apply Now
           </Link>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-slate-700 hover:text-secondary hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 rounded-xl text-slate-700 hover:text-secondary hover:bg-slate-100 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

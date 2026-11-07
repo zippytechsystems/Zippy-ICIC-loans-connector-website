@@ -38,9 +38,6 @@ export const SEOHead: React.FC<SEOProps> = ({
       }
       metaKeywords.setAttribute('content', keywords);
     }
-
-    // Scroll to top on route change
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [title, description, keywords, canonicalPath]);
 
   return null;

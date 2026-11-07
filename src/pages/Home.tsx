@@ -15,6 +15,7 @@ import { LocalSeoHub } from '../components/home/LocalSeoHub';
 import { EmiCalculator } from '../components/calculator/EmiCalculator';
 import { LoanEnquiryForm } from '../components/forms/LoanEnquiryForm';
 import { SEOHead } from '../components/common/SEOHead';
+import { HeroImageSlider } from '../components/home/HeroImageSlider';
 
 export const Home: React.FC = () => {
   return (
@@ -32,10 +33,10 @@ export const Home: React.FC = () => {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(245,158,11,0.12),transparent_40%)] pointer-events-none"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
             
             {/* Left Column: Headlines & Call to Actions */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <div className="lg:col-span-6 space-y-6 text-center lg:text-left">
               
               {/* Region & Badge tag */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-300 text-xs font-semibold backdrop-blur-md">
@@ -44,7 +45,7 @@ export const Home: React.FC = () => {
               </div>
 
               {/* Required Exact Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
+              <h1 className="text-3xl sm:text-5xl lg:text-5.5xl font-extrabold tracking-tight text-white leading-[1.15]">
                 Find the Right Loan for Your Financial Needs
               </h1>
 
@@ -77,7 +78,7 @@ export const Home: React.FC = () => {
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                 <a
                   href="#loan-categories"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary via-blue-600 to-secondary hover:from-blue-600 hover:to-blue-700 shadow-lg shadow-blue-500/30 hover:shadow-xl transition-all duration-200 flex items-center justify-center gap-2 text-base active:scale-95"
                 >
                   <span>Explore Loan Options</span>
                   <ArrowRight className="w-5 h-5" />
@@ -85,7 +86,7 @@ export const Home: React.FC = () => {
 
                 <Link
                   to="/eligibility"
-                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm"
+                  className="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-slate-200 bg-slate-800/80 hover:bg-slate-700 border border-slate-700 transition-all duration-200 flex items-center justify-center gap-2 text-base backdrop-blur-sm active:scale-95"
                 >
                   <span>Check Eligibility</span>
                 </Link>
@@ -104,78 +105,31 @@ export const Home: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Premium Financial Consultation Hero Card */}
-            <div className="lg:col-span-5">
-              <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Decorative border glow */}
-                <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-secondary to-accent opacity-20 blur-xl"></div>
-
-                <div className="relative rounded-3xl bg-slate-900/90 border border-slate-700/80 p-6 sm:p-8 backdrop-blur-xl shadow-2xl">
-                  {/* Header */}
-                  <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-lg bg-blue-600/20 text-blue-400 flex items-center justify-center font-bold">
-                        Z
-                      </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-white">Financial Consultation Desk</h4>
-                        <p className="text-[11px] text-slate-400">Authorized Lending Referral Services</p>
-                      </div>
-                    </div>
-                    <span className="px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">
-                      Active
-                    </span>
-                  </div>
-
-                  {/* Summary Metric Cards */}
-                  <div className="grid grid-cols-2 gap-3 my-5">
-                    <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
-                      <span className="text-[11px] text-slate-400 block mb-0.5">Indicative Rates</span>
-                      <span className="text-lg font-bold text-white font-mono">From 8.50%*</span>
-                      <span className="text-[10px] text-slate-500 block">Per annum</span>
-                    </div>
-                    <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
-                      <span className="text-[11px] text-slate-400 block mb-0.5">Max Tenure</span>
-                      <span className="text-lg font-bold text-accent font-mono">Up to 30 Yrs</span>
-                      <span className="text-[10px] text-slate-500 block">Home / LAP Loans</span>
-                    </div>
-                  </div>
-
-                  {/* Quick Feature Checklist */}
-                  <div className="space-y-2.5 text-xs text-slate-300">
-                    <div className="flex items-center justify-between py-1.5 px-3 rounded-lg bg-slate-800/40">
-                      <span>Personal Loan Consultation</span>
-                      <span className="font-semibold text-emerald-400">Up to ₹50 Lakhs</span>
-                    </div>
-                    <div className="flex items-center justify-between py-1.5 px-3 rounded-lg bg-slate-800/40">
-                      <span>Home & Construction Loans</span>
-                      <span className="font-semibold text-emerald-400">Up to ₹10 Crores</span>
-                    </div>
-                    <div className="flex items-center justify-between py-1.5 px-3 rounded-lg bg-slate-800/40">
-                      <span>Business & MSME Credit</span>
-                      <span className="font-semibold text-emerald-400">Collateral Free</span>
-                    </div>
-                  </div>
-
-                  {/* Direct Action */}
-                  <div className="mt-6 pt-5 border-t border-slate-800">
-                    <Link
-                      to="/apply"
-                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
-                    >
-                      <span>Start Confidential Enquiry</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-
-                  {/* Small statutory footnote */}
-                  <p className="text-[10px] text-slate-500 text-center mt-3 leading-tight">
-                    *Independent referral entity. All sanctions, pricing & loan terms depend on partner lenders.
-                  </p>
-                </div>
-              </div>
+            {/* Right Column: Hero Image Carousel Slider */}
+            <div className="lg:col-span-6 w-full">
+              <HeroImageSlider />
             </div>
 
+          </div>
+
+          {/* Quick Trust Highlights Strip */}
+          <div className="mt-12 pt-8 border-t border-slate-800/70 grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 text-center">
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
+              <span className="text-xl sm:text-2xl font-extrabold text-white font-mono block">From 8.50%*</span>
+              <span className="text-xs text-slate-400 mt-1 block">Indicative Home Rates</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
+              <span className="text-xl sm:text-2xl font-extrabold text-accent font-mono block">Up to 30 Yrs</span>
+              <span className="text-xs text-slate-400 mt-1 block">Flexible Repayment</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
+              <span className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono block">24-48 Hrs</span>
+              <span className="text-xs text-slate-400 mt-1 block">In-Principle Sanction</span>
+            </div>
+            <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
+              <span className="text-xl sm:text-2xl font-extrabold text-blue-400 font-mono block">Zero Fee</span>
+              <span className="text-xs text-slate-400 mt-1 block">Upfront Customer Charges</span>
+            </div>
           </div>
         </div>
       </section>
@@ -234,7 +188,7 @@ export const Home: React.FC = () => {
             <div className="shrink-0">
               <Link
                 to="/eligibility"
-                className="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary to-blue-700 hover:from-blue-700 hover:to-secondary shadow-lg shadow-blue-500/30 transition-all flex items-center gap-2 text-sm"
+                className="px-8 py-3.5 rounded-xl font-bold text-white bg-gradient-to-r from-secondary to-blue-700 hover:from-blue-700 hover:to-secondary shadow-lg shadow-blue-500/30 hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-2 text-sm"
               >
                 <span>Check Eligibility</span>
                 <ArrowRight className="w-4 h-4" />
@@ -296,7 +250,7 @@ export const Home: React.FC = () => {
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/apply"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent shadow-lg shadow-amber-500/25 transition-all flex items-center justify-center gap-2 text-base"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-white bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent shadow-lg shadow-amber-500/25 hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-2 text-base"
             >
               <span>Apply for Loan Now</span>
               <ArrowRight className="w-5 h-5" />
@@ -304,7 +258,7 @@ export const Home: React.FC = () => {
 
             <Link
               to="/contact"
-              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 transition-all flex items-center justify-center gap-2 text-base"
+              className="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-slate-200 bg-slate-800/90 hover:bg-slate-700 border border-slate-700 active:scale-95 transition-all flex items-center justify-center gap-2 text-base"
             >
               <span>Contact Assistance Desk</span>
             </Link>

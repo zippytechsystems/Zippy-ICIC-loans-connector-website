@@ -88,7 +88,7 @@ export const WhatsAppButton: React.FC = () => {
 
   return (
     <>
-      <aside aria-label="Quick WhatsApp Loan Assistance" className="fixed bottom-6 right-6 z-50 flex items-end flex-col">
+      <aside aria-label="Quick WhatsApp Loan Assistance" className="fixed bottom-6 right-6 z-50 flex items-end flex-col fixed-floating-btn">
         {/* Tooltip Card (shown on hover when modal is closed) */}
         {!isOpen && showTooltip && (
           <div className="mb-3 p-3.5 bg-white rounded-2xl shadow-xl border border-slate-200 text-slate-800 text-xs w-64 animate-in fade-in slide-in-from-bottom-2 duration-200 relative">
@@ -241,7 +241,7 @@ export const WhatsAppButton: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-2 py-3 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-bold text-xs shadow-md shadow-emerald-500/20 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                    className="w-full mt-2 py-3 px-4 bg-[#25D366] hover:bg-[#20bd5a] text-white rounded-xl font-bold text-xs shadow-md shadow-emerald-500/20 active:scale-95 transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                   >
                     {isSubmitting ? (
                       <>

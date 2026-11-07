@@ -17,16 +17,12 @@ import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsConditions } from './pages/TermsConditions';
 import { AdminLeads } from './pages/AdminLeads';
 
-// Scroll to top helper
+// Scroll to top helper on route navigation
 const ScrollToTop: React.FC = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo(0, 0);
   }, [pathname]);
 
   return null;

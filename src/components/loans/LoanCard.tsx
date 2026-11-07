@@ -66,14 +66,14 @@ export const LoanCard: React.FC<LoanCardProps> = ({ loan }) => {
       <div className="pt-4 border-t border-slate-100 grid grid-cols-2 gap-2 text-xs font-semibold">
         <Link
           to={`/services/${loan.slug}`}
-          className="flex items-center justify-center py-2.5 px-3 rounded-xl border border-slate-200 text-slate-700 hover:text-fintech-royal hover:border-blue-400 hover:bg-blue-50/50 transition-all"
+          className="flex items-center justify-center py-2.5 px-3 rounded-xl border border-slate-200 text-slate-700 hover:text-fintech-royal hover:border-blue-400 hover:bg-blue-50/70 active:scale-95 transition-all duration-200"
         >
           <span>Learn More</span>
         </Link>
 
         <Link
           to={`/apply?loan=${encodeURIComponent(loan.title)}`}
-          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-fintech-royal text-white hover:bg-blue-700 shadow-xs hover:shadow-md transition-all"
+          className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-fintech-royal hover:bg-blue-700 text-white shadow-xs hover:shadow-md hover:shadow-blue-500/20 active:scale-95 transition-all duration-200"
         >
           <span>Apply Now</span>
           <ArrowRight className="w-3.5 h-3.5" />

@@ -210,7 +210,7 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({
           {/* Action CTA */}
           <button
             onClick={handleApplyNow}
-            className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-fintech-royal to-blue-600 hover:from-blue-600 hover:to-fintech-royal text-white shadow-md transition-all flex items-center justify-center gap-2 group"
+            className="w-full py-3 px-4 rounded-xl font-bold text-sm bg-gradient-to-r from-fintech-royal to-blue-600 hover:from-blue-600 hover:to-fintech-royal text-white shadow-md hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center gap-2 group"
           >
             <span>Proceed with this Requirement</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
