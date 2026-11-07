@@ -89,7 +89,7 @@ Zippy ICIC banks Loans/
 ## 📋 The 12 Verified Loan Categories
 
 1. **Personal Loans:** Unsecured multi-purpose financing up to ₹50 Lakhs (from 10.75% p.a.).
-2. **Home Loans:** New flat, villa, and resale funding in Hyderabad/Telangana (from 8.50% p.a.).
+2. **Home Loans:** New flat, villa, and resale funding in Hyderabad/Telangana (from 8.00% p.a.).
 3. **Business Loans:** Collateral-free working capital for MSMEs & trading firms (from 12.00% p.a.).
 4. **Loan Against Property (LAP):** High-ticket mortgage against residential/commercial property up to ₹15 Crores (from 9.25% p.a.).
 5. **Vehicle Loans:** New and pre-owned four-wheeler financing with up to 100% on-road funding (from 8.75% p.a.).

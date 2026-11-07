@@ -53,7 +53,7 @@ const SLIDES: SlideItem[] = [
     headline: "Make Your Family's Dream Home a Reality",
     subheadline: 'End-to-end guidance for new flats, independent villas, and resale houses across Hyderabad & Telangana with competitive bank interest rates.',
     metrics: [
-      { label: 'Indicative Rates', value: 'From 8.50%*' },
+      { label: 'Indicative Rates', value: 'From 8.00%*' },
       { label: 'Max Tenure', value: 'Up to 30 Yrs' },
       { label: 'Sanction Speed', value: '24-48 Hrs*' }
     ],

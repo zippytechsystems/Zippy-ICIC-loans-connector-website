@@ -12,7 +12,7 @@ interface EmiCalculatorProps {
 export const EmiCalculator: React.FC<EmiCalculatorProps> = ({
   defaultLoanType = 'Personal Loan',
   defaultAmount = 1000000,
-  defaultRate = 10.75,
+  defaultRate = 8.0,
   defaultTenureYears = 5
 }) => {
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ export const EmiCalculator: React.FC<EmiCalculatorProps> = ({
               className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-fintech-royal"
             />
             <div className="flex justify-between text-[11px] text-slate-400 font-medium">
-              <span>7.5% (Home Loans)</span>
+              <span>8.0% (Starting Rate)</span>
               <span>12% (Personal)</span>
               <span>22%</span>
             </div>

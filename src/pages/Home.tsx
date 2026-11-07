@@ -135,7 +135,7 @@ export const Home: React.FC = () => {
                   <div className="grid grid-cols-2 gap-3 my-5">
                     <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
                       <span className="text-[11px] text-slate-400 block mb-0.5">Indicative Rates</span>
-                      <span className="text-lg font-bold text-white font-mono">From 8.50%*</span>
+                      <span className="text-lg font-bold text-white font-mono">From 8.00%*</span>
                       <span className="text-[10px] text-slate-500 block">Per annum</span>
                     </div>
                     <div className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
@@ -185,8 +185,8 @@ export const Home: React.FC = () => {
           {/* Quick Trust Highlights Strip */}
           <div className="mt-12 pt-8 border-t border-slate-800/70 grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 text-center">
             <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
-              <span className="text-xl sm:text-2xl font-extrabold text-white font-mono block">From 8.50%*</span>
-              <span className="text-xs text-slate-400 mt-1 block">Indicative Home Rates</span>
+              <span className="text-xl sm:text-2xl font-extrabold text-white font-mono block">From 8.00%*</span>
+              <span className="text-xs text-slate-400 mt-1 block">Indicative Home & Loan Rates</span>
             </div>
             <div className="p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md hover:border-slate-700 transition-all">
               <span className="text-xl sm:text-2xl font-extrabold text-accent font-mono block">Up to 30 Yrs</span>
@@ -271,7 +271,7 @@ export const Home: React.FC = () => {
       {/* Interactive EMI Calculator Section */}
       <section className="py-20 bg-white border-y border-slate-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <EmiCalculator defaultLoanType="Personal Loans" defaultAmount={1500000} defaultRate={10.75} defaultTenureYears={5} />
+          <EmiCalculator defaultLoanType="Personal Loans" defaultAmount={1500000} defaultRate={8.0} defaultTenureYears={5} />
         </div>
       </section>
 
