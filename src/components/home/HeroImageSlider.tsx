@@ -159,6 +159,14 @@ export const HeroImageSlider: React.FC = () => {
     setProgress(0);
   };
 
+  // Vite development & runtime telemetry logging
+  useEffect(() => {
+    console.log(
+      `%c[Vite:HeroSlider] Active slide ${currentIndex + 1}/${SLIDES.length}: "${SLIDES[currentIndex].tabLabel}" (${SLIDES[currentIndex].headline})`,
+      'color: #38bdf8; font-weight: bold;'
+    );
+  }, [currentIndex]);
+
   // Autoplay timer with progress bar
   useEffect(() => {
     if (isPaused) return;
@@ -236,18 +244,26 @@ export const HeroImageSlider: React.FC = () => {
               className="relative w-full h-full shrink-0 overflow-hidden"
               aria-hidden={index !== currentIndex}
             >
-              {/* Image with High-Definition object-cover */}
+              {/* Image with High-Definition object-cover and dual-path fallback */}
               <img
                 src={slide.image}
                 alt={slide.alt}
                 loading={index === 0 ? 'eager' : 'lazy'}
-                className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-1000 ease-out"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.triedFallback) {
+                    target.dataset.triedFallback = 'true';
+                    target.src = `/images/hero/${slide.id}.jpg`;
+                    console.warn(`[Vite:HeroSlider] Bundled image load issue for ${slide.id}, falling back to public image.`);
+                  }
+                }}
+                className="w-full h-full object-cover object-center transform scale-100 transition-transform duration-1000 ease-out brightness-105"
               />
 
-              {/* Multi-layered cinematic scrim overlays for exceptional text legibility */}
-              <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/85 to-slate-900/40" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.3),transparent_60%)]" />
+              {/* Balanced cinematic scrim overlays: clear image visibility on right, optimal text contrast on left */}
+              <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/70 md:via-slate-950/50 to-slate-950/15 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-transparent to-slate-950/25 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(23,105,170,0.25),transparent_60%)] pointer-events-none" />
             </div>
           ))}
         </div>
