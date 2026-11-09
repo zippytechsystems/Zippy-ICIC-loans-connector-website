@@ -38,6 +38,43 @@ export const ZippyEnterprisesSection: React.FC = () => {
           <p className="mt-4 text-slate-300 text-sm sm:text-base leading-relaxed">
             Leading innovations across enterprise software applications, IT engineering services, and authorized DSA banking loan solutions from Nacharam, Hyderabad.
           </p>
+
+          {/* Urgent Hiring Banner: Zippy DSA Loans Executive (Only 5 Jobs Available) */}
+          <div className="mt-8 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-amber-500/20 via-orange-500/20 to-blue-500/20 border-2 border-amber-500/60 shadow-xl backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+            <div className="flex items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-accent text-white flex items-center justify-center font-bold text-lg shadow-md shrink-0 animate-bounce">
+                💼
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-amber-500 text-slate-950 px-2.5 py-0.5 rounded-full">
+                    Urgent Hiring
+                  </span>
+                  <span className="text-xs text-amber-300 font-extrabold">
+                    Only 5 Jobs Are Available!
+                  </span>
+                </div>
+                <h4 className="text-base sm:text-lg font-black text-white mt-0.5">
+                  Zippy DSA Loans Executive Jobs — Zippy Enterprises Private Limited
+                </h4>
+                <p className="text-xs text-slate-300">
+                  Fixed Salary + High Incentives • Nacharam Office • Immediate Joining
+                </p>
+              </div>
+            </div>
+
+            <a
+              href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+                'Hello Zippy Enterprises Private Limited, I want to apply for the Zippy DSA Loans Executive job (Only 5 Positions Available). Please share the form details.'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all text-center shrink-0 flex items-center justify-center gap-2"
+            >
+              <span>Fill Form (Apply Now)</span>
+              <span>→</span>
+            </a>
+          </div>
         </div>
 
         {/* Two-Column Grid: Left Side (IT Services & DSA Loans) & Right Side (Software Management Apps) */}

@@ -17,6 +17,7 @@ import { LoanEnquiryForm } from '../components/forms/LoanEnquiryForm';
 import { SEOHead } from '../components/common/SEOHead';
 import { HeroImageSlider } from '../components/home/HeroImageSlider';
 import { ZippyEnterprisesSection } from '../components/home/ZippyEnterprisesSection';
+import { JobVacancyWidget } from '../components/home/JobVacancyWidget';
 
 export const Home: React.FC = () => {
   return (
@@ -339,6 +340,9 @@ export const Home: React.FC = () => {
 
       {/* Zippy Enterprises Private Limited - Parent Company & Software Ecosystem Showcase */}
       <ZippyEnterprisesSection />
+
+      {/* Floating Side Job Hiring Widget & Form Modal */}
+      <JobVacancyWidget />
     </>
   );
 };
