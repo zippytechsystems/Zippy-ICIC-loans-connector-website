@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: './', // Relative base prevents 404/blank screen when assets are loaded on any domain, subpath or file protocol
+  base: '/', // Standard absolute root base ensures all assets and React Router subroutes resolve cleanly without 404
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

@@ -5,13 +5,14 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "node scripts/prepare-dev.mjs && vite",
+    "prebuild": "node scripts/prepare-dev.mjs",
+    "build": "node scripts/prepare-dev.mjs && vite build && node scripts/sync-build.mjs && node scripts/verify-build.mjs",
     "start": "node server.js",
     "typecheck": "tsc -b",
     "build:tsc": "tsc -b && vite build",
     "preview": "vite preview",
-    "package": "powershell -ExecutionPolicy Bypass -File scripts/package-hostinger.ps1",
+    "package": "node scripts/sync-build.mjs",
     "lint": "oxlint"
   },
   "dependencies": {

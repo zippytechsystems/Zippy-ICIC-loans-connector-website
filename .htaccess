@@ -1,13 +1,12 @@
 # ==============================================================================
-# Zippy ICICI Loan Connector - Enterprise Production Security & Routing Configuration
-# Built for Hostinger Apache Web Server with HTTPS, HSTS, and Anti-Exploit Defenses
+# Zippy DSA Loans - Enterprise Production Security & Routing Configuration
+# Built for Hostinger Apache / LiteSpeed Web Server with HTTPS, HSTS, and Anti-Exploit Defenses
 # ==============================================================================
 
 # 1. DIRECTORY INDEX PRIORITY
-# Ensures index.html is served first even if default.php exists on Hostinger
 DirectoryIndex index.html index.php
 
-# 2. DISABLE DIRECTORY BROWSING (Prevents file listing)
+# 2. DISABLE DIRECTORY BROWSING
 Options -Indexes -MultiViews
 
 # 3. DEFAULT CHARSET & MIME TYPES
@@ -43,8 +42,7 @@ AddDefaultCharset UTF-8
   # 7. BLOCK ATTEMPTS TO ACCESS HIDDEN DIRECTORIES (.git, .env, etc.)
   RewriteRule "(^|/)\.(?!well-known)" - [F,L]
 
-  # 8. SUBPATH ASSET FALLBACK (Crucial for Vite base: './' with React Router)
-  # Resolves requests like /services/assets/* or /about/assets/* directly to /assets/*
+  # 8. SUBPATH ASSET FALLBACK
   RewriteRule ^(.*/)?(assets/.*)$ $2 [L,QSA]
   RewriteRule ^(.*/)?(images/.*)$ $2 [L,QSA]
   RewriteRule ^(.*/)?(api/.*)$ $2 [L,QSA]
@@ -52,27 +50,24 @@ AddDefaultCharset UTF-8
   RewriteRule ^(.*/)?(robots\.txt)$ robots.txt [L,QSA]
   RewriteRule ^(.*/)?(sitemap\.xml)$ sitemap.xml [L,QSA]
 
-  # 9. If dist/ directory exists (for git root deployments), route into dist/
-  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
-  RewriteRule ^$ dist/index.html [L]
-
-  RewriteCond %{DOCUMENT_ROOT}/dist/$1 -f
-  RewriteRule ^(.*)$ dist/$1 [L]
-
-  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . dist/index.html [L]
-
-  # 10. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE (for public_html extracted dist contents)
-  RewriteRule ^index\.html$ - [L]
+  # 9. DIRECT FILE ACCESS
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
-  RewriteRule . index.html [L]
+
+  # 10. IF FILE EXISTS IN dist/ SUBFOLDER (Fallback for root deployments)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond dist/$1 -f
+  RewriteRule ^(.*)$ dist/$1 [L]
+
+  # 11. REACT ROUTER SINGLE PAGE APPLICATION (SPA) REWRITE
+  # Route any path that is not a real file to root /index.html
+  RewriteRule ^index\.html$ - [L]
+  RewriteRule . /index.html [L]
 </IfModule>
 
-# 11. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
+# 12. BLOCK ACCESS TO SENSITIVE FILE EXTENSIONS
 <FilesMatch "(?i)\.(env|sql|log|bak|config|ts|tsx|map|sh|ps1|yml|yaml|md|lock)$">
   <IfModule mod_authz_core.c>
     Require all denied
@@ -83,7 +78,7 @@ AddDefaultCharset UTF-8
   </IfModule>
 </FilesMatch>
 
-# 12. HTTP SECURITY HEADERS (Defends against XSS, Clickjacking, Sniffing & MITM)
+# 13. HTTP SECURITY HEADERS
 <IfModule mod_headers.c>
   # Enforce HSTS (HTTP Strict Transport Security) - 1 Year with subdomains
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
@@ -91,7 +86,7 @@ AddDefaultCharset UTF-8
   # Prevent MIME-type sniffing
   Header always set X-Content-Type-Options "nosniff"
 
-  # Defend against Clickjacking (prevents external websites from framing this site)
+  # Defend against Clickjacking
   Header always set X-Frame-Options "SAMEORIGIN"
 
   # Browser XSS Filter Protection
@@ -104,7 +99,7 @@ AddDefaultCharset UTF-8
   Header always set Permissions-Policy "camera=(), microphone=(), payment=(), usb=()"
 </IfModule>
 
-# 13. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
+# 14. BROWSER CACHING FOR HIGH PERFORMANCE & SPEED
 <IfModule mod_headers.c>
   # Never cache index.html to guarantee instantaneous updates on new uploads
   <FilesMatch "\.(html|htm)$">
@@ -113,7 +108,7 @@ AddDefaultCharset UTF-8
     Header set Expires "0"
   </FilesMatch>
   
-  # Cache fingerprinted assets (contain hash) permanently
+  # Cache fingerprinted assets permanently
   <FilesMatch "\.(js|mjs|css|jpg|jpeg|png|gif|svg|webp|woff|woff2)$">
     Header set Cache-Control "public, max-age=31536000, immutable"
   </FilesMatch>
