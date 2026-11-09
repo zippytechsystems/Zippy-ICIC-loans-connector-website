@@ -118,7 +118,7 @@ export const WhatsAppButton: React.FC = () => {
           onClick={handleOpenModal}
           onMouseEnter={() => setShowTooltip(true)}
           className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-lg hover:shadow-emerald-500/30 transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-emerald-300"
-          aria-label="Chat on WhatsApp with Zippy ICICI Loan Connector"
+          aria-label="Chat on WhatsApp with Zippy DSA Loans"
         >
           {/* Radar ping ring */}
           <span className="absolute -inset-0.5 rounded-full bg-emerald-400 opacity-75 animate-ping group-hover:opacity-0 -z-10"></span>

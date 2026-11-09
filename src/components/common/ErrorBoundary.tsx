@@ -20,7 +20,7 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught React Error in Zippy Loan Connector:', error, errorInfo);
+    console.error('Uncaught React Error in Zippy DSA Loans:', error, errorInfo);
   }
 
   public handleReload = () => {
@@ -68,7 +68,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
 
             <p className="text-[11px] text-slate-400">
-              Zippy ICICI Loan Connector • Hyderabad, Telangana
+              Zippy DSA Loans • 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad
             </p>
           </div>
         </div>

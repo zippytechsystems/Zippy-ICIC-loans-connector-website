@@ -1,5 +1,5 @@
 /**
- * Zippy ICICI Loan Connector - Frontend API Service
+ * Zippy DSA Loans - Frontend API Service
  * Handles communication with:
  * 1. Hostinger MySQL Endpoint: /api/enquiry.php
  * 2. Dedicated WhatsApp Lead Endpoint: /api/whatsapp_lead.php
@@ -175,7 +175,7 @@ export async function trackWhatsAppLead(lead: WhatsAppLeadPayload): Promise<{
 
   // Construct default WhatsApp message with Reference ID
   const buildWaMessage = () => {
-    let msg = `*New Loan Enquiry - Zippy Loan Connector*\n`;
+    let msg = `*New Loan Enquiry - Zippy DSA Loans*\n`;
     msg += `Ref ID: *${refId}*\n\n`;
     msg += `*Customer Details:*\n`;
     msg += `• Name: ${fullName}\n`;
@@ -190,7 +190,7 @@ export async function trackWhatsAppLead(lead: WhatsAppLeadPayload): Promise<{
     if (additionalInfo) {
       msg += `• Notes: ${additionalInfo}\n`;
     }
-    msg += `\nHello Zippy Loan Connector Advisor, I would like guidance on suitable lender options.`;
+    msg += `\nHello Zippy DSA Loans Advisor, I would like guidance on suitable lender options.`;
     return `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(msg)}`;
   };
 

@@ -16,9 +16,9 @@ export const AboutUs: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="About Us | Independent Loan Referral & Assistance Services"
-        description="Learn about Zippy ICICI Loan Connector, an independent loan referral and customer assistance service catering to borrowers across Hyderabad, Secunderabad, and Telangana."
-        keywords="About Zippy ICICI Loan Connector, Loan Referral Hyderabad, Loan DSA Telangana, Independent Loan Assistance"
+        title="About Us | Genuine DSA Loans Desk | Zippy DSA Loans Hyderabad"
+        description="Learn about Zippy DSA Loans, a genuine Direct Selling Agent (DSA) and loan referral service located at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana."
+        keywords="About Zippy DSA Loans, Genuine DSA Loans Hyderabad, DSA Office Nacharam, Loan DSA Telangana, Independent Loan Assistance"
       />
 
       {/* Hero Banner */}

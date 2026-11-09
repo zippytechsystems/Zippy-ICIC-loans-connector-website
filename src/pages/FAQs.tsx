@@ -25,8 +25,8 @@ export const FAQs: React.FC = () => {
     {
       id: 'gen-1',
       category: 'General',
-      question: 'Is Zippy ICICI Loan Connector an official branch or representative of ICICI Bank?',
-      answer: 'No. Zippy ICICI Loan Connector is an independent loan referral and customer assistance entity. We do not represent ourselves as ICICI Bank itself, an official branch, subsidiary, or affiliate. We assist customers by assessing their loan needs and connecting them with authorized lender channels as permitted under applicable business referral or DSA arrangements.'
+      question: 'Is Zippy DSA Loans a genuine and authorized loan referral partner?',
+      answer: 'Yes! Zippy DSA Loans is a 100% genuine, authorized Direct Selling Agent (DSA) and loan referral partner with its registered office located at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076. We assist customers with home, personal, and business loans through partner banks including ICICI Bank and other leading institutions. All loan sanctions and disbursements are conducted directly by partner banks.'
     },
     {
       id: 'gen-2',
@@ -125,9 +125,9 @@ export const FAQs: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Frequently Asked Questions (FAQs) | Loan Guidance Hyderabad"
-        description="Find answers to common questions about personal loans, home loans, eligibility criteria, documentation, and independent referral services in Hyderabad & Telangana."
-        keywords="Loan FAQs Hyderabad, Personal Loan Questions, Home Loan Documentation Telangana, ICICI loan referral FAQ"
+        title="Frequently Asked Questions (FAQs) | Zippy DSA Loans Hyderabad"
+        description="Find answers to common questions about personal loans, home loans, eligibility criteria, documentation, and genuine DSA services from Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad)."
+        keywords="Loan FAQs Hyderabad, Zippy DSA Loans, Personal Loan Questions, Home Loan Documentation Telangana, DSA Office Nacharam"
       />
 
       {/* Hero Banner */}

@@ -44,9 +44,9 @@ export const LoanServices: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Loan Services & Products | Personal, Home, Business Loans Hyderabad"
-        description="Browse all 12 verified loan categories including personal loans, home loans, business loans, balance transfer, and loan against property with Zippy ICICI Loan Connector."
-        keywords="Personal Loans Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Loan Against Property Telangana, Education Loans Hyderabad"
+        title="Loan Services & Products | Zippy DSA Loans Hyderabad"
+        description="Browse all 12 verified loan categories including personal loans, home loans, business loans, balance transfer, and loan against property with Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam)."
+        keywords="Personal Loans Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Zippy DSA Loans, Loan Against Property Telangana, Education Loans Hyderabad"
       />
 
       {/* Hero Banner */}

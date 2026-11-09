@@ -16,14 +16,15 @@ import { EmiCalculator } from '../components/calculator/EmiCalculator';
 import { LoanEnquiryForm } from '../components/forms/LoanEnquiryForm';
 import { SEOHead } from '../components/common/SEOHead';
 import { HeroImageSlider } from '../components/home/HeroImageSlider';
+import { ZippyEnterprisesSection } from '../components/home/ZippyEnterprisesSection';
 
 export const Home: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Find the Right Loan for Your Financial Needs | Loan Assistance Hyderabad"
-        description="Zippy ICICI Loan Connector provides personalized loan guidance, preliminary eligibility checks, and authorized lender referral assistance in Hyderabad, Secunderabad, and Telangana."
-        keywords="Loan Assistance Hyderabad, Personal Loans Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Loan Against Property Hyderabad, Loan Enquiry Hyderabad, Loan Assistance Telangana"
+        title="Zippy DSA Loans | Find the Right Loan for Your Financial Needs | Hyderabad"
+        description="Zippy DSA Loans is a genuine DSA office in Nacharam, Hyderabad (4-1-19 Sneha Apartments, HMT Nagar). Personalized guidance, eligibility checks, and authorized bank loan referral assistance in Telangana."
+        keywords="Zippy DSA Loans, Genuine DSA Loans Hyderabad, DSA Office Nacharam, Loan Assistance Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Personal Loans Hyderabad"
       />
 
       {/* 1. TOP HERO IMAGE SLIDER: ABSOLUTE FIRST THING USER SEES FOR MAXIMUM IMPRESSION */}
@@ -99,7 +100,7 @@ export const Home: React.FC = () => {
               <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-accent" />
-                  <span>Hyderabad • Secunderabad • Cyberabad</span>
+                  <span>Genuine DSA Office: 4-1-19 Sneha Apartments, HMT Nagar, Nacharam</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-blue-400" />
@@ -335,6 +336,9 @@ export const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Zippy Enterprises Private Limited - Parent Company & Software Ecosystem Showcase */}
+      <ZippyEnterprisesSection />
     </>
   );
 };

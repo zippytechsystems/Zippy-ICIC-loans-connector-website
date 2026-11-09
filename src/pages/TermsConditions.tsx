@@ -9,9 +9,9 @@ export const TermsConditions: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Terms & Conditions | Independent Loan Referral Portal"
-        description="Review the Terms & Conditions governing the use of Zippy ICICI Loan Connector website, loan enquiry tools, and referral assistance services."
-        keywords="Terms and Conditions Zippy ICICI Loan Connector, Loan Disclaimer Hyderabad, Loan Referral Terms"
+        title="Terms & Conditions | Genuine DSA Loan Portal | Zippy DSA Loans"
+        description="Review the Terms & Conditions governing the use of Zippy DSA Loans website, loan enquiry tools, and referral assistance services."
+        keywords="Terms and Conditions Zippy DSA Loans, Loan Disclaimer Hyderabad, Loan Referral Terms"
       />
 
       {/* Header Banner */}

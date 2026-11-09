@@ -80,7 +80,7 @@ export const LOANS_DATA: LoanProduct[] = [
       }
     ],
     steps: [
-      "Submit preliminary requirements via Zippy Loan Connector",
+      "Submit preliminary requirements via Zippy DSA Loans",
       "Profile verification and eligibility check against lender matrices",
       "Guided documentation assembly and submission to authorized lender desk",
       "Lender underwriting, credit verification, and direct disbursement to your account"
@@ -107,7 +107,7 @@ export const LOANS_DATA: LoanProduct[] = [
     title: "Home Loans",
     shortDescription: "Attractive financing solutions for purchasing new flats, independent villas, or plots across Hyderabad and Telangana.",
     heroHeadline: "Affordable Home Loan Guidance for Your Dream Property in Hyderabad",
-    fullDescription: "Purchasing a home is one of the most critical financial decisions you will ever make. Our loan connector team provides end-to-end guidance for residential real estate acquisitions across Hyderabad, Cyberabad, and expanding Telangana corridors. We assist with assessing your borrowing capacity, structuring co-borrower profiles, understanding property legal scrutiny stages, and routing your application to authorized lending officers.",
+    fullDescription: "Purchasing a home is one of the most critical financial decisions you will ever make. Our DSA loan team provides end-to-end guidance for residential real estate acquisitions across Hyderabad, Cyberabad, and expanding Telangana corridors. We assist with assessing your borrowing capacity, structuring co-borrower profiles, understanding property legal scrutiny stages, and routing your application to authorized lending officers.",
     indicativeRate: "From 8.00% p.a. (floating, indicative)",
     tenureRange: "Up to 30 Years",
     maxAmount: "Up to ₹10 Crores (subject to property valuation & LTV)",
@@ -461,7 +461,7 @@ export const LOANS_DATA: LoanProduct[] = [
     title: "Education Loans",
     shortDescription: "Funding higher studies in top Indian universities and prestigious international colleges in USA, UK, Canada & Germany.",
     heroHeadline: "Empower Your Academic Ambitions With Global Education Loan Guidance",
-    fullDescription: "Higher education opens international careers, and financing should never be an obstacle to your potential. Hyderabad sends thousands of bright engineering and management students annually to premier universities across the USA, UK, Australia, Germany, and India. Our loan connector guidance assists students and co-borrower parents in securing collateralized or non-collateral education financing covering tuition fees, living allowances, travel expenses, and health insurance.",
+    fullDescription: "Higher education opens international careers, and financing should never be an obstacle to your potential. Hyderabad sends thousands of bright engineering and management students annually to premier universities across the USA, UK, Australia, Germany, and India. Our DSA loan guidance assists students and co-borrower parents in securing collateralized or non-collateral education financing covering tuition fees, living allowances, travel expenses, and health insurance.",
     indicativeRate: "From 8.00% p.a. (indicative)",
     tenureRange: "Up to 15 Years (post-course moratorium)",
     maxAmount: "Up to ₹1.5 Crores (Overseas) / ₹50 Lakhs (India)",

@@ -9,9 +9,9 @@ export const PrivacyPolicy: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Privacy Policy | Data Protection & Customer Consent"
-        description="Read the Privacy Policy of Zippy ICICI Loan Connector. Learn how your loan enquiry details and contact information are protected and processed under Indian data protection laws."
-        keywords="Privacy Policy Zippy ICICI Loan Connector, Data Protection Hyderabad, Loan Consent Policy"
+        title="Privacy Policy | Data Protection & Customer Consent | Zippy DSA Loans"
+        description="Read the Privacy Policy of Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad). Learn how your loan enquiry details and contact information are protected."
+        keywords="Privacy Policy Zippy DSA Loans, Data Protection Hyderabad, Loan Consent Policy"
       />
 
       {/* Header Banner */}

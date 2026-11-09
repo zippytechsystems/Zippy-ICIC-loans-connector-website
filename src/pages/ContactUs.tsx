@@ -57,9 +57,9 @@ export const ContactUs: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Contact Us | Loan Assistance Desk Hyderabad & Telangana"
-        description="Get in touch with Zippy ICICI Loan Connector in Hyderabad, Telangana. Connect via phone, WhatsApp, or email for quick loan referral assistance."
-        keywords="Contact Loan Connector Hyderabad, Loan Assistance Contact Number, Loan Enquiry Telangana"
+        title="Contact Us | Genuine DSA Loans Office Hyderabad & Telangana"
+        description="Visit Zippy DSA Loans at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. Connect via phone or WhatsApp for genuine loan referral assistance."
+        keywords="Contact Zippy DSA Loans Hyderabad, DSA Office Nacharam, 4-1-19 Sneha Apartments HMT Nagar, Loan Assistance Hyderabad, Loan Enquiry Telangana"
       />
 
       {/* Hero Banner */}
@@ -107,11 +107,15 @@ export const ContactUs: React.FC = () => {
                   </div>
                   <div>
                     <strong className="text-slate-900 block font-semibold text-xs uppercase tracking-wider">
-                      Regional Location
+                      Genuine DSA Office Address
                     </strong>
-                    <span className="text-slate-700 text-sm">{BRAND_CONFIG.contact.officeLocation}</span>
-                    <span className="text-xs text-slate-400 block mt-0.5">
-                      Serving Hyderabad, Secunderabad & All Telangana Districts
+                    <span className="text-slate-900 text-sm font-bold block">4-1-19, Sneha Apartments, HMT Nagar</span>
+                    <span className="text-slate-700 text-sm block">Nacharam, Hyderabad, Telangana - 500076</span>
+                    <span className="text-xs text-slate-500 block mt-0.5">
+                      Landmark: Sneha Apartments, HMT Nagar Main Hub, Nacharam
+                    </span>
+                    <span className="inline-block mt-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                      ✓ Direct Walk-ins Welcome (Mon – Sat: 9:30 AM – 6:30 PM)
                     </span>
                   </div>
                 </div>

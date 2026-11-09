@@ -39,16 +39,16 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-sm text-slate-300 leading-relaxed max-w-md">
-              A specialized loan referral and advisory service catering to salaried employees, professionals, and business owners across Hyderabad, Secunderabad, and Telangana. We assist you in discovering suitable borrowing alternatives through authorized lending channels.
+              A genuine Direct Selling Agent (DSA) and authorized loan referral network catering to salaried employees, professionals, and business owners across Hyderabad, Secunderabad, and Telangana. Visit our registered office at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad.
             </p>
 
             <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 space-y-2">
               <div className="flex items-center gap-2 text-accent font-semibold">
                 <ShieldCheck className="w-4 h-4" />
-                <span>Zero Upfront Fee Assurance</span>
+                <span>100% Genuine DSA • Zero Upfront Fee</span>
               </div>
               <p className="text-[12px] text-slate-400 leading-normal">
-                We do not collect cash or consulting charges from applicants. Referral compensation is settled directly by partner institutions according to written DSA / corporate arrangements.
+                We do not collect any advance fees or cash charges from applicants. All loan sanctions and disbursements are conducted directly by authorized partner banks.
               </p>
             </div>
           </div>
@@ -91,15 +91,19 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Column 4: Contact & Service Region */}
+          {/* Column 4: Contact & Genuine DSA Office */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold text-white uppercase tracking-wider">
-              Assistance Desk
+              Genuine DSA Office
             </h4>
             <div className="space-y-3 text-xs text-slate-300">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-accent shrink-0 mt-0.5" />
-                <span>Serving {BRAND_CONFIG.targetRegion}</span>
+                <div>
+                  <strong className="text-white block font-medium">Physical Office Address:</strong>
+                  <span className="text-slate-300 block leading-snug">{BRAND_CONFIG.contact.officeLocation}</span>
+                  <span className="text-[11px] text-accent block mt-0.5">Near HMT Nagar Hub, Nacharam</span>
+                </div>
               </div>
 
               <div className="flex items-start gap-2.5">
@@ -111,7 +115,7 @@ export const Footer: React.FC = () => {
                   >
                     {BRAND_CONFIG.contact.phoneDisplay}
                   </a>
-                  <span className="text-[11px] text-slate-400">Local Dialing Placeholder</span>
+                  <span className="text-[11px] text-slate-400">Direct Loan Consultation</span>
                 </div>
               </div>
 
@@ -139,6 +143,7 @@ export const Footer: React.FC = () => {
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
             <Link to="/about" className="hover:text-white transition-colors">About Us</Link>
             <Link to="/services" className="hover:text-white transition-colors">Loan Services</Link>
+            <a href="#customer-reviews" className="hover:text-white transition-colors">Customer Reviews</a>
             <Link to="/eligibility" className="hover:text-white transition-colors">Check Eligibility</Link>
             <Link to="/apply" className="hover:text-white transition-colors">Apply Online</Link>
             <Link to="/contact" className="hover:text-white transition-colors">Contact Support</Link>
@@ -194,6 +199,82 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* Zippy Enterprises Private Limited - Corporate Ecosystem Strip */}
+        <div className="mt-12 p-6 rounded-3xl bg-slate-900/90 border border-slate-800 text-slate-300">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            {/* Left Side: Zippy Enterprises Private Limited & Services */}
+            <div className="lg:col-span-6 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-accent"></span>
+                <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                  Zippy Enterprises Private Limited
+                </h4>
+              </div>
+              <p className="text-xs text-accent font-semibold">
+                Zippy Softwares (Also Available)
+              </p>
+              <ul className="text-xs space-y-1.5 text-slate-300">
+                <li className="flex items-start gap-1.5">
+                  <span className="text-blue-400 font-bold shrink-0">1.</span>
+                  <span><strong className="text-white">Web Development:</strong> High-performance responsive websites & web portals</span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-emerald-400 font-bold shrink-0">2.</span>
+                  <span><strong className="text-white">App Development:</strong> Custom Android & iOS mobile applications</span>
+                </li>
+                <li className="flex items-start gap-1.5">
+                  <span className="text-purple-400 font-bold shrink-0">3.</span>
+                  <span><strong className="text-white">AI Agent Automation Services:</strong> Smart AI workflows, chatbots & lead automation</span>
+                </li>
+              </ul>
+              
+              <div className="pt-2 text-xs text-slate-400 border-t border-slate-800/80">
+                <strong className="text-slate-200 block">Zippy DSA Loans:</strong>
+                <span>Home, Business, Personal, Plot, LAP & Vehicle loan referral assistance with zero upfront charges.</span>
+              </div>
+              
+              <div className="text-[11px] text-slate-400 pt-1">
+                <span className="text-accent font-semibold">Office Address:</span> 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana.
+              </div>
+            </div>
+
+            {/* Right Side: Software Management Apps */}
+            <div className="lg:col-span-6 space-y-3 lg:border-l lg:border-slate-800 lg:pl-8">
+              <div className="flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                  Zippy Enterprises Private Limited — Software Management Apps
+                </h4>
+              </div>
+              <div className="space-y-2.5 text-xs">
+                <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+                  <div className="font-bold text-white text-xs flex items-center justify-between">
+                    <span className="text-accent font-semibold">Option 1:</span>
+                    <span className="text-[10px] text-blue-300 bg-blue-900/50 px-2 py-0.5 rounded">Fintech CRM</span>
+                  </div>
+                  <strong className="text-white block mt-0.5">Zippy Loan Connector Management Software App</strong>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    DSA operations suite: Lead pipeline, bank relationship manager routing, automated WhatsApp updates & secure document vault.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+                  <div className="font-bold text-white text-xs flex items-center justify-between">
+                    <span className="text-amber-400 font-semibold">Option 2:</span>
+                    <span className="text-[10px] text-amber-300 bg-amber-900/50 px-2 py-0.5 rounded">Agro ERP</span>
+                  </div>
+                  <strong className="text-white block mt-0.5">Zippy Rice Mill Management Software App</strong>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    End-to-end rice mill management: Paddy procurement, weighbridge sync, milling batch yield, warehouse stock & GST invoicing.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         {/* Regulatory & Referral Disclosure Notice Box */}
         <div className="mt-8 p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-400 leading-relaxed space-y-2">
           <div className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-wider">
@@ -211,10 +292,10 @@ export const Footer: React.FC = () => {
         {/* Bottom Copyright */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>
-            &copy; {currentYear} {BRAND_CONFIG.brandName}. All Rights Reserved.
+            &copy; {currentYear} Zippy Enterprises Private Limited. All Rights Reserved. (Zippy DSA Loans & Zippy Softwares)
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-slate-400">Target Region: Hyderabad, Telangana, India</span>
+            <span className="text-slate-400">Head Office: 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad - 500076</span>
             <span className="text-slate-700">•</span>
             <Link to="/leads" className="text-slate-500 hover:text-slate-300 text-[11px] transition-colors">
               Leads Portal

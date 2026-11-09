@@ -224,7 +224,7 @@ export const AdminLeads: React.FC = () => {
     return (
       <div className="min-h-[80vh] flex items-center justify-center bg-slate-50 px-4 py-16">
         <SEOHead
-          title="Lead Management Desk | Zippy Loan Connector"
+          title="Lead Management Desk | Zippy DSA Loans"
           description="Internal Lead Management and Database Monitoring Portal"
         />
         <div className="w-full max-w-md bg-white p-8 rounded-3xl border border-slate-200 shadow-xl space-y-6">
@@ -274,8 +274,8 @@ export const AdminLeads: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 py-8 px-4 sm:px-6 lg:px-8">
       <SEOHead
-        title="Admin Leads & Database Desk | Zippy Loan Connector"
-        description="Internal Lead Dashboard for Zippy ICICI Loan Referral Desk"
+        title="Admin Leads & Database Desk | Zippy DSA Loans"
+        description="Internal Lead Dashboard for Zippy DSA Loans Referral Desk"
       />
 
       <div className="max-w-7xl mx-auto space-y-6">
@@ -489,7 +489,7 @@ export const AdminLeads: React.FC = () => {
                     const isWa = lead.source_context?.toLowerCase().includes('whatsapp');
                     const cleanPhone = lead.mobile_number.replace(/\D/g, '');
                     const customerWaUrl = `https://wa.me/91${cleanPhone}?text=${encodeURIComponent(
-                      `Hello ${lead.full_name}, thank you for contacting Zippy ICICI Loan Connector regarding ${lead.loan_category} (Ref: ${lead.reference_id}). How can we assist you today?`
+                      `Hello ${lead.full_name}, thank you for contacting Zippy DSA Loans regarding ${lead.loan_category} (Ref: ${lead.reference_id}). How can we assist you today?`
                     )}`;
 
                     return (

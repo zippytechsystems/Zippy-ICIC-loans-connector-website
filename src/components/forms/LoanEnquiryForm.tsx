@@ -141,7 +141,7 @@ export const LoanEnquiryForm: React.FC<FormProps> = ({
 
     // 2. Generate Professional WhatsApp Message containing customer's submitted details
     const professionalWhatsAppMessage = 
-`*New Loan Enquiry - Zippy Loan Connector*
+`*New Loan Enquiry - Zippy DSA Loans*
 Ref ID: *${officialRef}*
 
 *Customer Details:*
@@ -154,7 +154,7 @@ ${formData.email.trim() ? `• Email: ${formData.email.trim()}\n` : ''}• City:
 • Requested Amount: *₹${formData.requiredAmount}*
 • Employment: ${formData.employmentType}
 ${formData.monthlyIncome ? `• Monthly Income: ₹${formData.monthlyIncome}\n` : ''}${formData.additionalInfo ? `• Notes: ${formData.additionalInfo.trim()}\n` : ''}
-Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like guidance on suitable lender options.`;
+Hello Zippy DSA Loans Advisor, I have submitted my enquiry and would like guidance on suitable lender options.`;
 
     // 3. Construct official WhatsApp click-to-chat URL (+91 6302690251)
     const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(professionalWhatsAppMessage)}`;
@@ -269,7 +269,7 @@ Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like g
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-3.5 mb-8">
           <a
-            href={whatsappChatUrl || `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(`Hello Zippy Loan Connector, I have submitted an enquiry with Ref ${referenceId}.`)}`}
+            href={whatsappChatUrl || `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(`Hello Zippy DSA Loans, I have submitted an enquiry with Ref ${referenceId}.`)}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-full sm:w-auto px-7 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2 group"
@@ -324,7 +324,7 @@ Hello Zippy Loan Connector Advisor, I have submitted my enquiry and would like g
         <div className="mt-6 p-3 rounded-xl bg-blue-50/70 border border-blue-200/60 text-xs text-blue-900 text-left flex items-start gap-2.5">
           <ShieldCheck className="w-4 h-4 text-fintech-royal shrink-0 mt-0.5" />
           <p className="text-[11px] leading-relaxed">
-            <strong>Security Reminder:</strong> Zippy Loan Connector will never ask for your Aadhaar card number, PAN card physical copies, bank passwords, or OTPs. All loan evaluation and approvals are executed solely by authorized lenders.
+            <strong>Security Reminder:</strong> Zippy DSA Loans will never ask for your Aadhaar card number, PAN card physical copies, bank passwords, or OTPs. All loan evaluation and approvals are executed solely by authorized lenders.
           </p>
         </div>
       </div>

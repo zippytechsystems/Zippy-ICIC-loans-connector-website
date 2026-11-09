@@ -18,9 +18,9 @@ export const ApplyForLoan: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Apply for Loan Online | Secure Loan Assistance Hyderabad"
-        description="Submit your loan enquiry with Zippy ICICI Loan Connector. Fast, confidential loan referral and assistance for borrowers in Hyderabad, Secunderabad, and Telangana."
-        keywords="Apply for loan Hyderabad, Personal loan application Hyderabad, Home loan enquiry Telangana, Business loan application"
+        title="Apply for Loan Online | Genuine DSA Loan Desk | Zippy DSA Loans Hyderabad"
+        description="Submit your loan enquiry with Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad). Fast, confidential loan referral and assistance for borrowers in Hyderabad and Telangana."
+        keywords="Apply for loan Hyderabad, Zippy DSA Loans, Personal loan application Hyderabad, Home loan enquiry Telangana, Business loan application"
       />
 
       {/* Hero Banner */}

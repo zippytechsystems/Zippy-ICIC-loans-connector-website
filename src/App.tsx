@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Link } from 'react
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
 import { WhatsAppButton } from './components/common/WhatsAppButton';
+import { ReviewsSection } from './components/common/ReviewsSection';
 
 // Pages
 import { Home } from './pages/Home';
@@ -49,61 +50,74 @@ const NotFound: React.FC = () => {
   );
 };
 
+// Layout Component inside Router to handle location-based features
+const AppContent: React.FC = () => {
+  const location = useLocation();
+  const isAdminPortal = location.pathname.startsWith('/admin') || location.pathname === '/leads';
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white text-darkSlate font-sans selection:bg-secondary selection:text-white">
+      {/* Navigation */}
+      <Navbar />
+
+      {/* Dynamic Route View */}
+      <main className="flex-grow">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/services" element={<LoanServices />} />
+          
+          {/* Dynamic slug route for all 12 loans */}
+          <Route path="/services/:loanSlug" element={<IndividualLoanDetails />} />
+          
+          {/* Direct named routes for specific requested loan pages */}
+          <Route path="/personal-loan" element={<IndividualLoanDetails directSlug="personal-loans" />} />
+          <Route path="/home-loan" element={<IndividualLoanDetails directSlug="home-loans" />} />
+          <Route path="/business-loan" element={<IndividualLoanDetails directSlug="business-loans" />} />
+          <Route path="/loan-against-property" element={<IndividualLoanDetails directSlug="loan-against-property" />} />
+          <Route path="/vehicle-loan" element={<IndividualLoanDetails directSlug="vehicle-loans" />} />
+          <Route path="/construction-loan" element={<IndividualLoanDetails directSlug="construction-loans" />} />
+
+          {/* Core utility and enquiry pages */}
+          <Route path="/eligibility" element={<CheckEligibility />} />
+          <Route path="/check-eligibility" element={<CheckEligibility />} />
+          <Route path="/apply" element={<ApplyForLoan />} />
+          <Route path="/apply-now" element={<ApplyForLoan />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/faqs" element={<FAQs />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsConditions />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+
+          {/* Admin Lead Management Portal */}
+          <Route path="/admin-leads" element={<AdminLeads />} />
+          <Route path="/leads" element={<AdminLeads />} />
+          
+          {/* 404 Fallback */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
+
+      {/* Verified Reviews Section: Displayed across website right above Footer */}
+      {!isAdminPortal && <ReviewsSection />}
+
+      {/* Global Floating WhatsApp Contact Trigger */}
+      <WhatsAppButton />
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
 export const App: React.FC = () => {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-white text-darkSlate font-sans selection:bg-secondary selection:text-white">
-        {/* Navigation */}
-        <Navbar />
-
-        {/* Dynamic Route View */}
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/services" element={<LoanServices />} />
-            
-            {/* Dynamic slug route for all 12 loans */}
-            <Route path="/services/:loanSlug" element={<IndividualLoanDetails />} />
-            
-            {/* Direct named routes for specific requested loan pages */}
-            <Route path="/personal-loan" element={<IndividualLoanDetails directSlug="personal-loans" />} />
-            <Route path="/home-loan" element={<IndividualLoanDetails directSlug="home-loans" />} />
-            <Route path="/business-loan" element={<IndividualLoanDetails directSlug="business-loans" />} />
-            <Route path="/loan-against-property" element={<IndividualLoanDetails directSlug="loan-against-property" />} />
-            <Route path="/vehicle-loan" element={<IndividualLoanDetails directSlug="vehicle-loans" />} />
-            <Route path="/construction-loan" element={<IndividualLoanDetails directSlug="construction-loans" />} />
-
-            {/* Core utility and enquiry pages */}
-            <Route path="/eligibility" element={<CheckEligibility />} />
-            <Route path="/check-eligibility" element={<CheckEligibility />} />
-            <Route path="/apply" element={<ApplyForLoan />} />
-            <Route path="/apply-now" element={<ApplyForLoan />} />
-            <Route path="/contact" element={<ContactUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/faqs" element={<FAQs />} />
-            <Route path="/privacy" element={<PrivacyPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<TermsConditions />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-
-            {/* Admin Lead Management Portal */}
-            <Route path="/admin-leads" element={<AdminLeads />} />
-            <Route path="/leads" element={<AdminLeads />} />
-            
-            {/* 404 Fallback */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-
-        {/* Global Floating WhatsApp Contact Trigger */}
-        <WhatsAppButton />
-
-        {/* Footer */}
-        <Footer />
-      </div>
+      <AppContent />
     </Router>
   );
 };

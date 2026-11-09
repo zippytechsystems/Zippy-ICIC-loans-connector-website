@@ -230,7 +230,7 @@ export const LocalSeoHub: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto shrink-0">
               <a
                 href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-                  `Hello Zippy Loan Connector, I live in ${selectedHub.name} (Pincode: ${selectedHub.pincode}) and need consultation for a bank loan.`
+                  `Hello Zippy DSA Loans, I live in ${selectedHub.name} (Pincode: ${selectedHub.pincode}) and need consultation for a bank loan.`
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"

@@ -145,9 +145,9 @@ export const CheckEligibility: React.FC = () => {
   return (
     <>
       <SEOHead
-        title="Check Loan Eligibility Online | Multi-Step Enquiry Portal"
-        description="Check preliminary loan eligibility in Hyderabad. 4-step frontend enquiry for personal, home, and business loans with Zippy ICICI Loan Connector."
-        keywords="Check Loan Eligibility Hyderabad, Loan Eligibility Calculator, Loan Enquiry Telangana"
+        title="Check Loan Eligibility Online | Zippy DSA Loans Hyderabad"
+        description="Check preliminary loan eligibility in Hyderabad. 4-step frontend enquiry for personal, home, and business loans with Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam)."
+        keywords="Check Loan Eligibility Hyderabad, Zippy DSA Loans, Loan Eligibility Calculator, Loan Enquiry Telangana"
       />
 
       {/* Hero Banner */}

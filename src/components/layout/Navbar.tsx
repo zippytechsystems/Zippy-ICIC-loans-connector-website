@@ -220,6 +220,13 @@ export const Navbar: React.FC = () => {
             Contact Us
           </Link>
 
+          <a
+            href="#customer-reviews"
+            className="px-3.5 py-2 rounded-lg text-sm font-semibold text-darkSlate hover:text-secondary hover:bg-slate-100/70 transition-all duration-200"
+          >
+            Reviews
+          </a>
+
           <Link
             to="/faqs"
             className={`px-3.5 py-2 rounded-lg text-sm font-semibold transition-all duration-200 ${
@@ -343,6 +350,15 @@ export const Navbar: React.FC = () => {
               <span>Contact Us</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </Link>
+
+            <a
+              href="#customer-reviews"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-semibold text-slate-800 hover:bg-slate-100"
+            >
+              <span>Customer Reviews</span>
+              <ChevronRight className="w-4 h-4 text-slate-400" />
+            </a>
 
             <Link
               to="/faqs"
