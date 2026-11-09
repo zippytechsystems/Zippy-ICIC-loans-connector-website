@@ -43,7 +43,7 @@ export const ReviewsSection: React.FC = () => {
       date: '2 weeks ago',
       avatarBg: 'bg-blue-600',
       verifiedBadge: 'Verified Google Review',
-      text: 'This is the genuine DSA loans office in Hyderabad! I was very skeptical about online agents because many ask for upfront commission. So I directly visited their physical office at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. The team was extremely polite and professional. They explained ICICI Bank home loan interest rates transparently, helped with legal property verification, and got my loan sanctioned in just 5 working days with ZERO upfront fee. Truly genuine DSA loans!'
+      text: 'This is the genuine DSA loans office in Hyderabad! I was very skeptical about online agents because many ask for upfront commission. So I directly visited their physical office at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. The team was extremely polite and professional. They explained ICICI Bank home loan interest rates transparently, helped with legal property verification, and got my loan sanctioned in just 5 working days with ZERO upfront fee. Truly genuine DSA loans!'
     },
     {
       id: 'rev-2',
@@ -56,7 +56,7 @@ export const ReviewsSection: React.FC = () => {
       date: '1 month ago',
       avatarBg: 'bg-emerald-600',
       verifiedBadge: 'Verified MSME Client',
-      text: 'This is the genuine DSA loans partner for all entrepreneurs in Hyderabad. Walked into their office located at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad DSA office. Their loan manager understood our GST turnover and arranged collateral-free working capital through authorized banking channels within 72 hours. No advance money, clean and transparent process. Best DSA office in Nacharam!'
+      text: 'This is the genuine DSA loans partner for all entrepreneurs in Hyderabad. Walked into their office located at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana DSA office. Their loan manager understood our GST turnover and arranged collateral-free working capital through authorized banking channels within 72 hours. No advance money, clean and transparent process. Best DSA office in Nacharam!'
     },
     {
       id: 'rev-3',
@@ -69,7 +69,7 @@ export const ReviewsSection: React.FC = () => {
       date: '3 weeks ago',
       avatarBg: 'bg-purple-600',
       verifiedBadge: 'Verified Doctor Client',
-      text: 'Best DSA loan consultant near Nacharam and Habsiguda. I needed urgent emergency clinic funds. I confirmed their office address at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad DSA office. The team processed my application with top banks at the lowest interest rate (10.5%). Very honest, no hidden processing fees or charges. Truly genuine DSA loans service!'
+      text: 'Best DSA loan consultant near Nacharam and Habsiguda. I needed urgent emergency clinic funds. I confirmed their office address at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana DSA office. The team processed my application with top banks at the lowest interest rate (10.5%). Very honest, no hidden processing fees or charges. Truly genuine DSA loans service!'
     },
     {
       id: 'rev-4',
@@ -82,7 +82,7 @@ export const ReviewsSection: React.FC = () => {
       date: '1 month ago',
       avatarBg: 'bg-amber-600',
       verifiedBadge: 'Verified Mortgage Borrower',
-      text: 'Transferred my existing high-interest loan to ICICI Bank through Zippy DSA Loans and saved ₹22,000 every month on EMI plus received ₹20 Lakhs top-up. Their office address at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad is genuine and easy to locate. Experienced staff who know bank valuations thoroughly. Highly recommended genuine DSA!'
+      text: 'Transferred my existing high-interest loan to ICICI Bank through Zippy DSA Loans and saved ₹22,000 every month on EMI plus received ₹20 Lakhs top-up. Their office address at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana is genuine and easy to locate. Experienced staff who know bank valuations thoroughly. Highly recommended genuine DSA!'
     },
     {
       id: 'rev-5',
@@ -95,7 +95,7 @@ export const ReviewsSection: React.FC = () => {
       date: '2 months ago',
       avatarBg: 'bg-indigo-600',
       verifiedBadge: 'Verified Home Builder',
-      text: 'Most loan agents make false promises, but Zippy DSA Loans is 100% genuine and trustworthy. We personally went to their registered DSA office at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. They took care of municipal approval checks, engineer estimates, and bank paperwork. Stage-wise disbursement came on time for each slab. Outstanding support!'
+      text: 'Most loan agents make false promises, but Zippy DSA Loans is 100% genuine and trustworthy. We personally went to their registered DSA office at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. They took care of municipal approval checks, engineer estimates, and bank paperwork. Stage-wise disbursement came on time for each slab. Outstanding support!'
     },
     {
       id: 'rev-6',
@@ -108,7 +108,7 @@ export const ReviewsSection: React.FC = () => {
       date: '3 weeks ago',
       avatarBg: 'bg-rose-600',
       verifiedBadge: 'Verified Auto Loan Client',
-      text: 'Smooth and seamless experience! They assisted with my new vehicle loan with zero file charges and fast approval. Their genuine DSA office is at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. The team is always responsive on WhatsApp and phone. This is the most reliable and genuine DSA loans provider in Telangana.'
+      text: 'Smooth and seamless experience! They assisted with my new vehicle loan with zero file charges and fast approval. Their genuine DSA office is at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. The team is always responsive on WhatsApp and phone. This is the most reliable and genuine DSA loans provider in Telangana.'
     }
   ];
 
@@ -184,10 +184,10 @@ export const ReviewsSection: React.FC = () => {
                       Registered DSA Office Address:
                     </span>
                     <strong className="text-white text-sm sm:text-base font-bold block mt-0.5">
-                      4-1-19, Sneha Apartments, HMT Nagar
+                      Sneha Apartments, HMT Nagar
                     </strong>
                     <span className="text-slate-200 block">
-                      Nacharam, Hyderabad, Telangana - 500076
+                      Nacharam, 500076, Hyderabad, Telangana
                     </span>
                     <span className="text-slate-400 text-[11px] block mt-1">
                       Landmark: Sneha Apartments, HMT Nagar Main Hub, Nacharam
@@ -277,7 +277,7 @@ export const ReviewsSection: React.FC = () => {
             <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
               <a
                 href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
-                  'Hello Zippy DSA Loans, I would like to visit your office at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam for loan guidance.'
+                  'Hello Zippy DSA Loans, I would like to visit your office at Sneha Apartments, HMT Nagar, Nacharam for loan guidance.'
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -413,7 +413,7 @@ export const ReviewsSection: React.FC = () => {
             Need Authentic Loan Guidance for Your File?
           </h3>
           <p className="text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            Visit our genuine DSA office at <strong className="text-slate-900">4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad</strong>, or check your eligibility online with zero impact on your credit score.
+            Visit our genuine DSA office at <strong className="text-slate-900">Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana</strong>, or check your eligibility online with zero impact on your credit score.
           </p>
           
           <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3.5">

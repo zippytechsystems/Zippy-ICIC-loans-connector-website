@@ -17,7 +17,7 @@ export const AboutUs: React.FC = () => {
     <>
       <SEOHead
         title="About Us | Genuine DSA Loans Desk | Zippy DSA Loans Hyderabad"
-        description="Learn about Zippy DSA Loans, a genuine Direct Selling Agent (DSA) and loan referral service located at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana."
+        description="Learn about Zippy DSA Loans, a genuine Direct Selling Agent (DSA) and loan referral service located at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana."
         keywords="About Zippy DSA Loans, Genuine DSA Loans Hyderabad, DSA Office Nacharam, Loan DSA Telangana, Independent Loan Assistance"
       />
 

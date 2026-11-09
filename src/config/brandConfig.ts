@@ -2,7 +2,7 @@
  * Centralized Frontend Configuration
  * Brand Name: Zippy DSA Loans
  * Tagline: Your Loan. Your Choice. Our Genuine Guidance.
- * Location: 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076
+ * Location: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana
  */
 
 export interface BrandConfig {
@@ -72,7 +72,7 @@ export const BRAND_CONFIG: BrandConfig = {
   parentCompany: {
     legalName: "Zippy Enterprises Private Limited",
     softwareDivision: "Zippy Softwares",
-    officeAddress: "4-1-19, Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana",
+    officeAddress: "Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana",
     itServices: [
       {
         id: "web-dev",
@@ -131,9 +131,9 @@ export const BRAND_CONFIG: BrandConfig = {
     whatsappNumber: "916302690251",
     whatsappPrefilledMessage: "Hello Zippy DSA Loans, I would like to know about suitable loan options.",
     email: "zippyloanconnector2@gmail.com",
-    officeLocation: "4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076",
-    fullOfficeAddress: "4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076",
-    officeLandmark: "Sneha Apartments, HMT Nagar, Nacharam Hub",
+    officeLocation: "Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana",
+    fullOfficeAddress: "Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana",
+    officeLandmark: "Sneha Apartments, HMT Nagar, Nacharam Hub, Hyderabad",
     businessHours: "Monday – Saturday: 9:30 AM – 6:30 PM IST (Sunday Closed)"
   },
   socialLinks: {
@@ -144,8 +144,8 @@ export const BRAND_CONFIG: BrandConfig = {
   },
   disclaimers: {
     headerNotice: "Genuine Direct Selling Agent (DSA) & Independent Loan Referral Desk. Sanction & terms depend on partner lenders.",
-    mainDisclaimer: "Zippy DSA Loans is a genuine, authorized Direct Selling Agent (DSA) and loan referral partner with its registered office located at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076. We assist prospective borrowers in finding suitable loan solutions through authorized banking and NBFC channels. All credit evaluation, interest rates, sanctions, and disbursements are governed solely by partner lending institutions according to statutory regulations. We do NOT charge upfront fees to customers for referral consultations.",
-    shortFooter: "Disclaimer: Zippy DSA Loans is a genuine Direct Selling Agent (DSA) and loan referral consultant headquartered at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. We do not charge upfront fees.",
+    mainDisclaimer: "Zippy DSA Loans is a genuine, authorized Direct Selling Agent (DSA) and loan referral partner with its registered office located at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. We assist prospective borrowers in finding suitable loan solutions through authorized banking and NBFC channels. All credit evaluation, interest rates, sanctions, and disbursements are governed solely by partner lending institutions according to statutory regulations. We do NOT charge upfront fees to customers for referral consultations.",
+    shortFooter: "Disclaimer: Zippy DSA Loans is a genuine Direct Selling Agent (DSA) and loan referral consultant headquartered at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. We do not charge upfront fees.",
     consentText: "I hereby give my explicit consent to Zippy DSA Loans to contact me via Call, SMS, WhatsApp, or Email regarding my loan enquiry and to share my requirements with authorized lender representatives as per the Privacy Policy.",
     noAadhaarNotice: "Security Alert: We never ask for your Aadhaar card number, PAN card physical copies, Net Banking passwords, debit card PINs, or OTPs on this website.",
     eligibilityNotice: "Notice: This is a preliminary enquiry form and eligibility estimation guide, not an official bank eligibility calculator or loan approval engine."

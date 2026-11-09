@@ -146,7 +146,7 @@ export const CheckEligibility: React.FC = () => {
     <>
       <SEOHead
         title="Check Loan Eligibility Online | Zippy DSA Loans Hyderabad"
-        description="Check preliminary loan eligibility in Hyderabad. 4-step frontend enquiry for personal, home, and business loans with Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam)."
+        description="Check preliminary loan eligibility in Hyderabad. 4-step frontend enquiry for personal, home, and business loans with Zippy DSA Loans (Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana)."
         keywords="Check Loan Eligibility Hyderabad, Zippy DSA Loans, Loan Eligibility Calculator, Loan Enquiry Telangana"
       />
 

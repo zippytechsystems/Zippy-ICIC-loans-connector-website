@@ -208,7 +208,7 @@ export const ZippyEnterprisesSection: React.FC = () => {
                       Zippy Enterprises Head Office Address:
                     </span>
                     <strong className="text-white text-sm font-bold block mt-0.5">
-                      4-1-19, Sneha Apartments, HMT Nagar
+                      Sneha Apartments, HMT Nagar
                     </strong>
                     <span className="text-slate-200 block">
                       Nacharam, 500076, Hyderabad, Telangana

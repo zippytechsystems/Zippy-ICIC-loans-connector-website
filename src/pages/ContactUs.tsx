@@ -8,7 +8,9 @@ import {
   Send,
   Loader2,
   CheckCircle,
-  ShieldCheck
+  ShieldCheck,
+  ExternalLink,
+  Navigation
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../config/brandConfig';
 import { openWhatsAppWithTracking } from '../services/api';
@@ -58,8 +60,8 @@ export const ContactUs: React.FC = () => {
     <>
       <SEOHead
         title="Contact Us | Genuine DSA Loans Office Hyderabad & Telangana"
-        description="Visit Zippy DSA Loans at 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad. Connect via phone or WhatsApp for genuine loan referral assistance."
-        keywords="Contact Zippy DSA Loans Hyderabad, DSA Office Nacharam, 4-1-19 Sneha Apartments HMT Nagar, Loan Assistance Hyderabad, Loan Enquiry Telangana"
+        description="Visit Zippy DSA Loans at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. Connect via phone or WhatsApp for genuine loan referral assistance."
+        keywords="Contact Zippy DSA Loans Hyderabad, DSA Office Nacharam, Sneha Apartments HMT Nagar, Loan Assistance Hyderabad, Loan Enquiry Telangana"
       />
 
       {/* Hero Banner */}
@@ -109,8 +111,8 @@ export const ContactUs: React.FC = () => {
                     <strong className="text-slate-900 block font-semibold text-xs uppercase tracking-wider">
                       Genuine DSA Office Address
                     </strong>
-                    <span className="text-slate-900 text-sm font-bold block">4-1-19, Sneha Apartments, HMT Nagar</span>
-                    <span className="text-slate-700 text-sm block">Nacharam, Hyderabad, Telangana - 500076</span>
+                    <span className="text-slate-900 text-sm font-bold block">Sneha Apartments, HMT Nagar</span>
+                    <span className="text-slate-700 text-sm block">Nacharam, 500076, Hyderabad, Telangana</span>
                     <span className="text-xs text-slate-500 block mt-0.5">
                       Landmark: Sneha Apartments, HMT Nagar Main Hub, Nacharam
                     </span>
@@ -380,6 +382,54 @@ export const ContactUs: React.FC = () => {
             )}
           </div>
 
+        </div>
+
+        {/* Interactive Google Maps Location Section */}
+        <div className="mt-12 bg-white rounded-3xl border border-slate-200/90 shadow-sm overflow-hidden">
+          <div className="p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-blue-950 text-white flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2 text-accent text-xs font-bold uppercase tracking-wider">
+                <Navigation className="w-4 h-4" />
+                <span>Office Location & Route Directions</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                Zippy DSA Loans Office — Nacharam, Hyderabad
+              </h3>
+              <p className="text-xs sm:text-sm text-slate-300">
+                Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana
+              </p>
+              <div className="flex flex-wrap items-center gap-2 pt-2 text-[11px] text-slate-300">
+                <span className="bg-white/10 px-2.5 py-1 rounded-md border border-white/10">Near Habsiguda (5 Mins)</span>
+                <span className="bg-white/10 px-2.5 py-1 rounded-md border border-white/10">Near Uppal (10 Mins)</span>
+                <span className="bg-white/10 px-2.5 py-1 rounded-md border border-white/10">Near Secunderabad (15 Mins)</span>
+              </div>
+            </div>
+
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Sneha+Apartments+HMT+Nagar+Nacharam+Hyderabad+500076"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-slate-950 font-black text-xs sm:text-sm hover:bg-amber-300 shadow-md transition-all shrink-0 cursor-pointer"
+            >
+              <MapPin className="w-4 h-4" />
+              <span>Get Directions on Google Maps</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          <div className="w-full h-80 sm:h-96 bg-slate-100">
+            <iframe
+              title="Zippy DSA Loans Office Location Map"
+              src="https://maps.google.com/maps?q=Sneha+Apartments,+HMT+Nagar,+Nacharam,+Hyderabad,+Telangana+500076&t=&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen={false}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full"
+            ></iframe>
+          </div>
         </div>
       </div>
     </>

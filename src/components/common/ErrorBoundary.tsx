@@ -68,7 +68,7 @@ export class ErrorBoundary extends Component<Props, State> {
             </div>
 
             <p className="text-[11px] text-slate-400">
-              Zippy DSA Loans • 4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad
+              Zippy DSA Loans • Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana
             </p>
           </div>
         </div>

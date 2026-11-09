@@ -19,7 +19,7 @@ export const ApplyForLoan: React.FC = () => {
     <>
       <SEOHead
         title="Apply for Loan Online | Genuine DSA Loan Desk | Zippy DSA Loans Hyderabad"
-        description="Submit your loan enquiry with Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad). Fast, confidential loan referral and assistance for borrowers in Hyderabad and Telangana."
+        description="Submit your loan enquiry with Zippy DSA Loans (Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana). Fast, confidential loan referral and assistance for borrowers in Hyderabad and Telangana."
         keywords="Apply for loan Hyderabad, Zippy DSA Loans, Personal loan application Hyderabad, Home loan enquiry Telangana, Business loan application"
       />
 

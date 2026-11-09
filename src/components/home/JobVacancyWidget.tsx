@@ -61,7 +61,7 @@ export const JobVacancyWidget: React.FC = () => {
 Company: *Zippy Enterprises Private Limited*
 Application ID: *${generatedAppId}*
 Position: *Zippy DSA Loans Executive (5 Openings)*
-Office: 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad
+Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana
 
 *Applicant Details:*
 • Name: ${fullName.trim()}
@@ -224,7 +224,7 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                 </div>
 
                 <p className="text-xs text-slate-400 leading-relaxed">
-                  Our HR team from our Nacharam office (4-1-19 Sneha Apartments) will contact you shortly for the interview schedule.
+                  Our HR team from our Nacharam office (Sneha Apartments, HMT Nagar) will contact you shortly for the interview schedule.
                 </p>
 
                 <div className="pt-2">
@@ -253,7 +253,7 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                   </p>
                   <p className="text-[11px] text-slate-300 flex items-center gap-1 pt-1">
                     <MapPin className="w-3 h-3 text-orange-400" />
-                    <span>Office: 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad</span>
+                    <span>Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana</span>
                   </p>
                 </div>
 

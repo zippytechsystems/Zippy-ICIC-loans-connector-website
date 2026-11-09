@@ -39,7 +39,7 @@ export const Footer: React.FC = () => {
             </div>
 
             <p className="text-sm text-slate-300 leading-relaxed max-w-md">
-              A genuine Direct Selling Agent (DSA) and authorized loan referral network catering to salaried employees, professionals, and business owners across Hyderabad, Secunderabad, and Telangana. Visit our registered office at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad.
+              A genuine Direct Selling Agent (DSA) and authorized loan referral network catering to salaried employees, professionals, and business owners across Hyderabad, Secunderabad, and Telangana. Visit our registered office at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana.
             </p>
 
             <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 text-xs text-slate-300 space-y-2">
@@ -235,7 +235,7 @@ export const Footer: React.FC = () => {
               </div>
               
               <div className="text-[11px] text-slate-400 pt-1">
-                <span className="text-accent font-semibold">Office Address:</span> 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana.
+                <span className="text-accent font-semibold">Office Address:</span> Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana.
               </div>
             </div>
 
@@ -295,7 +295,7 @@ export const Footer: React.FC = () => {
             &copy; {currentYear} Zippy Enterprises Private Limited. All Rights Reserved. (Zippy DSA Loans & Zippy Softwares)
           </p>
           <div className="flex items-center gap-4">
-            <span className="text-slate-400">Head Office: 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad - 500076</span>
+            <span className="text-slate-400">Head Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana</span>
             <span className="text-slate-700">•</span>
             <Link to="/leads" className="text-slate-500 hover:text-slate-300 text-[11px] transition-colors">
               Leads Portal

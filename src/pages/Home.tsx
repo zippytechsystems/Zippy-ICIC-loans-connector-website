@@ -24,7 +24,7 @@ export const Home: React.FC = () => {
     <>
       <SEOHead
         title="Zippy DSA Loans | Find the Right Loan for Your Financial Needs | Hyderabad"
-        description="Zippy DSA Loans is a genuine DSA office in Nacharam, Hyderabad (4-1-19 Sneha Apartments, HMT Nagar). Personalized guidance, eligibility checks, and authorized bank loan referral assistance in Telangana."
+        description="Zippy DSA Loans is a genuine DSA office in Nacharam, Hyderabad (Sneha Apartments, HMT Nagar, 500076, Telangana). Personalized guidance, eligibility checks, and authorized bank loan referral assistance in Telangana."
         keywords="Zippy DSA Loans, Genuine DSA Loans Hyderabad, DSA Office Nacharam, Loan Assistance Hyderabad, Home Loans Hyderabad, Business Loans Hyderabad, Personal Loans Hyderabad"
       />
 
@@ -101,7 +101,7 @@ export const Home: React.FC = () => {
               <div className="pt-6 border-t border-slate-800/80 flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs text-slate-400">
                 <span className="flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-accent" />
-                  <span>Genuine DSA Office: 4-1-19 Sneha Apartments, HMT Nagar, Nacharam</span>
+                  <span>Genuine DSA Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad</span>
                 </span>
                 <span className="flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-blue-400" />

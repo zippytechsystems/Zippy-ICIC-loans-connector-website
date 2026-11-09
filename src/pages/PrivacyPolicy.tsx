@@ -10,7 +10,7 @@ export const PrivacyPolicy: React.FC = () => {
     <>
       <SEOHead
         title="Privacy Policy | Data Protection & Customer Consent | Zippy DSA Loans"
-        description="Read the Privacy Policy of Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad). Learn how your loan enquiry details and contact information are protected."
+        description="Read the Privacy Policy of Zippy DSA Loans (Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana). Learn how your loan enquiry details and contact information are protected."
         keywords="Privacy Policy Zippy DSA Loans, Data Protection Hyderabad, Loan Consent Policy"
       />
 

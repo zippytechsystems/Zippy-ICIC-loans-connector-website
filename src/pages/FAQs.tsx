@@ -26,7 +26,7 @@ export const FAQs: React.FC = () => {
       id: 'gen-1',
       category: 'General',
       question: 'Is Zippy DSA Loans a genuine and authorized loan referral partner?',
-      answer: 'Yes! Zippy DSA Loans is a 100% genuine, authorized Direct Selling Agent (DSA) and loan referral partner with its registered office located at 4-1-19, Sneha Apartments, HMT Nagar, Nacharam, Hyderabad, Telangana - 500076. We assist customers with home, personal, and business loans through partner banks including ICICI Bank and other leading institutions. All loan sanctions and disbursements are conducted directly by partner banks.'
+      answer: 'Yes! Zippy DSA Loans is a 100% genuine, authorized Direct Selling Agent (DSA) and loan referral partner with its registered office located at Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana. We assist customers with home, personal, and business loans through partner banks including ICICI Bank and other leading institutions. All loan sanctions and disbursements are conducted directly by partner banks.'
     },
     {
       id: 'gen-2',
@@ -126,7 +126,7 @@ export const FAQs: React.FC = () => {
     <>
       <SEOHead
         title="Frequently Asked Questions (FAQs) | Zippy DSA Loans Hyderabad"
-        description="Find answers to common questions about personal loans, home loans, eligibility criteria, documentation, and genuine DSA services from Zippy DSA Loans (4-1-19 Sneha Apartments, HMT Nagar, Nacharam, Hyderabad)."
+        description="Find answers to common questions about personal loans, home loans, eligibility criteria, documentation, and genuine DSA services from Zippy DSA Loans (Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana)."
         keywords="Loan FAQs Hyderabad, Zippy DSA Loans, Personal Loan Questions, Home Loan Documentation Telangana, DSA Office Nacharam"
       />
 
