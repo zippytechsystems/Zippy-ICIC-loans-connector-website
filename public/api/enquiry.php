@@ -23,6 +23,8 @@ header('Referrer-Policy: strict-origin-when-cross-origin');
 // 2. CORS Handling
 $allowedOrigins = [
     'https://mintcream-coyote-409919.hostingersite.com',
+    'https://zippydsaloans.in',
+    'https://www.zippydsaloans.in',
     'https://zippyicicloanconnector.in',
     'https://www.zippyicicloanconnector.in',
     'http://localhost:5173',
