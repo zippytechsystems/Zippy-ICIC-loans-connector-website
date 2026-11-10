@@ -36,6 +36,31 @@ export interface WhatsAppLeadPayload {
   clientReferenceId?: string;
 }
 
+export interface DsaApplication {
+  id?: number;
+  application_id: string;
+  full_name: string;
+  mobile_number: string;
+  email: string | null;
+  qualification: string;
+  experience: string;
+  location: string;
+  notes: string | null;
+  role: string;
+  status: string;
+  source_context?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface DsaHiringMetrics {
+  total: number;
+  newApplicants: number;
+  shortlisted: number;
+  today: number;
+  experienced: number;
+}
+
 export interface LoanEnquiryResponse {
   success: boolean;
   referenceId: string;
@@ -266,3 +291,249 @@ export async function openWhatsAppWithTracking(lead: WhatsAppLeadPayload): Promi
   }
   return result;
 }
+
+/**
+ * Generate DSA Job Application ID: ZIP-JOB-YYYYMMDD-XXXX
+ */
+export const generateDsaApplicationId = (): string => {
+  const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const randomSuffix = Math.floor(1000 + Math.random() * 9000);
+  return `ZIP-JOB-${dateStr}-${randomSuffix}`;
+};
+
+/**
+ * Submit DSA Job Application to MySQL / Local Storage
+ */
+export async function submitDsaApplication(data: {
+  fullName: string;
+  mobileNumber: string;
+  email?: string;
+  qualification: string;
+  experience: string;
+  location: string;
+  notes?: string;
+  role?: string;
+  applicationId?: string;
+}): Promise<{
+  success: boolean;
+  applicationId: string;
+  message: string;
+  savedToDatabase: boolean;
+}> {
+  const appId = data.applicationId || generateDsaApplicationId();
+  const cleanMobile = data.mobileNumber.replace(/\D/g, '');
+  const cleanName = data.fullName.trim();
+  const cleanRole = data.role || 'Zippy DSA Loans Executive';
+
+  const newApp: DsaApplication = {
+    application_id: appId,
+    full_name: cleanName,
+    mobile_number: cleanMobile,
+    email: data.email?.trim() || null,
+    qualification: data.qualification,
+    experience: data.experience,
+    location: data.location,
+    notes: data.notes?.trim() || null,
+    role: cleanRole,
+    status: 'NEW',
+    source_context: 'Website Job Vacancy Widget',
+    created_at: new Date().toISOString()
+  };
+
+  // 1. Always store locally in localStorage for immediate reflection in Admin Dashboard
+  try {
+    const localApps: DsaApplication[] = JSON.parse(localStorage.getItem('zippy_dsa_applications') || '[]');
+    const existingIdx = localApps.findIndex((a) => a.application_id === appId);
+    if (existingIdx >= 0) {
+      localApps[existingIdx] = newApp;
+    } else {
+      localApps.unshift(newApp);
+    }
+    localStorage.setItem('zippy_dsa_applications', JSON.stringify(localApps));
+  } catch {
+    // Ignore storage errors
+  }
+
+  // 2. Submit to PHP MySQL backend
+  let savedToDatabase = false;
+  try {
+    const res = await fetch('/api/dsa_hiring.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        applicationId: appId,
+        fullName: cleanName,
+        mobileNumber: cleanMobile,
+        email: data.email?.trim() || '',
+        qualification: data.qualification,
+        experience: data.experience,
+        location: data.location,
+        notes: data.notes?.trim() || '',
+        role: cleanRole
+      })
+    });
+    if (res.ok) {
+      const respData = await res.json();
+      if (respData.success) {
+        savedToDatabase = Boolean(respData.savedToDatabase);
+      }
+    }
+  } catch (err) {
+    console.warn('Backend API connection warning (offline or local fallback):', err);
+  }
+
+  return {
+    success: true,
+    applicationId: appId,
+    message: 'Application recorded successfully.',
+    savedToDatabase
+  };
+}
+
+/**
+ * Fetch all DSA Job Applications for Admin Dashboard
+ */
+export async function fetchDsaApplications(key: string): Promise<{
+  applications: DsaApplication[];
+  metrics: DsaHiringMetrics;
+}> {
+  let backendApps: DsaApplication[] = [];
+  let backendMetrics: Partial<DsaHiringMetrics> = {};
+
+  try {
+    const res = await fetch(`/api/dsa_hiring.php?action=list&key=${encodeURIComponent(key)}`);
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success && Array.isArray(data.applications)) {
+        backendApps = data.applications;
+        if (data.metrics) {
+          backendMetrics = data.metrics;
+        }
+      }
+    }
+  } catch (err) {
+    console.info('Backend fetch skipped or offline, loading local applications cache:', err);
+  }
+
+  // Retrieve locally cached applications and merge
+  let localApps: DsaApplication[] = [];
+  try {
+    localApps = JSON.parse(localStorage.getItem('zippy_dsa_applications') || '[]');
+  } catch {
+    localApps = [];
+  }
+
+  // Also migrate any old 'zippy_job_applications' if present
+  try {
+    const legacy = JSON.parse(localStorage.getItem('zippy_job_applications') || '[]');
+    if (Array.isArray(legacy) && legacy.length > 0) {
+      for (const item of legacy) {
+        if (item.appId && !localApps.some((a) => a.application_id === item.appId)) {
+          localApps.push({
+            application_id: item.appId,
+            full_name: item.name || 'Applicant',
+            mobile_number: item.mobile || '',
+            email: null,
+            qualification: 'Graduate',
+            experience: 'Fresher',
+            location: 'Hyderabad',
+            notes: null,
+            role: item.role || 'Zippy DSA Loans Executive',
+            status: 'NEW',
+            created_at: item.timestamp || new Date().toISOString()
+          });
+        }
+      }
+      localStorage.setItem('zippy_dsa_applications', JSON.stringify(localApps));
+    }
+  } catch {}
+
+  // Merge backend and local, preferring newer/backend
+  const mergedMap = new Map<string, DsaApplication>();
+  // 1. Put backend apps
+  backendApps.forEach((app) => mergedMap.set(app.application_id, app));
+  // 2. Put local apps if not present
+  localApps.forEach((app) => {
+    if (!mergedMap.has(app.application_id)) {
+      mergedMap.set(app.application_id, app);
+    }
+  });
+
+  const mergedApps = Array.from(mergedMap.values()).sort((a, b) => {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+
+  // Calculate metrics
+  const now = new Date();
+  const todayStr = now.toISOString().slice(0, 10);
+  const total = mergedApps.length;
+  const newApplicants = mergedApps.filter((a) => a.status === 'NEW').length;
+  const shortlisted = mergedApps.filter((a) => a.status === 'SHORTLISTED' || a.status === 'INTERVIEW_SCHEDULED').length;
+  const today = mergedApps.filter((a) => (a.created_at || '').slice(0, 10) === todayStr).length;
+  const experienced = mergedApps.filter((a) => !a.experience?.toLowerCase().includes('fresher')).length;
+
+  const metrics: DsaHiringMetrics = {
+    total: backendMetrics.total ?? total,
+    newApplicants: backendMetrics.newApplicants ?? newApplicants,
+    shortlisted: backendMetrics.shortlisted ?? shortlisted,
+    today: backendMetrics.today ?? today,
+    experienced: backendMetrics.experienced ?? experienced
+  };
+
+  return {
+    applications: mergedApps,
+    metrics
+  };
+}
+
+/**
+ * Update DSA Application Status
+ */
+export async function updateDsaApplicationStatus(
+  applicationId: string,
+  newStatus: string,
+  key: string
+): Promise<boolean> {
+  // Update local storage
+  try {
+    const localApps: DsaApplication[] = JSON.parse(localStorage.getItem('zippy_dsa_applications') || '[]');
+    const updated = localApps.map((a) => (a.application_id === applicationId ? { ...a, status: newStatus } : a));
+    localStorage.setItem('zippy_dsa_applications', JSON.stringify(updated));
+  } catch {}
+
+  // Update backend API
+  try {
+    const res = await fetch('/api/dsa_hiring.php?action=update_status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ applicationId, status: newStatus, key })
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Delete DSA Application
+ */
+export async function deleteDsaApplication(applicationId: string, key: string): Promise<boolean> {
+  // Remove from local storage
+  try {
+    const localApps: DsaApplication[] = JSON.parse(localStorage.getItem('zippy_dsa_applications') || '[]');
+    const filtered = localApps.filter((a) => a.application_id !== applicationId);
+    localStorage.setItem('zippy_dsa_applications', JSON.stringify(filtered));
+  } catch {}
+
+  try {
+    const res = await fetch('/api/dsa_hiring.php?action=delete', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ applicationId, key })
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+

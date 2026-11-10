@@ -297,8 +297,9 @@ export const Footer: React.FC = () => {
           <div className="flex items-center gap-4">
             <span className="text-slate-400">Head Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana</span>
             <span className="text-slate-700">•</span>
-            <Link to="/leads" className="text-slate-500 hover:text-slate-300 text-[11px] transition-colors">
-              Leads Portal
+            <Link to="/admin?tab=dsa_hiring" className="text-slate-400 hover:text-accent text-[11px] font-semibold transition-colors flex items-center gap-1">
+              <span>Admin Dashboard</span>
+              <span className="text-[9px] bg-slate-800 text-amber-300 px-1.5 py-0.2 rounded border border-slate-700">DSA Hiring</span>
             </Link>
           </div>
         </div>

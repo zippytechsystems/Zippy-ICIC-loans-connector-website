@@ -92,9 +92,12 @@ const AppContent: React.FC = () => {
           <Route path="/terms" element={<TermsConditions />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
 
-          {/* Admin Lead Management Portal */}
-          <Route path="/admin-leads" element={<AdminLeads />} />
-          <Route path="/leads" element={<AdminLeads />} />
+          {/* Admin Dashboard & DSA Hiring Portal */}
+          <Route path="/admin" element={<AdminLeads defaultTab="dsa_hiring" />} />
+          <Route path="/admin-dashboard" element={<AdminLeads defaultTab="dsa_hiring" />} />
+          <Route path="/admin/dsa-hiring" element={<AdminLeads defaultTab="dsa_hiring" />} />
+          <Route path="/admin-leads" element={<AdminLeads defaultTab="leads" />} />
+          <Route path="/leads" element={<AdminLeads defaultTab="leads" />} />
           
           {/* 404 Fallback */}
           <Route path="*" element={<NotFound />} />

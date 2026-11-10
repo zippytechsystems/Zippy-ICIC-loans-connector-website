@@ -8,9 +8,12 @@ import {
   Building2,
   Sparkles,
   ChevronUp,
-  ChevronDown
+  ChevronDown,
+  Loader2,
+  MessageSquare
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../../config/brandConfig';
+import { submitDsaApplication, generateDsaApplicationId } from '../../services/api';
 
 export const JobVacancyWidget: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,6 +30,8 @@ export const JobVacancyWidget: React.FC = () => {
   const [location, setLocation] = useState('Hyderabad (Near Nacharam / Uppal / East)');
   const [notes, setNotes] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [chatLink, setChatLink] = useState('');
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -38,7 +43,7 @@ export const JobVacancyWidget: React.FC = () => {
     setIsModalOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!fullName.trim() || fullName.trim().length < 3) {
@@ -52,10 +57,30 @@ export const JobVacancyWidget: React.FC = () => {
       return;
     }
 
-    const generatedAppId = `ZIP-JOB-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.floor(1000 + Math.random() * 9000)}`;
+    setIsSubmitting(true);
+    setError('');
+
+    const generatedAppId = generateDsaApplicationId();
     setAppId(generatedAppId);
 
-    // Construct professional WhatsApp Job Application message
+    // 1. Submit application to backend & Admin Dashboard store
+    try {
+      await submitDsaApplication({
+        applicationId: generatedAppId,
+        fullName: fullName.trim(),
+        mobileNumber: cleanMobile,
+        email: email.trim() || undefined,
+        qualification,
+        experience,
+        location: location.trim(),
+        notes: notes.trim() || undefined,
+        role: 'Zippy DSA Loans Executive'
+      });
+    } catch (saveErr) {
+      console.warn('API submission error:', saveErr);
+    }
+
+    // 2. Construct professional WhatsApp Job Application message
     const waMessage = 
 `*Job Application - Zippy DSA Loans Executive*
 Company: *Zippy Enterprises Private Limited*
@@ -73,29 +98,16 @@ ${notes.trim() ? `• Additional Info: ${notes.trim()}\n` : ''}
 Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Executive vacancy at Zippy Enterprises Private Limited. Please review my profile.`;
 
     const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
+    setChatLink(chatUrl);
 
-    // Store in localStorage for reference
-    try {
-      const stored = JSON.parse(localStorage.getItem('zippy_job_applications') || '[]');
-      stored.push({
-        appId: generatedAppId,
-        name: fullName.trim(),
-        mobile: cleanMobile,
-        role: 'Zippy DSA Loans Executive',
-        timestamp: new Date().toISOString()
-      });
-      localStorage.setItem('zippy_job_applications', JSON.stringify(stored));
-    } catch {
-      // ignore
-    }
-
-    // Open WhatsApp
+    // 3. Open WhatsApp
     try {
       window.open(chatUrl, '_blank', 'noopener,noreferrer');
     } catch (popupErr) {
       console.info('Auto popup restricted. Fallback button active.', popupErr);
     }
 
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -227,10 +239,21 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                   Our HR team from our Nacharam office (Sneha Apartments, HMT Nagar) will contact you shortly for the interview schedule.
                 </p>
 
-                <div className="pt-2">
+                <div className="pt-2 flex flex-col sm:flex-row gap-2">
+                  {chatLink && (
+                    <a
+                      href={chatLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 shadow-md"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Chat with HR on WhatsApp</span>
+                    </a>
+                  )}
                   <button
                     onClick={handleCloseModal}
-                    className="w-full py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
+                    className="flex-1 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider transition-all cursor-pointer"
                   >
                     Close Window
                   </button>
@@ -376,10 +399,20 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                   <div className="pt-2">
                     <button
                       type="submit"
-                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-accent via-amber-500 to-amber-600 hover:from-amber-600 hover:to-accent text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      disabled={isSubmitting}
+                      className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-accent via-amber-500 to-amber-600 hover:from-amber-600 hover:to-accent text-white font-extrabold text-xs sm:text-sm uppercase tracking-wider shadow-lg shadow-amber-500/25 active:scale-95 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
                     >
-                      <Send className="w-4 h-4" />
-                      <span>Submit Application (Fill Form)</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Registering Your Application...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>Submit Application (Fill Form)</span>
+                        </>
+                      )}
                     </button>
                     <p className="text-[10px] text-slate-400 text-center mt-2">
                       Immediate Joining • Attractive Salary + Performance Incentives • 5 Vacancies Only
