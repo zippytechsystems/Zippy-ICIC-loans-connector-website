@@ -58,6 +58,38 @@ function getDb(array $cfg): ?PDO {
     return null;
 }
 
+// Auto-create table and indexes if not exists
+function ensureLoanEnquiriesTableExists(PDO $pdo): void {
+    $schema = "CREATE TABLE IF NOT EXISTS loan_enquiries (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        reference_id VARCHAR(50) NOT NULL UNIQUE,
+        full_name VARCHAR(150) NOT NULL,
+        mobile_number VARCHAR(20) NOT NULL,
+        email VARCHAR(150) NULL,
+        city VARCHAR(100) NOT NULL,
+        loan_category VARCHAR(100) NOT NULL,
+        required_amount DECIMAL(15, 2) NOT NULL,
+        employment_type VARCHAR(100) NOT NULL,
+        monthly_income DECIMAL(15, 2) NULL,
+        additional_info TEXT NULL,
+        source_context VARCHAR(100) DEFAULT 'Website Loan Enquiry Form',
+        status VARCHAR(30) DEFAULT 'NEW',
+        consent_given TINYINT(1) NOT NULL DEFAULT 1,
+        consent_timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        ip_address VARCHAR(45) NULL,
+        user_agent VARCHAR(255) NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+        INDEX idx_ref (reference_id),
+        INDEX idx_mobile (mobile_number),
+        INDEX idx_category (loan_category),
+        INDEX idx_city (city),
+        INDEX idx_status (status),
+        INDEX idx_created (created_at)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+    $pdo->exec($schema);
+}
+
 // Read payload from JSON or GET/POST parameters
 $rawInput = file_get_contents('php://input');
 $data = [];
@@ -130,6 +162,7 @@ foreach ($dbConfigs as $cfg) {
     try {
         $pdo = getDb($cfg);
         if ($pdo) {
+            ensureLoanEnquiriesTableExists($pdo);
             $stmt = $pdo->prepare($sql);
             $stmt->execute($params);
             $saved++;

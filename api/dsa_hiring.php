@@ -120,6 +120,14 @@ function ensureTableExists(PDO $pdo): void {
         INDEX idx_status (status)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
     $pdo->exec($schema);
+
+    // Auto-migration: ensure 'role' column exists in case table was created with earlier schema
+    try {
+        $checkRole = $pdo->query("SHOW COLUMNS FROM dsa_job_applications LIKE 'role'");
+        if ($checkRole && $checkRole->rowCount() === 0) {
+            $pdo->exec("ALTER TABLE dsa_job_applications ADD COLUMN role VARCHAR(100) DEFAULT 'Zippy DSA Loans Executive' AFTER notes");
+        }
+    } catch (Throwable $e) {}
 }
 
 // Rigorous Input Sanitization
