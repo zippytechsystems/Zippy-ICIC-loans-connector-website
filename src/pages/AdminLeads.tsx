@@ -97,6 +97,7 @@ export const AdminLeads: React.FC<AdminLeadsProps> = ({ defaultTab = 'dsa_hiring
   const [candidateEmail, setCandidateEmail] = useState('');
   const [candidateQualification, setCandidateQualification] = useState('Graduate (Any Stream)');
   const [candidateExperience, setCandidateExperience] = useState('Fresher (Ready to Learn)');
+  const [candidateRole, setCandidateRole] = useState('Zippy DSA Loans Executive');
   const [candidateLocation, setCandidateLocation] = useState('Hyderabad (Near Nacharam / Uppal)');
   const [candidateNotes, setCandidateNotes] = useState('');
   const [isSavingCandidate, setIsSavingCandidate] = useState(false);
@@ -219,7 +220,7 @@ export const AdminLeads: React.FC<AdminLeadsProps> = ({ defaultTab = 'dsa_hiring
         experience: candidateExperience,
         location: candidateLocation,
         notes: candidateNotes.trim() ? `[Admin Entry] ${candidateNotes.trim()}` : '[Manual Admin Entry]',
-        role: 'Zippy DSA Loans Executive'
+        role: candidateRole
       });
       setShowAddDsaModal(false);
       setCandidateName('');
@@ -640,12 +641,13 @@ export const AdminLeads: React.FC<AdminLeadsProps> = ({ defaultTab = 'dsa_hiring
                   <Sparkles className="w-5 h-5 text-accent" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-extrabold text-slate-900 flex items-center gap-1.5">
-                    <span>Active Recruitment Drive: Zippy DSA Loans Executive</span>
+                  <h3 className="text-sm font-extrabold text-slate-900 flex flex-wrap items-center gap-1.5">
+                    <span>Recruitment & Partner Desk: DSA Executives & Sub Loan Connectors</span>
                     <span className="px-2 py-0.2 rounded-md bg-amber-100 text-amber-900 text-[10px] font-bold">5 Openings</span>
+                    <span className="px-2 py-0.2 rounded-md bg-emerald-100 text-emerald-900 text-[10px] font-bold">Commissions</span>
                   </h3>
                   <p className="text-xs text-slate-600">
-                    All candidates who apply via the website job vacancy widget or manual walk-in are listed below in real-time.
+                    DSA Loans Executives (Nacharam Hub) & Sub Loan Connectors referring commissions across Hyderabad & Telangana.
                   </p>
                 </div>
               </div>
@@ -1465,6 +1467,18 @@ export const AdminLeads: React.FC<AdminLeadsProps> = ({ defaultTab = 'dsa_hiring
                     className="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-accent"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block font-bold text-slate-700 mb-1">Target Position / Opportunity</label>
+                <select
+                  value={candidateRole}
+                  onChange={(e) => setCandidateRole(e.target.value)}
+                  className="w-full px-3 py-2 text-xs border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-accent bg-white font-medium"
+                >
+                  <option value="Zippy DSA Loans Executive">💼 Zippy DSA Loans Executive (Office • 5 Openings)</option>
+                  <option value="Sub Loan Connector (Refers Commissions in Hyderabad Telangana)">🤝 Sub Loan Connector (Refers Commissions in Hyderabad Telangana)</option>
+                </select>
               </div>
 
               <div className="grid grid-cols-2 gap-3">

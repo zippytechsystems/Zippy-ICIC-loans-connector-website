@@ -72,6 +72,12 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4 text-xs">
+            <a
+              href="#zippy-enterprises"
+              className="flex items-center gap-1.5 text-amber-300 hover:text-white font-semibold transition-colors bg-blue-900/60 px-2.5 py-0.5 rounded-full border border-amber-400/40 shadow-xs"
+            >
+              <span>💼 Hiring: Executives & Sub Loan Connectors (Commissions)</span>
+            </a>
             <span className="text-slate-300">Target Location: {BRAND_CONFIG.targetRegion}</span>
             <a
               href={`tel:${BRAND_CONFIG.contact.phoneRaw}`}
@@ -237,6 +243,14 @@ export const Navbar: React.FC = () => {
           >
             FAQs
           </Link>
+
+          <a
+            href="#zippy-enterprises"
+            className="px-3 py-1.5 rounded-lg text-xs font-bold text-amber-800 bg-amber-50 hover:bg-amber-100 border border-amber-300/80 transition-all duration-200 flex items-center gap-1.5 shadow-xs"
+          >
+            <span className="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+            <span>Hiring & Connectors</span>
+          </a>
         </div>
 
         {/* Action Button: Apply Now CTA */}
@@ -370,6 +384,20 @@ export const Navbar: React.FC = () => {
               <span>FAQs</span>
               <ChevronRight className="w-4 h-4 text-slate-400" />
             </Link>
+
+            <a
+              href="#zippy-enterprises"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center justify-between px-4 py-2.5 rounded-lg text-sm font-bold text-amber-900 bg-amber-50/90 border border-amber-200/80"
+            >
+              <span className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                <span>Hiring & Sub Loan Connectors</span>
+              </span>
+              <span className="text-[10px] bg-amber-500 text-slate-950 px-2 py-0.5 rounded-full font-black uppercase">
+                Commissions
+              </span>
+            </a>
           </div>
 
           <div className="pt-3 border-t border-slate-100 space-y-3">

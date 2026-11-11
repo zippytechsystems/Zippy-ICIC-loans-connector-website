@@ -11,7 +11,10 @@ import {
   MessageSquare,
   Sparkles,
   Database,
-  Cpu
+  Cpu,
+  Users,
+  Handshake,
+  CheckCircle
 } from 'lucide-react';
 import { BRAND_CONFIG } from '../../config/brandConfig';
 
@@ -69,9 +72,52 @@ export const ZippyEnterprisesSection: React.FC = () => {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all text-center shrink-0 flex items-center justify-center gap-2"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-accent to-amber-600 hover:from-amber-600 hover:to-accent text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all text-center shrink-0 flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Fill Form (Apply Now)</span>
+              <span>→</span>
+            </a>
+          </div>
+
+          {/* Sub Loan Connectors Refers Commissions in Hyderabad Telangana Banner */}
+          <div className="mt-3 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-blue-500/20 border-2 border-emerald-500/60 shadow-xl backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-4 text-left">
+            <div className="flex items-start sm:items-center gap-3">
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white flex items-center justify-center font-bold text-lg shadow-md shrink-0">
+                <Handshake className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-500 text-slate-950 px-2.5 py-0.5 rounded-full">
+                    Partner & Referral Program
+                  </span>
+                  <span className="text-xs text-emerald-300 font-extrabold flex items-center gap-1">
+                    <Sparkles className="w-3 h-3 text-emerald-300" />
+                    <span>Attractive Commissions • Spot Payouts</span>
+                  </span>
+                </div>
+                <h4 className="text-base sm:text-lg font-black text-white mt-1">
+                  Sub Loan Connectors Refers Commissions in Hyderabad Telangana
+                </h4>
+                <p className="text-xs text-slate-300 mt-0.5 leading-relaxed">
+                  Join as a Zippy Sub Loan Connector! Refer loan borrowers for Personal Loans, Home Loans, Business Loans, and Loan Against Property (LAP). Earn handsome referral commissions per disbursed file across Hyderabad & all Telangana districts. Zero investment required!
+                </p>
+                <div className="flex flex-wrap gap-2 mt-2 text-[11px]">
+                  <span className="px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 font-medium">✓ High Referral Commission</span>
+                  <span className="px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 font-medium">✓ Zero Registration Fee</span>
+                  <span className="px-2 py-0.5 rounded-md bg-emerald-950/80 border border-emerald-500/30 text-emerald-300 font-medium">✓ Open for All in Telangana</span>
+                </div>
+              </div>
+            </div>
+
+            <a
+              href={`https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(
+                'Hello Zippy Enterprises Private Limited, I am interested in joining as a Sub Loan Connector for referral commissions in Hyderabad Telangana. Please share connector registration details.'
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:scale-105 active:scale-95 transition-all text-center shrink-0 flex items-center justify-center gap-2 cursor-pointer whitespace-nowrap"
+            >
+              <span>Join as Connector</span>
               <span>→</span>
             </a>
           </div>

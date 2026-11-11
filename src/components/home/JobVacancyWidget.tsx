@@ -25,6 +25,7 @@ export const JobVacancyWidget: React.FC = () => {
   const [fullName, setFullName] = useState('');
   const [mobile, setMobile] = useState('');
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('Zippy DSA Loans Executive (Nacharam Office • 5 Openings)');
   const [qualification, setQualification] = useState('Graduate (Any Stream)');
   const [experience, setExperience] = useState('Fresher (Ready to Learn)');
   const [location, setLocation] = useState('Hyderabad (Near Nacharam / Uppal / East)');
@@ -74,7 +75,7 @@ export const JobVacancyWidget: React.FC = () => {
         experience,
         location: location.trim(),
         notes: notes.trim() || undefined,
-        role: 'Zippy DSA Loans Executive'
+        role: role
       });
     } catch (saveErr) {
       console.warn('API submission error:', saveErr);
@@ -82,10 +83,10 @@ export const JobVacancyWidget: React.FC = () => {
 
     // 2. Construct professional WhatsApp Job Application message
     const waMessage = 
-`*Job Application - Zippy DSA Loans Executive*
+`*Job / Connector Application - Zippy Enterprises*
 Company: *Zippy Enterprises Private Limited*
 Application ID: *${generatedAppId}*
-Position: *Zippy DSA Loans Executive (5 Openings)*
+Position: *${role}*
 Office: Sneha Apartments, HMT Nagar, Nacharam, 500076, Hyderabad, Telangana
 
 *Applicant Details:*
@@ -95,7 +96,7 @@ ${email.trim() ? `• Email: ${email.trim()}\n` : ''}• Qualification: ${qualif
 • Experience: ${experience}
 • Preferred Location: ${location}
 ${notes.trim() ? `• Additional Info: ${notes.trim()}\n` : ''}
-Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Executive vacancy at Zippy Enterprises Private Limited. Please review my profile.`;
+Hello Hiring Team, I am submitting my application for ${role} at Zippy Enterprises Private Limited. Please review my profile.`;
 
     const chatUrl = `https://wa.me/${BRAND_CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(waMessage)}`;
     setChatLink(chatUrl);
@@ -129,7 +130,7 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
             <span className="w-2.5 h-2.5 rounded-full bg-accent animate-ping"></span>
             <span className="text-xs font-extrabold text-amber-300 flex items-center gap-1.5">
               <Briefcase className="w-3.5 h-3.5 text-accent" />
-              <span>Jobs: Only 5 Openings Left!</span>
+              <span>Jobs & Sub Loan Connectors (Commissions)</span>
             </span>
             <ChevronUp className="w-3.5 h-3.5 text-slate-400 group-hover:text-white" />
           </button>
@@ -167,6 +168,17 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
               </p>
               <p className="text-[11px] text-slate-400 leading-snug">
                 Join our Nacharam branch. Attractive incentive + salary for dynamic loan executives.
+              </p>
+            </div>
+
+            {/* Sub Loan Connectors Refers Commissions in Hyderabad Telangana */}
+            <div className="mt-2.5 pt-2 border-t border-slate-800 space-y-0.5">
+              <div className="flex items-center gap-1.5 text-emerald-400 font-extrabold text-xs">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span>Sub Loan Connectors • Refer & Earn</span>
+              </div>
+              <p className="text-[11px] text-slate-300 leading-snug">
+                Sub Loan connectors refers commissions in Hyderabad Telangana. Refer loan clients and earn top spot payouts!
               </p>
             </div>
 
@@ -266,13 +278,16 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                 <div className="space-y-1 pr-6">
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-[10px] font-extrabold uppercase tracking-wider border border-amber-400/40">
                     <Sparkles className="w-3 h-3 text-accent" />
-                    <span>Hiring • Only 5 Jobs Available</span>
+                    <span>Hiring • 5 Jobs + Sub Loan Connectors (Commissions)</span>
                   </div>
                   <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
-                    Apply: Zippy DSA Loans Executive
+                    Apply: Loans Executive / Sub Loan Connector
                   </h3>
                   <p className="text-xs text-accent font-semibold">
                     Zippy Enterprises Private Limited
+                  </p>
+                  <p className="text-[11px] text-emerald-400 font-semibold pt-0.5">
+                    ✨ Sub Loan connectors refers commissions in Hyderabad Telangana
                   </p>
                   <p className="text-[11px] text-slate-300 flex items-center gap-1 pt-1">
                     <MapPin className="w-3 h-3 text-orange-400" />
@@ -287,6 +302,25 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                 )}
 
                 <form onSubmit={handleSubmit} className="space-y-3.5">
+                  {/* Applying For / Hiring Option */}
+                  <div>
+                    <label className="block text-xs font-bold text-slate-300 mb-1">
+                      Applying For / Hiring Option *
+                    </label>
+                    <select
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-800/95 border border-amber-500/50 text-amber-300 text-xs font-bold focus:ring-2 focus:ring-accent outline-none"
+                    >
+                      <option value="Zippy DSA Loans Executive (Nacharam Office • 5 Openings)">
+                        💼 Zippy DSA Loans Executive (Office Job • 5 Openings)
+                      </option>
+                      <option value="Sub Loan Connector (Refers Commissions in Hyderabad Telangana)">
+                        🤝 Sub Loan Connector (Refers Commissions in Hyderabad Telangana)
+                      </option>
+                    </select>
+                  </div>
+
                   {/* Full Name */}
                   <div>
                     <label className="block text-xs font-bold text-slate-300 mb-1">
@@ -415,7 +449,7 @@ Hello Hiring Team, I am submitting my application for the Zippy DSA Loans Execut
                       )}
                     </button>
                     <p className="text-[10px] text-slate-400 text-center mt-2">
-                      Immediate Joining • Attractive Salary + Performance Incentives • 5 Vacancies Only
+                      Immediate Joining for DSA Executives • Attractive Commissions for Sub Loan Connectors across Telangana
                     </p>
                   </div>
                 </form>

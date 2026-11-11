@@ -150,6 +150,7 @@ export const Footer: React.FC = () => {
             <Link to="/faqs" className="hover:text-white transition-colors">FAQs</Link>
             <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link to="/terms-conditions" className="hover:text-white transition-colors">Terms & Conditions</Link>
+            <a href="#zippy-enterprises" className="hover:text-accent text-amber-300 font-semibold transition-colors">Hiring & Sub Loan Connectors</a>
           </div>
 
           {/* Social Media Placeholders */}
